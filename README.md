@@ -138,6 +138,18 @@ export default {
     // value, min, max - это то чему необходимо задать тип и значение по умолчанию
     // остальное берется из FveFieldMixin обеспечивая единообразие
     value    : { type: String, default: '' },
+    /* 
+     * на всякий случай) все это указано в FveFieldMixin -> props и переопределять все это нет смысла!
+     * // стилистика
+     * label       : { type: String, default: '' },
+     * name        : { type: String, default: '' },
+     * placeholder : { type: String, default: '' },
+     * readonly    : { type: Boolean, default: false },
+     * disabled    : { type: Boolean, default: false },
+     * // валидация
+     * required         : { type: Boolean, default: true },
+     * validateRealtime : { type: Boolean, default: true },
+     */
   },
   // data применяется для наследования, в вашем компоненте ее может и не быть
   data(){
@@ -175,7 +187,7 @@ export default {
 </style>
 ```
 
-Или использовать созданный компонент. Например FveText.
+Или использовать в качестве основы созданный компонент. Например FveText.
 ```vue
 <script>
 
@@ -205,3 +217,93 @@ export default {
 
 ## Как это будет выглядеть
 В "~/FormValidate/test/page/UiKit.vue" добавлены элементы формы, можно посмотреть, как все это будет выглядеть.
+
+
+## Еще больше документации
+Да я тоже хочу еще больше документации, но времени на написание документации тратиться много.
+А при развитии всего этого, она устаревает еще быстрее чем пишется).
+В данном случае, не надо боятся заглянуть в миксины (они не на столько сложные и большая часть будет понятна всем).
+По созданию своих элементов формы, примеры можно посмотреть в папке Element
+
+## Пример как это использовать на форме авторизации
+Фаил формы авторизации (AuthForm): 
+```vue
+<template>
+  <form class="form-auth form-base" @submit="formSubmit"  @submit.prevent="formSubmit">
+    <LoginFormElement
+        name="login"
+        label="Логин"
+        v-model="form.login"
+        @keypress-enter="formSubmit"
+    />
+    <PasswordFormElement
+        name="password"
+        label="Пароль"
+        v-model="form.password"
+        @keypress-enter="formSubmit"
+    />
+    <button type="button" @click="formSubmit" class="btn btn-prime">Войти</button>
+  </form>
+</template>
+
+<script>
+
+import LoginFormElement    from "@FormValidate/Element/Text/FveLogin";
+import PasswordFormElement from "@FormValidate/Element/Text/FvePassword";
+//
+import FveFormMixin   from "@FormValidate/FveFormMixin";
+
+export default {
+  mixins: [
+    FveFormMixin
+  ],
+  components: {
+    LoginFormElement,
+    PasswordFormElement,
+  },
+  methods: {
+    formSchema() {
+      return {
+        login: {
+          type: String,
+          default: () => { return ''; }
+        },
+        password: {
+          type: String,
+          default: () => { return ''; }
+        },
+      };
+    },
+  },
+
+};
+</script>
+```
+
+И файл обработки данной формы
+```vue
+<template>
+  <div>
+    <FormAuth @submit="authSubmit" />
+  </div>
+</template>
+
+<script>
+
+import FormAuth from '@component/Form/Auth';
+
+export default {
+  components: {
+    FormAuth
+  },
+  methods: {
+    // вызовется если вся форма валидна
+    authSubmit (data) {
+      console.log('Auth form submit data', data);
+    },
+  
+  },
+};
+
+</script>
+```
