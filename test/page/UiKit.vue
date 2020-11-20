@@ -15,7 +15,7 @@
           />
         </div>
         <div class="col-3 form-base">
-          <TextFormElement
+          <FveText
               name="text"
               label="Text field readonly"
               placeholder="Readonly"
@@ -127,8 +127,6 @@ import FveRadioGroup  from "@FormValidate/Element/FveRadioGroup";
 import FveCheckbox    from "@FormValidate/Element/FveCheckbox";
 import FvePhone       from "@FormValidate/Element/FvePhone";
 
-import TextFormElement from "@FormValidate/Element/FveText";
-
 export default {
   mixins: [
     FveFormMixin
@@ -141,8 +139,6 @@ export default {
     FveRadioGroup,
     FveCheckbox,
     FvePhone,
-    //
-    TextFormElement,
   },
   methods: {
     formSchema() {

@@ -1,4 +1,5 @@
 # Vue Form Validate
+![Пример формы](./docs/img/example.gif)
 
 ## Что это и зачем
 Данный модуль (точнее набор mixin-ов и компонентов) для Vue 2 - это набор правил для создания форм, их валидации и кастомизации. Это не панацея, но хоть какое то решение на фоне всего остального мрака.
@@ -78,7 +79,7 @@ export default {
     FveFormMixin
   ],
   components: {
-    FveFormMixin,
+    FveText,
   },
   methods: {
     // необходимо описать, какие данные мы хотим получить в виде полной схемы без сокращений (как props)
@@ -99,4 +100,108 @@ export default {
 ```
 
 # Как создать свой элемент формы
-TODO
+Все просто, необходимо только использовать миксин FveFieldMixin
+Рассмотрим все на примере обычного текстового поля
+```vue
+<template>
+  <FveFieldTemplate>
+    <!-- FveFieldTemplate - это однообразная обертка для всех наших полей -->
+    <input
+        :type="type"
+        :name="name"
+        :placeholder="placeholder"
+        :readonly="readonly"
+        :disabled="disabled"
+        :value="value"
+        :required="required"
+        @input="inputFormElement"
+        @change="inputFormElement"
+    />
+    <!-- 
+      @input="inputFormElement"                  - тут мы следим за нашим value
+      @change="inputFormElement"                 - inputFormElement - функция миксина, она отвечает за логику обработки.
+
+      @keypress.enter="$emit('keypress-enter')"  - добавляет в форму отправку по нажатию enter
+    -->
+  </FveFieldTemplate>
+</template>
+
+<script>
+
+import FveFieldMixin from "@FormValidate/FveFieldMixin";
+
+export default {
+  mixins: [
+    FveFieldMixin
+  ],
+  props: {
+    // value, min, max - это то чему необходимо задать тип и значение по умолчанию
+    // остальное берется из FveFieldMixin обеспечивая единообразие
+    value    : { type: String, default: '' },
+  },
+  // data применяется для наследования, в вашем компоненте ее может и не быть
+  data(){
+    return {
+      // type - вынесен в data для того что бы его можно было переопределить в наследниках на password, number и тд..
+      type: 'text',
+    };
+  },
+  // это то что нам необходимо реализовать...
+  methods: {
+    // сюда приходят события или неочищенные или не преобразованные данные. Нам необходим достать чистые данные.
+    // смотрим на props value => String
+    prepareValue($event) {
+      return $event.target.value;
+    },
+    // проверка на то что поле не заполнено (используется для обязательных полей)
+    isEmpty(value) {
+      return value === '';
+    },
+    // функция валидации. Если все хорошо то отдаем 'SUCCESS', если есть ошибки, то отдаем текст с текстом ошибки
+    // на данный момент, нет разных статусов ошибок (warning, error)
+    // все что не 'SUCCESS' то error message.
+    validateFunction(str) {
+      return 'SUCCESS';
+    },
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+// используются стили которые не влияют на весь проект и на чужие компоненты (которые используют select, input и тд...)
+@import '~@FormValidate/style/const.scss';
+@import "~@FormValidate/style/inputText.scss";
+
+</style>
+```
+
+Или использовать созданный компонент. Например FveText.
+```vue
+<script>
+
+import FveText from "@FormValidate/Element/FveText";
+
+export default {
+  mixins: [
+    FveText
+  ],
+  methods: {
+    // переопределяем только валидацию текстового поля и на этом все)
+    validateFunction(str) {
+      if(str.length < 5 ){ return 'Длинна логина не менее 5 символов'; }
+      // mут можно проверить еще что нибудь....
+      return 'SUCCESS';
+    },
+  }
+};
+</script>
+```
+
+
+## Хочу изменить вид полей...
+Нет проблем, в папке style есть настройки переменных css variable (const.scss) и общие стили для input полей (inputText.scss).
+Так же есть общий template для всех полей - FveFieldTemplate.vue (в корне).
+
+
+## Как это будет выглядеть
+В "~/FormValidate/test/page/UiKit.vue" добавлены элементы формы, можно посмотреть, как все это будет выглядеть.
