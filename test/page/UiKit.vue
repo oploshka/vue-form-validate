@@ -74,8 +74,7 @@ import FveNumber      from '@widgetFormValidate/Element/Text/FveNumber';
 import FvePassword    from '@widgetFormValidate/Element/Text/FvePassword';
 import FveTime        from '@widgetFormValidate/Element/Text/FveTime';
 import FveUrl         from '@widgetFormValidate/Element/Text/FveUrl';
-
-// TODO: import FvePhone       from "@widgetFormValidate/Element/FvePhone";
+import FvePhone       from "@widgetFormValidate/Element/Text/FvePhone";
 // TODO: import FveTextarea    from "@widgetFormValidate/Element/Text/FveTextarea";
 
 // date and time
@@ -99,6 +98,7 @@ export default {
       componentInfoList: [
         {name: 'text'         , component: FveText  , data: {} },
         //
+        {name: 'text-phone'   , component: FvePhone     , data: {} },
         {name: 'text-email'   , component: FveEmail     , data: {} },
         {name: 'text-login'   , component: FveLogin     , data: {} },
         {name: 'text-number'  , component: FveNumber    , data: {} },
