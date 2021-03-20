@@ -1,6 +1,6 @@
 <script>
 
-import FveText from "@FormValidate/Element/FveText";
+import FveText from "@widgetFormValidate/Element/FveText";
 
 export default {
   mixins: [
@@ -13,9 +13,15 @@ export default {
   },
   methods: {
     validateFunction(str) {
-      const errorText = 'Пароль от 8 символов и должен содержать 1 цифру и букву';
-      const regex = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}/;
-      if(!regex.test(str)) { return errorText; }
+
+      if(str.length < 6) {
+        return 'Пароль от 6 символов';
+      }
+
+      // const errorText = 'Пароль от 8 символов и должен содержать 1 цифру и букву';
+      // const regex = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}/;
+      // if(!regex.test(str)) { return errorText; }
+
       return 'SUCCESS';
     },
   }
