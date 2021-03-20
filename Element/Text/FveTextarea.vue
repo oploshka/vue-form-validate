@@ -45,42 +45,6 @@ export default {
 
 <style lang="scss" scoped>
 
-textarea {
-  ::-webkit-input-placeholder { color: var(--fve-color-placeholder); }
-  :-ms-input-placeholder      { color: var(--fve-color-placeholder); }
-  ::-ms-input-placeholder     { color: var(--fve-color-placeholder); }
-  ::placeholder               { color: var(--fve-color-placeholder); }
-
-  display           : var(--fve-input--display          );
-  margin            : var(--fve-input--margin           );
-  padding           : var(--fve-input--padding          );
-  width             : var(--fve-input--width            );
-  height            : var(--fve-textarea--height        );
-  font-family       : var(--fve-input--font-family      );
-  font-size         : var(--fve-input--font-size        );
-  color             : var(--fve-input--font-color       );
-  line-height       : var(--fve-input--line-height      );
-  border            : var(--fve-input--border           );
-  border-color      : var(--fve-input--border-color     );
-  border-radius     : var(--fve-input--border-radius    );
-  background        : var(--fve-input--background       );
-  background-color  : var(--fve-input--background-color );
-
-  transition: border-color 0.15s ease-in-out;
-  box-sizing: border-box;
-  resize: vertical;
-
-  &:focus {
-    outline: none;
-  }
-
-
-  // TODO: fix
-  &[readonly],
-  &[disabled] {
-    opacity: .5;
-  }
-
-}
+@import "~@widgetFormValidate/style/textarea.scss";
 
 </style>

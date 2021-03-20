@@ -75,7 +75,7 @@ import FvePassword    from '@widgetFormValidate/Element/Text/FvePassword';
 import FveTime        from '@widgetFormValidate/Element/Text/FveTime';
 import FveUrl         from '@widgetFormValidate/Element/Text/FveUrl';
 import FvePhone       from "@widgetFormValidate/Element/Text/FvePhone";
-// TODO: import FveTextarea    from "@widgetFormValidate/Element/Text/FveTextarea";
+import FveTextarea    from "@widgetFormValidate/Element/Text/FveTextarea";
 
 // date and time
 // TODO: import FveDatepicker  from "@widgetFormValidate/Element/FveDatepicker";
@@ -97,6 +97,7 @@ export default {
     return {
       componentInfoList: [
         {name: 'text'         , component: FveText  , data: {} },
+        {name: 'textarea'     , component: FveTextarea  , data: {} },
         //
         {name: 'text-phone'   , component: FvePhone     , data: {} },
         {name: 'text-email'   , component: FveEmail     , data: {} },
@@ -118,14 +119,15 @@ export default {
     formSchema() {
       return {
         text            : { type: String    , default: () => { return '';     } },
+        'text-phone'    : { type: String    , default: () => { return '';     } },
         'text-email'    : { type: String    , default: () => { return '';     } },
         'text-login'    : { type: String    , default: () => { return '';     } },
         'text-number'   : { type: String    , default: () => { return '';     } },
         'text-password' : { type: String    , default: () => { return '';     } },
         'text-time'     : { type: String    , default: () => { return '';     } },
         'text-url'      : { type: String    , default: () => { return '';     } },
-        // textarea  : { type: String    , default: () => { return '';     } },
-        // phone     : { type: String    , default: () => { return '';     } },
+
+        textarea  : { type: String    , default: () => { return '';     } },
         // // time
         // datepicker: { type: String    , default: () => { return '';     } },
         // date      : { type: DateTime  , default: () => { return null;   } },
