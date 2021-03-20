@@ -1,18 +1,18 @@
 <template>
   <FveFieldTemplate>
     <input
-        :type="type"
-        :name="name"
-        :placeholder="placeholder"
-        :readonly="readonly"
-        :disabled="disabled"
-        :value="value"
-        :required="required"
-        autocomplete="off"
-        @input="inputFormElement"
-        @change="inputFormElement"
-        @keypress.enter="$emit('keypress-enter')"
-        v-bind="inputAttr"
+      :type="type"
+      :name="name"
+      :placeholder="placeholder"
+      :readonly="readonly"
+      :disabled="disabled"
+      :value="value"
+      :required="required"
+      autocomplete="off"
+      @input="inputFormElement"
+      @change="inputFormElement"
+      @keypress.enter="$emit('keypress-enter')"
+      v-bind="inputAttr"
     />
   </FveFieldTemplate>
 </template>

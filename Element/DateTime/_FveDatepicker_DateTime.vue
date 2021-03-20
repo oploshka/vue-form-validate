@@ -1,21 +1,21 @@
 <template>
   <FveFieldTemplate>
     <DatePicker
-        :min-date="min && min.format('YYYY-MM-DD')"
-        :max-date="max && max.format('YYYY-MM-DD')"
-        :popover="{ placement: 'bottom-end', visibility: 'click' }"
-        :value="valueToDate"
-        @input="inputFormElement"
+      :min-date="min && min.format('YYYY-MM-DD')"
+      :max-date="max && max.format('YYYY-MM-DD')"
+      :popover="{ placement: 'bottom-end', visibility: 'click' }"
+      :value="valueToDate"
+      @input="inputFormElement"
     >
       <div class="fve-datepicker">
         <input
-            type="text"
-            class="fve-datepicker-input"
-            :name="name"
-            :value="value ? value.format('DD.MM.YYYY') : null"
-            :placeholder="placeholder"
-            :readonly="true"
-            :required="required"
+          type="text"
+          class="fve-datepicker-input"
+          :name="name"
+          :value="value ? value.format('DD.MM.YYYY') : null"
+          :placeholder="placeholder"
+          :readonly="true"
+          :required="required"
         />
         <img svg-inline class="fve-datepicker-icon" src="@img/icon/calendar2.svg" />
       </div>
