@@ -9,6 +9,7 @@
       :disabled="disabled"
       :value="value"
       :required="required"
+      autocomplete="off"
       @input="inputFormElement"
       @change="inputFormElement"
       @keypress.enter="$emit('keypress-enter')"
@@ -41,7 +42,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 
