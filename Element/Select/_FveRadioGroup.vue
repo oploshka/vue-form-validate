@@ -5,15 +5,15 @@
         <div :class="['fve-field', 'fve-radio', { 'fve-disabled' : option.disabled }]" :key="getKey(option)">
           <div class="fve-radio-bl">
             <input
-                type="radio"
-                class="fve-radio-control"
-                :name="name"
-                :id="'radio-'+ name +'-'+ getKey(option)"
-                :required="required"
-                :disabled="option.disabled"
-                :value="getKey(option)"
-                :checked="value ? value === getKey(option) : false"
-                @change="inputFormElement"
+              type="radio"
+              class="fve-radio-control"
+              :name="name"
+              :id="'radio-'+ name +'-'+ getKey(option)"
+              :required="required"
+              :disabled="option.disabled"
+              :value="getKey(option)"
+              :checked="value ? value === getKey(option) : false"
+              @change="inputFormElement"
             />
             <div class="fve-radio-vue"></div>
           </div>
@@ -63,8 +63,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-@import '~@FormValidate/style/const.scss';
 
 .fve-list {
   &--inline {

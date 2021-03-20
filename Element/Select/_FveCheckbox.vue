@@ -54,8 +54,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@import '~@FormValidate/style/const.scss';
-
 .fve-checkbox {
   padding-left: var(--fve-checkbox-indent);
   .fve-checkbox-bl {

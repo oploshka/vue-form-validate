@@ -43,7 +43,7 @@ export default {
     isEmpty(value) {
       return !value;
     },
-    validateFunction(/*value*/){
+    validateFunction(value){
       return 'SUCCESS';
     },
   },

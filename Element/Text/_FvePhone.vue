@@ -1,14 +1,14 @@
 <template>
   <FveFieldTemplate>
     <PhoneMaskInput
-        autoDetectCountry
-        showFlag
-        @onValidate="onValidate"
-        wrapperClass="fve-field-phone--wrapper"
-        inputClass="fve-field-phone--input"
-        flagClass="fve-field-phone--flag-icon"
-        :value="value"
-        @input="inputFormElement"
+      autoDetectCountry
+      showFlag
+      @onValidate="onValidate"
+      wrapperClass="fve-field-phone--wrapper"
+      inputClass="fve-field-phone--input"
+      flagClass="fve-field-phone--flag-icon"
+      :value="value"
+      @input="inputFormElement"
     />
   </FveFieldTemplate>
 </template>
@@ -52,8 +52,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-@import '~@FormValidate/style/const.scss';
 
 .fve {
 

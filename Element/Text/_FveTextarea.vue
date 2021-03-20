@@ -1,17 +1,17 @@
 <template>
   <FveFieldTemplate>
     <textarea
-        type="text"
-        class="fei-control"
-        :name="name"
-        :placeholder="placeholder"
-        :readonly="readonly"
-        :disabled="disabled"
-        :value="value"
-        :required="required"
-        @input="inputFormElement"
-        @change="inputFormElement"
-        @keypress.enter="$emit('keypress-enter')"
+      type="text"
+      class="fei-control"
+      :name="name"
+      :placeholder="placeholder"
+      :readonly="readonly"
+      :disabled="disabled"
+      :value="value"
+      :required="required"
+      @input="inputFormElement"
+      @change="inputFormElement"
+      @keypress.enter="$emit('keypress-enter')"
     ></textarea>
   </FveFieldTemplate>
 </template>
@@ -44,8 +44,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
-@import '~@FormValidate/style/const.scss';
 
 textarea {
   ::-webkit-input-placeholder { color: var(--fve-color-placeholder); }

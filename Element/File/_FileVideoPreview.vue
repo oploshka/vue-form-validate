@@ -1,16 +1,16 @@
 <template>
-    <label v-bind:class="['file-image-preview fip', { 'has-error' : (formStatus === 'ERROR') }]">
-      <div class="fip__img">
-        <img svg-inline class="icon fip__prew" :src="imagePreviewDefault" />
-      </div>
-      <input class="fip__input" type="file" :id="'file-'+name" ref="file" accept="*" @change="handleFileUpload()"/> <!-- TODO: fix accept -->
-      <template v-if="!value.getFile().name">
-        <img svg-inline class="icon fip__icon fip__icon--add" src="@img/icon/plus.svg" />
-      </template>
-      <template v-else>
-        <img svg-inline class="icon fip__icon fip__icon--edit" src="@img/icon/edit-solid.svg" />
-      </template>
-    </label>
+  <label v-bind:class="['file-image-preview fip', { 'has-error' : (formStatus === 'ERROR') }]">
+    <div class="fip__img">
+      <img svg-inline class="icon fip__prew" :src="imagePreviewDefault" />
+    </div>
+    <input class="fip__input" type="file" :id="'file-'+name" ref="file" accept="*" @change="handleFileUpload()"/> <!-- TODO: fix accept -->
+    <template v-if="!value.getFile().name">
+      <img svg-inline class="icon fip__icon fip__icon--add" src="@img/icon/plus.svg" />
+    </template>
+    <template v-else>
+      <img svg-inline class="icon fip__icon fip__icon--edit" src="@img/icon/edit-solid.svg" />
+    </template>
+  </label>
 
 </template>
 
