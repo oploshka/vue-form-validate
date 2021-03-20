@@ -67,7 +67,7 @@
 import FveFormMixin   from "@widgetFormValidate/FveFormMixin";
 
 // text
-import FveText        from "@widgetFormValidate/Element/FveText";
+import FveText        from "@widgetFormValidate/Element/Text/FveText";
 import FveEmail       from '@widgetFormValidate/Element/Text/FveEmail';
 import FveLogin       from '@widgetFormValidate/Element/Text/FveLogin';
 import FveNumber      from '@widgetFormValidate/Element/Text/FveNumber';
@@ -76,13 +76,13 @@ import FveTime        from '@widgetFormValidate/Element/Text/FveTime';
 import FveUrl         from '@widgetFormValidate/Element/Text/FveUrl';
 
 // TODO: import FvePhone       from "@widgetFormValidate/Element/FvePhone";
-// TODO: import FveTextarea    from "@widgetFormValidate/Element/FveTextarea";
+// TODO: import FveTextarea    from "@widgetFormValidate/Element/Text/FveTextarea";
 
 // date and time
 // TODO: import FveDatepicker  from "@widgetFormValidate/Element/FveDatepicker";
 
 // options
-import FveSelect      from "@widgetFormValidate/Element/FveSelect";
+import FveSelect      from "@widgetFormValidate/Element/Select/FveSelect";
 // TODO: import FveRadioGroup  from "@widgetFormValidate/Element/FveRadioGroup";
 // TODO: import FveCheckbox    from "@widgetFormValidate/Element/FveCheckbox";
 

@@ -21,8 +21,8 @@ FveMultiItemMixin.vue
 
 <script>
 
-import FveMultiTemplate from "@FormValidate/FveMultiTemplate";
-import FveFieldMixin from "@FormValidate/FveFieldMixin";
+import FveMultiTemplate from "@widgetFormValidate/FveMultiTemplate";
+import FveFieldMixin from "@widgetFormValidate/FveFieldMixin";
 
 export default {
   mixins: [

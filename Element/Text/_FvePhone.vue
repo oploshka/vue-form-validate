@@ -17,7 +17,7 @@
 
 import PhoneMaskInput from  "vue-phone-mask-input";
 
-import FveFieldMixin from "@FormValidate/FveFieldMixin";
+import FveFieldMixin from "@widgetFormValidate/FveFieldMixin";
 
 export default {
   mixins: [
@@ -57,7 +57,7 @@ export default {
 
   ::v-deep .fve-field-phone--wrapper {
     position: relative;
-    @import "~@FormValidate/style/inputText.scss";
+    @import "~@widgetFormValidate/style/inputText.scss";
   }
   ::v-deep .flag {
     position: absolute;

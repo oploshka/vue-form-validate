@@ -27,7 +27,7 @@
 
 import DatePicker from 'v-calendar/lib/components/date-picker.umd';
 
-import FveFieldMixin from "@FormValidate/FveFieldMixin";
+import FveFieldMixin from "@widgetFormValidate/FveFieldMixin";
 
 export default {
   mixins: [
@@ -64,8 +64,8 @@ export default {
 
 <style lang="scss" scoped>
 
-@import '~@FormValidate/style/const.scss';
-@import "~@FormValidate/style/inputText.scss";
+@import '~@widgetFormValidate/style/const.scss';
+@import "~@widgetFormValidate/style/inputText.scss";
 
 input[readonly],
 input[disabled] {
