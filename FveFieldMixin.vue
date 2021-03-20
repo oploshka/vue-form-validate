@@ -1,6 +1,6 @@
 <script>
 
-import FveFieldTemplate from "@FormValidate/FveFieldTemplate";
+import FveFieldTemplate from "@widgetFormValidate/FveFieldTemplate";
 
 export default {
   components: {
@@ -14,9 +14,10 @@ export default {
     readonly    : { type: Boolean, default: false },
     disabled    : { type: Boolean, default: false },
     // валидация
-    required         : { type: Boolean, default: true },
+    required         : { type: Boolean, default: false },
     validateRealtime : { type: Boolean, default: true },
 
+    validateCustomFunction: {type: Function, default: null},
     // TODO:
     // validateUserFunction : { type: Function, default: () => { return 'SUCCESS'; } },
 
@@ -96,10 +97,21 @@ export default {
      */
     validateFormElement(value) {
       let formMessage = this.validateFunction(value);
+
       if(formMessage !== 'SUCCESS') {
         this.formMessage = formMessage;
         this.formStatus  = 'ERROR';
         return false;
+      }
+
+      if(this.validateCustomFunction){
+        formMessage = this.validateCustomFunction(value);
+
+        if(formMessage !== 'SUCCESS') {
+          this.formMessage = formMessage;
+          this.formStatus  = 'ERROR';
+          return false;
+        }
       }
       return true;
     },
@@ -138,10 +150,8 @@ export default {
       this.formStatus  = '';
       return true;
     },
-    setErrorMessage(message) {
-      this.formMessage = message;
-      this.formStatus  = 'ERROR';
-    },
+                                                                                                                     //
+                                                                                                                     //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   }
 };
