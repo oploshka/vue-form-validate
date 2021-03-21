@@ -8,6 +8,7 @@
       :option-get-name    или :option-func-get-name
       :option-*
 
+- свой выпадающий список (возможно стоит взять за основу v-autocomplete)
 
 Fix
 - проверить работу компонента номер телефона 
