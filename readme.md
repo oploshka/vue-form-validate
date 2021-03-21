@@ -70,9 +70,9 @@ module.exports = {
 
 <script>
 // подключаем необходимые поля для формы
-import FveText from "@widgetFormValidate/Element/Text/FveText";
+import FveText from "@widgetFormValidate/src/Element/Text/FveText";
 // подключаем миксин формы
-import FveFormMixin   from "@widgetFormValidate/FveFormMixin";
+import FveFormMixin   from "@widgetFormValidate/src/Mixin/FveFormMixin";
 
 export default {
   mixins: [
@@ -128,7 +128,7 @@ export default {
 
 <script>
 
-import FveFieldMixin from "@widgetFormValidate/FveFieldMixin";
+import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";
 
 export default {
   mixins: [
@@ -191,7 +191,7 @@ export default {
 ```vue
 <script>
 
-import FveText from "@widgetFormValidate/Element/Text/FveText";
+import FveText from "@widgetFormValidate/src/Element/Text/FveText";
 
 export default {
   mixins: [
@@ -248,10 +248,10 @@ export default {
 
 <script>
 
-import LoginFormElement    from "@widgetFormValidate/Element/Text/FveLogin";
-import PasswordFormElement from "@widgetFormValidate/Element/Text/FvePassword";
+import LoginFormElement    from "@widgetFormValidate/src/Element/Text/FveLogin";
+import PasswordFormElement from "@widgetFormValidate/src/Element/Text/FvePassword";
 //
-import FveFormMixin   from "@widgetFormValidate/FveFormMixin";
+import FveFormMixin   from "@widgetFormValidate/src/Mixin/FveFormMixin";
 
 export default {
   mixins: [

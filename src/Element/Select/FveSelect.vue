@@ -17,7 +17,7 @@
 
 <script>
 
-import FveFieldMixin from "@widgetFormValidate/FveFieldMixin";
+import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";
 
 export default {
   mixins: [

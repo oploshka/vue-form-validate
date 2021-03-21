@@ -17,7 +17,7 @@
 
 import PhoneMaskInput from  "vue-phone-mask-input";
 
-import FveFieldMixin from "@widgetFormValidate/FveFieldMixin";
+import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";
 
 export default {
   mixins: [

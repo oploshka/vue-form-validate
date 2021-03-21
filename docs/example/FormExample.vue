@@ -27,9 +27,9 @@
 
 <script>
 // подключаем необходимые поля для формы
-import FveText from "@widgetFormValidate/Element/Text/FveText";
+import FveText from "@widgetFormValidate/src/Element/Text/FveText";
 // подключаем миксин формы
-import FveFormMixin   from "@widgetFormValidate/FveFormMixin";
+import FveFormMixin   from "@widgetFormValidate/src/Mixin/FveFormMixin";
 
 export default {
   mixins: [

@@ -3,9 +3,9 @@
 import UiKit from '@widgetFormValidate/test/page/UiKit';
 
 
-import FveSelect      from "@widgetFormValidate/Element/Select/FveSelect";
-// TODO: import FveRadioGroup  from "@widgetFormValidate/Element/FveRadioGroup";
-// TODO: import FveCheckbox    from "@widgetFormValidate/Element/FveCheckbox";
+import FveSelect      from "@widgetFormValidate/src/Element/Select/FveSelect";
+// TODO: import FveRadioGroup  from "@widgetFormValidate/src/Element/FveRadioGroup";
+// TODO: import FveCheckbox    from "@widgetFormValidate/src/Element/FveCheckbox";
 
 export default {
   mixins: [
@@ -17,9 +17,9 @@ export default {
 
     return {
       componentInfoList: [
-        {name: 'html-select'  , component: () => import('@widgetFormValidate/Element/Select/FveSelect')  , data: {options: options} },
-        {name: 'html-radio'   , component: () => import('@widgetFormValidate/Element/Select/FveHtmlRadio')  , data: {options: options} },
-        {name: 'FveVueSuggestionSelect'   , component: () => import('@widgetFormValidate/Element/Select/FveVueSuggestionSelect')  , data: {options: options} },
+        {name: 'html-select'  , component: () => import('@widgetFormValidate/src/Element/Select/FveSelect')  , data: {options: options} },
+        {name: 'html-radio'   , component: () => import('@widgetFormValidate/src/Element/Select/FveHtmlRadio')  , data: {options: options} },
+        {name: 'FveVueSuggestionSelect'   , component: () => import('@widgetFormValidate/src/Element/Select/FveVueSuggestionSelect')  , data: {options: options} },
       ],
     };
   },

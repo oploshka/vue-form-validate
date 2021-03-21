@@ -64,26 +64,26 @@
 
 <script>
 
-import FveFormMixin   from "@widgetFormValidate/FveFormMixin";
+import FveFormMixin   from "@widgetFormValidate/src/Mixin/FveFormMixin";
 
 // text
-import FveText        from "@widgetFormValidate/Element/Text/FveText";
-import FveEmail       from '@widgetFormValidate/Element/Text/FveEmail';
-import FveLogin       from '@widgetFormValidate/Element/Text/FveLogin';
-import FveNumber      from '@widgetFormValidate/Element/Text/FveNumber';
-import FvePassword    from '@widgetFormValidate/Element/Text/FvePassword';
-import FveTime        from '@widgetFormValidate/Element/Text/FveTime';
-import FveUrl         from '@widgetFormValidate/Element/Text/FveUrl';
-import FvePhone       from "@widgetFormValidate/Element/Text/FvePhone";
-import FveTextarea    from "@widgetFormValidate/Element/Text/FveTextarea";
+import FveText        from "@widgetFormValidate/src/Element/Text/FveText";
+import FveEmail       from '@widgetFormValidate/src/Element/Text/FveEmail';
+import FveLogin       from '@widgetFormValidate/src/Element/Text/FveLogin';
+import FveNumber      from '@widgetFormValidate/src/Element/Text/FveNumber';
+import FvePassword    from '@widgetFormValidate/src/Element/Text/FvePassword';
+import FveTime        from '@widgetFormValidate/src/Element/Text/FveTime';
+import FveUrl         from '@widgetFormValidate/src/Element/Text/FveUrl';
+import FvePhone       from "@widgetFormValidate/src/Element/Text/FvePhone";
+import FveTextarea    from "@widgetFormValidate/src/Element/Text/FveTextarea";
 
 // date and time
-// TODO: import FveDatepicker  from "@widgetFormValidate/Element/FveDatepicker";
+// TODO: import FveDatepicker  from "@widgetFormValidate/src/Element/FveDatepicker";
 
 // options
-import FveSelect      from "@widgetFormValidate/Element/Select/FveSelect";
-// TODO: import FveRadioGroup  from "@widgetFormValidate/Element/FveRadioGroup";
-// TODO: import FveCheckbox    from "@widgetFormValidate/Element/FveCheckbox";
+import FveSelect      from "@widgetFormValidate/src/Element/Select/FveSelect";
+// TODO: import FveRadioGroup  from "@widgetFormValidate/src/Element/FveRadioGroup";
+// TODO: import FveCheckbox    from "@widgetFormValidate/src/Element/FveCheckbox";
 
 
 export default {

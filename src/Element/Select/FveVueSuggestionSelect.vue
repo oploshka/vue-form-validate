@@ -29,7 +29,7 @@
 import Template from './__AutoComplete/UserLoginAutoCompleteItemTemplate';
 import { VueSuggestion } from 'vue-suggestion';
 
-import FveFieldMixin from "@widgetFormValidate/FveFieldMixin";
+import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";
 
 export default {
   mixins: [

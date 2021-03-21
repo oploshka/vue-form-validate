@@ -1,6 +1,6 @@
 <script>
 
-import FveFieldTemplate from "@widgetFormValidate/FveFieldTemplate";
+import FveFieldTemplate from "@widgetFormValidate/src/Mixin/FveFieldTemplate";
 
 export default {
   components: {
