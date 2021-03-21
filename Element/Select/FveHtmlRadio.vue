@@ -26,8 +26,6 @@
 
 <script>
 
-// TODO: исправить стили
-
 import FveFieldMixin from "@widgetFormValidate/FveFieldMixin";
 
 export default {
@@ -40,7 +38,7 @@ export default {
     inline: { type: Boolean, default: false },
     getKey: {
       type: Function,
-      default: (obj)=>{ return obj.id; }
+      default: (obj)=>{ return obj.id.toString(); }
     },
     getName: {
       type: Function,
@@ -61,6 +59,7 @@ export default {
   },
 };
 </script>
+
 
 <style lang="scss" scoped>
 

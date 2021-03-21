@@ -52,67 +52,7 @@ export default {
 
 <style lang="scss" scoped>
 
-select {
-  ::-webkit-input-placeholder { color: var(--fve-color-placeholder); }
-  :-ms-input-placeholder      { color: var(--fve-color-placeholder); }
-  ::-ms-input-placeholder     { color: var(--fve-color-placeholder); }
-  ::placeholder               { color: var(--fve-color-placeholder); }
+@import "~@widgetFormValidate/style/select.scss";
 
-  display           : var(--fve-input--display          );
-  margin            : var(--fve-input--margin           );
-  padding           : var(--fve-input--padding          );
-  width             : var(--fve-input--width            );
-  height            : var(--fve-input--height           );
-  font-family       : var(--fve-input--font-family      );
-  font-size         : var(--fve-input--font-size        );
-  color             : var(--fve-input--font-color       );
-  line-height       : var(--fve-input--line-height      );
-  border            : var(--fve-input--border           );
-  border-color      : var(--fve-input--border-color     );
-  border-radius     : var(--fve-input--border-radius    );
-  background        : var(--fve-input--background       );
-  background-color  : var(--fve-input--background-color );
-
-  transition: border-color 0.15s ease-in-out;
-  box-sizing: border-box;
-
-  &:focus {
-    outline: none;
-  }
-
-  // TODO: fix
-  &[readonly],
-  &[disabled] {
-    opacity: .5;
-  }
-
-}
-
-/*
-// TODO: fix
-.fve-select {
-  .fve-control {
-    height: var(--fve-input-height);
-    padding-right: 26px;
-    -webkit-appearance: none;
-    -moz-appearance   : none;
-    appearance        : none;
-    &::-ms-expand {
-      display: none;
-    }
-  }
-  &:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    margin-top: -3px;
-    border: 6px solid transparent;
-    border-top: 6px solid var(--fve-color-gray);
-    pointer-events: none;
-    z-index: 1;
-  }
-}
-*/
 </style>
 
