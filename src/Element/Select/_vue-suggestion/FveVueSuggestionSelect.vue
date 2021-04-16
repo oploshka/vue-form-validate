@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Template from './__AutoComplete/UserLoginAutoCompleteItemTemplate';
+import Template from './Template/OptionTemplate';
 import { VueSuggestion } from 'vue-suggestion';
 
 import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";

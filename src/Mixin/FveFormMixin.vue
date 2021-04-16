@@ -115,7 +115,12 @@ export default {
     }
 
   },
-  computed: {}
+  computed: {},
+  watch:{
+    formData(newFormData) {
+      this.form = this.formGetDefaultData();
+    }
+  }
 };
 
 </script>

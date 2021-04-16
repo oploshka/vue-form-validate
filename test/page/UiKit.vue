@@ -22,6 +22,7 @@
         <div class="row" style="margin-top: 30px;">
 
           <div class="col-12"><h4>{{componentInfo.name}}</h4></div>
+          <div class="col-12"><pre>{{form[componentInfo.name]}}</pre></div>
 
           <template v-for="required in ['', 'required']">
             <template v-for="readonly in ['', 'readonly']">
@@ -81,7 +82,7 @@ import FveTextarea    from "@widgetFormValidate/src/Element/Text/FveTextarea";
 // TODO: import FveDatepicker  from "@widgetFormValidate/src/Element/FveDatepicker";
 
 // options
-import FveSelect      from "@widgetFormValidate/src/Element/Select/FveSelect";
+import FveSelect      from "@widgetFormValidate/src/Element/Select/html/FveSelect";
 // TODO: import FveRadioGroup  from "@widgetFormValidate/src/Element/FveRadioGroup";
 // TODO: import FveCheckbox    from "@widgetFormValidate/src/Element/FveCheckbox";
 

@@ -10,6 +10,14 @@
 
 - свой выпадающий список (возможно стоит взять за основу v-autocomplete)
 
+- отказ от
+    "vue-suggestion": "^1.1.0",
+    "vuetify": "^2.4.9"
+  в пользу
+    vue-multiselect
+    v-calendar
+  
+
 Fix
 - проверить работу компонента номер телефона 
   - не корректно readonly и disable
