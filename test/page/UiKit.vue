@@ -22,6 +22,7 @@
         <div class="row" style="margin-top: 30px;">
 
           <div class="col-12"><h4>{{componentInfo.name}}</h4></div>
+          <div class="col-12"><pre>{{form[componentInfo.name]}}</pre></div>
 
           <template v-for="required in ['', 'required']">
             <template v-for="readonly in ['', 'readonly']">
@@ -64,27 +65,26 @@
 
 <script>
 
-import FveFormMixin   from "@widgetFormValidate/FveFormMixin";
+import FveFormMixin   from "@widgetFormValidate/src/Mixin/FveFormMixin";
 
 // text
-import FveText        from "@widgetFormValidate/Element/FveText";
-import FveEmail       from '@widgetFormValidate/Element/Text/FveEmail';
-import FveLogin       from '@widgetFormValidate/Element/Text/FveLogin';
-import FveNumber      from '@widgetFormValidate/Element/Text/FveNumber';
-import FvePassword    from '@widgetFormValidate/Element/Text/FvePassword';
-import FveTime        from '@widgetFormValidate/Element/Text/FveTime';
-import FveUrl         from '@widgetFormValidate/Element/Text/FveUrl';
-
-// TODO: import FvePhone       from "@widgetFormValidate/Element/FvePhone";
-// TODO: import FveTextarea    from "@widgetFormValidate/Element/FveTextarea";
+import FveText        from "@widgetFormValidate/src/Element/Text/FveText";
+import FveEmail       from '@widgetFormValidate/src/Element/Text/FveEmail';
+import FveLogin       from '@widgetFormValidate/src/Element/Text/FveLogin';
+import FveNumber      from '@widgetFormValidate/src/Element/Text/FveNumber';
+import FvePassword    from '@widgetFormValidate/src/Element/Text/FvePassword';
+import FveTime        from '@widgetFormValidate/src/Element/Text/FveTime';
+import FveUrl         from '@widgetFormValidate/src/Element/Text/FveUrl';
+import FvePhone       from "@widgetFormValidate/src/Element/Text/FvePhone";
+import FveTextarea    from "@widgetFormValidate/src/Element/Text/FveTextarea";
 
 // date and time
-// TODO: import FveDatepicker  from "@widgetFormValidate/Element/FveDatepicker";
+// TODO: import FveDatepicker  from "@widgetFormValidate/src/Element/FveDatepicker";
 
 // options
-import FveSelect      from "@widgetFormValidate/Element/FveSelect";
-// TODO: import FveRadioGroup  from "@widgetFormValidate/Element/FveRadioGroup";
-// TODO: import FveCheckbox    from "@widgetFormValidate/Element/FveCheckbox";
+import FveSelect      from "@widgetFormValidate/src/Element/Select/html/FveSelect";
+// TODO: import FveRadioGroup  from "@widgetFormValidate/src/Element/FveRadioGroup";
+// TODO: import FveCheckbox    from "@widgetFormValidate/src/Element/FveCheckbox";
 
 
 export default {
@@ -98,7 +98,9 @@ export default {
     return {
       componentInfoList: [
         {name: 'text'         , component: FveText  , data: {} },
+        {name: 'textarea'     , component: FveTextarea  , data: {} },
         //
+        {name: 'text-phone'   , component: FvePhone     , data: {} },
         {name: 'text-email'   , component: FveEmail     , data: {} },
         {name: 'text-login'   , component: FveLogin     , data: {} },
         {name: 'text-number'  , component: FveNumber    , data: {} },
@@ -118,14 +120,15 @@ export default {
     formSchema() {
       return {
         text            : { type: String    , default: () => { return '';     } },
+        'text-phone'    : { type: String    , default: () => { return '';     } },
         'text-email'    : { type: String    , default: () => { return '';     } },
         'text-login'    : { type: String    , default: () => { return '';     } },
         'text-number'   : { type: String    , default: () => { return '';     } },
         'text-password' : { type: String    , default: () => { return '';     } },
         'text-time'     : { type: String    , default: () => { return '';     } },
         'text-url'      : { type: String    , default: () => { return '';     } },
-        // textarea  : { type: String    , default: () => { return '';     } },
-        // phone     : { type: String    , default: () => { return '';     } },
+
+        textarea  : { type: String    , default: () => { return '';     } },
         // // time
         // datepicker: { type: String    , default: () => { return '';     } },
         // date      : { type: DateTime  , default: () => { return null;   } },
