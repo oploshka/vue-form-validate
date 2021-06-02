@@ -1,7 +1,7 @@
 <template>
   <FveFieldTemplate>
     <DatePicker
-     :popover="{ placement: 'bottom-end', visibility: 'click' }"
+      :popover="{ placement: 'bottom-end', visibility: 'click' }"
       v-model="valueDatePickerComputed"
       color="red"
       is-dark
@@ -46,9 +46,9 @@ export default {
     FveFieldMixin
   ],
   props: {
-    value       : { type: String },
-    min         : { type: String },
-    max         : { type: String },
+    value       : { type: DateTime },
+    min         : { type: DateTime },
+    max         : { type: DateTime },
   },
   data() {
     return {
@@ -83,7 +83,7 @@ export default {
       return !value;
     },
     validateFunction(value) {
-      const date = this.strToDate(value, DATE_FORMAT_API);
+      const date = this.strToDate(value, this.DATE_FORMAT_API);
       return date ?  'SUCCESS' : 'Некорректная дата';
       // const d = this.valueToDate ? DateTime(this.valueToDate, DATE_FORMAT_VIEW, true) : null;
       // return d.isValid() || null ?
@@ -91,7 +91,6 @@ export default {
   },
   computed: {
     placeholderCache() {
-      ///# return this.placeholder ? this.placeholder : '';
       return this.placeholder ? DateTime(this.placeholder).format(this.DATE_FORMAT_VIEW) : '';
     },
     valueDatePickerComputed: {
@@ -99,7 +98,7 @@ export default {
         return this.strToDate(this.value, this.DATE_FORMAT_API);
       },
       set(value) {
-        const _value = DateTime(value).format(this.DATE_FORMAT_API);
+        const _value = DateTime(value)/*.format(DATE_FORMAT_API)*/;
         this.inputFormElement(_value);
       }
     },
@@ -109,7 +108,8 @@ export default {
       },
       set(value) {
         const _value = this.prepareDateFormat(value, this.DATE_FORMAT_VIEW, this.DATE_FORMAT_API);
-        this.inputFormElement(_value);
+        // this.inputFormElement(_value);
+        (_value instanceof DateTime) && this.inputFormElement(_value);
       }
     }
   },
