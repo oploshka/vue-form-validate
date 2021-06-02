@@ -47,71 +47,105 @@ export default {
   ],
   props: {
     value       : { type: DateTime },
+    placeholder : { type: DateTime },
     min         : { type: DateTime },
     max         : { type: DateTime },
   },
   data() {
     return {
-      DATE_PICKER_MODE  : 'dateTime',
+      DATE_PICKER_MODE  : 'date',
       DATE_INPUT_MASK   : '##.##.#### ##:##',
-      DATE_FORMAT_API   : 'YYYY-MM-DDTHH:mm:ss',
       DATE_FORMAT_VIEW  : 'DD.MM.YYYY HH:mm',
+      // DATE_FORMAT_API   : 'YYYY-MM-DDTHH:mm:ss',
+
+      cacheStr: '',
     };
   },
   components: {
     DatePicker
   },
   methods: {
-    strToDate(str, format1) {
-      let date = DateTime(str, format1, true);
-      if( !date.isValid() ){
-        return null;
-      }
-      return date.toDate();
+    // для строк -> приходит строка и преобразуем в DateTime
+    prepareInput(value){
+      return value;
     },
-    prepareDateFormat(str, format1, format2) {
-      let date = DateTime(str, format1, true);
-      if( !date.isValid() ){
-        return str;
-      }
-      return date.format(format2);
+    // на выходе ожидается строка у нас DateTime
+    prepareOutput(valueDateTime){
+      if(valueDateTime === null) { return null; }
+      return valueDateTime;
+    },
+
+
+    // strToDate(str, format1) {
+    //   let date = DateTime(str, format1, true);
+    //   if( !date.isValid() ){
+    //     return null;
+    //   }
+    //   return date.toDate();
+    // },
+    // prepareDateFormat(str, format1, format2) {
+    //   let date = DateTime(str, format1, true);
+    //   if( !date.isValid() ){
+    //     return str;
+    //   }
+    //   return date.format(format2);
+    // },
+    inputPrepareFormElement(valueDateTime) {
+      this.inputFormElement( this.prepareOutput(valueDateTime) );
     },
     prepareValue($event) {
       return $event;
     },
     isEmpty(value) {
-      return !value;
+      return !value && this.cacheStr === '';
     },
     validateFunction(value) {
-      const date = this.strToDate(value, this.DATE_FORMAT_API);
-      return date ?  'SUCCESS' : 'Некорректная дата';
-      // const d = this.valueToDate ? DateTime(this.valueToDate, DATE_FORMAT_VIEW, true) : null;
-      // return d.isValid() || null ?
+      if( this.cacheStr ) {
+        return 'Некорректно введенная дата';
+      }
+      return 'SUCCESS';
     },
   },
   computed: {
-    placeholderCache() {
-      return this.placeholder ? DateTime(this.placeholder).format(this.DATE_FORMAT_VIEW) : '';
+    valueDateTime() {
+      return this.prepareInput(this.value);
     },
     valueDatePickerComputed: {
       get() {
-        return this.strToDate(this.value, this.DATE_FORMAT_API);
+        return this.valueDateTime ? this.valueDateTime.toDate() : null;
       },
       set(value) {
-        const _value = DateTime(value)/*.format(DATE_FORMAT_API)*/;
-        this.inputFormElement(_value);
+        this.cacheStr = '';
+        const valueDateTime = DateTime(value);
+        this.inputPrepareFormElement( valueDateTime );
       }
     },
     valueInputComputed: {
       get() {
-        return this.prepareDateFormat(this.value, this.DATE_FORMAT_API, this.DATE_FORMAT_VIEW);
+        if( this.cacheStr ) {
+          return this.cacheStr;
+        }
+        return this.valueDateTime ? this.valueDateTime.format(this.DATE_FORMAT_VIEW) : '';
       },
       set(value) {
-        const _value = this.prepareDateFormat(value, this.DATE_FORMAT_VIEW, this.DATE_FORMAT_API);
-        // this.inputFormElement(_value);
-        (_value instanceof DateTime) && this.inputFormElement(_value);
+        if( value === '') {
+          this.inputPrepareFormElement( null );
+        }
+
+        let date = DateTime(value, this.DATE_FORMAT_VIEW, true);
+        if( !date.isValid() ){
+          this.cacheStr = value;
+          return;
+        }
+
+        this.inputPrepareFormElement( date );
       }
-    }
+    },
+
+
+    placeholderCache() {
+      return !this.placeholder ? '' : this.prepareInput(this.placeholder).format(this.DATE_FORMAT_VIEW);
+    },
   },
 };
 </script>
