@@ -1,5 +1,5 @@
 <template>
-  <FveTemplateField>
+  <FveFieldTemplate>
     <Multiselect
       :name="name"
       :placeholder="placeholder"
@@ -9,9 +9,8 @@
       :required="required"
       autocomplete="off"
 
-      :options="_optionList"
-
-      :multiple="multiple"
+      @input="inputFormElement"
+      :options="options"
 
       selectLabel=""
       selectedLabel="Выбрано"
@@ -19,107 +18,76 @@
       deselectGroupLabel="Press enter to deselect group"
       selectGroupLabel="Press enter to select group"
 
-      label="name"
-      track-by="id"
-      v-model="_value"
+      :multiple="true"
+      v-model="value2"
+
+      @search-change="searchChange"
+
+      :track-by="optionFieldId"
+      :label="optionFieldName"
     >
       <template v-slot:noOptions>Пустой список</template>
       <template v-slot:noResult><div>По вашему запросу ничего не найдено. <span v-if="searchAdd" style="color: red;" @click="addItem">Добавить</span></div></template>
     </Multiselect>
-  </FveTemplateField>
+  </FveFieldTemplate>
 </template>
 
 <script>
 
-import FveMixinField from "@widgetFormValidate/src/Mixin/FveMixinField";
-import FveMixinFieldSelect from '@widgetFormValidate/src/Mixin/FveMixinFieldSelect';
-
+import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";
 import Multiselect from 'vue-multiselect';
 
 export default {
   mixins: [
-    FveMixinField,
-    FveMixinFieldSelect
+    FveFieldMixin
   ],
   components: {
     Multiselect
   },
-  props: {
-    // значение по умолчанию (можно переопределить тип)
-    value    : { type: Number, default: () => null },
-  },
   data(){
     return {
-      multiple: false,
+      value2: this.value ? [ ...this.value ] : [],
       search: '',
       searchAdd: false,
     };
   },
+  props: {
+    options  : { type: Array, default: () => [] },
+    // значение по умолчанию (можно переопределить тип)
+    value    : { type: Array, default: () => [] },
+    optionFieldId: { type: String, default: () => 'id' },
+    optionFieldName: { type: String, default: () => 'name' },
+  },
   methods: {
-    addItem(){},
-
-    // для строк -> приходит строка и преобразуем в DateTime
-    prepareInput(value){
-      return value;
-    },
-    // на выходе ожидается строка у нас DateTime
-    prepareOutput(value){
-      if(value === null) { return null; }
-      return value;
-    },
-    inputPrepareFormElement(valueDateTime) {
-      this.inputFormElement( this.prepareOutput(valueDateTime) );
-    },
-
-
     prepareValue($event) {
       return $event;
     },
     isEmpty(value) {
-      return value === '';
+      return value === '' || value === null || value.length === 0;
     },
     // eslint-disable-next-line
     validateFunction(str) {
       return 'SUCCESS';
     },
+
+    searchChange(search){
+      this.search = search;
+    },
+    addItem(){}
   },
-  computed: {
-    valuePrepare() {
-      return this.prepareInput(this.value);
-    },
-    _value: {
-      get() {
-        if(!this.valuePrepare) {
-          return null;
-        }
-        return {
-          id: this.optionGetKey(this.valuePrepare),
-          name: this.optionGetName(this.valuePrepare),
-        };
-      },
-      set(option){
-        this.inputPrepareFormElement(option.origin);
-      }
-    },
-    _optionList() {
-      return this.optionList.map((option) => {
-        return {
-          id: this.optionGetKey(option),
-          name: this.optionGetName(option),
-          origin: option,
-        };
-      });
+  watch: {
+    value(newValue){
+      this.value2 = this.value ? [ ...this.value ] : [];
     }
   }
+  // TODO: add watcher value ---> value2
 };
 </script>
-
 
 <style lang="scss" >
 // TODO use scope
 .fve {
   @import "~vue-multiselect/dist/vue-multiselect.min";
-
   .multiselect {
     margin: var(--fve-input--margin);
     .multiselect__select {
@@ -190,7 +158,6 @@ export default {
       }
     }
   }
-
 }
 
 </style>
