@@ -54,9 +54,9 @@ export default {
       return value;
     },
     // на выходе ожидается строка у нас DateTime
-    prepareOutput(valueDateTime){
-      if(valueDateTime === null) { return null; }
-      return valueDateTime;
+    prepareOutput(value){
+      if(value === null) { return null; }
+      return value;
     },
     inputPrepareFormElement(valueDateTime) {
       this.inputFormElement( this.prepareOutput(valueDateTime) );
@@ -80,21 +80,16 @@ export default {
     },
     _value: {
       get() {
-        if(!this.value) {
+        if(!this.valuePrepare) {
           return null;
         }
-        let v = this._optionList.find(option => option.id === this.value.toString());
-        v =  v ? v : null;
-        return v;
-        /*
-        this.value ?{
-          id: this.value,
-          name: '', // Не известное значение
-        } : null;
-         */
+        return {
+          id: this.optionGetKey(this.valuePrepare),
+          name: this.optionGetName(this.valuePrepare),
+        };
       },
       set(option){
-        this.inputFormElement(option.id);
+        this.inputPrepareFormElement(option.origin);
       }
     },
     _optionList() {
@@ -102,7 +97,7 @@ export default {
         return {
           id: this.optionGetKey(option),
           name: this.optionGetName(option),
-          // origin: option,
+          origin: option,
         };
       });
     }
