@@ -33,7 +33,7 @@ export default {
   },
   props: {
     // значение по умолчанию (можно переопределить тип)
-    value    : { type: String, default: '' },
+    value    : { type: [String, Number], default: '' },
   },
   methods: {
     prepareValue($event) {
