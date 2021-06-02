@@ -65,7 +65,7 @@
 
 <script>
 
-import FveFormMixin   from "@widgetFormValidate/src/Mixin/FveFormMixin";
+import FveMixinForm   from "@widgetFormValidate/src/Mixin/FveMixinForm";
 
 // text
 import FveText        from "@widgetFormValidate/src/Element/Text/FveText";
@@ -89,7 +89,7 @@ import FveSelect      from "@widgetFormValidate/src/Element/Select/html/FveSelec
 
 export default {
   mixins: [
-    FveFormMixin
+    FveMixinForm
   ],
   components: {},
   data() {

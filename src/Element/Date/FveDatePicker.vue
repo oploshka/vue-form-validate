@@ -1,10 +1,10 @@
 <script>
 
-import FveMixinDatePicker from '@widgetFormValidate/src/Element/Date/FveMixinDatePicker';
+import FveMixinFieldDatePicker from '@widgetFormValidate/src/Element/Date/FveMixinFieldDatePicker';
 
 export default {
   mixins: [
-    FveMixinDatePicker
+    FveMixinFieldDatePicker
   ],
   props: {
     value       : { type: DateTime },

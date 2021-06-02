@@ -1,5 +1,5 @@
 <template>
-  <FveFieldTemplate>
+  <FveTemplateField>
     <Multiselect
       :name="name"
       :placeholder="placeholder"
@@ -25,20 +25,20 @@
       <template v-slot:noOptions>Пустой список</template>
       <template v-slot:noResult>По вашему запросу ничего не найдено.</template>
     </Multiselect>
-  </FveFieldTemplate>
+  </FveTemplateField>
 </template>
 
 <script>
 
-import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";
-import FveFieldSelectMixin from '@widgetFormValidate/src/Mixin/FveFieldSelectMixin';
+import FveMixinField from "@widgetFormValidate/src/Mixin/FveMixinField";
+import FveMixinFieldSelect from '@widgetFormValidate/src/Mixin/FveMixinFieldSelect';
 
 import Multiselect from 'vue-multiselect';
 
 export default {
   mixins: [
-    FveFieldMixin,
-    FveFieldSelectMixin
+    FveMixinField,
+    FveMixinFieldSelect
   ],
   components: {
     Multiselect
