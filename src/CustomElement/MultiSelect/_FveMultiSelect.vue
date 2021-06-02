@@ -1,5 +1,5 @@
 <template>
-  <FveFieldTemplate>
+  <FveTemplateField>
     <Multiselect
       :name="name"
       :placeholder="placeholder"
@@ -29,7 +29,7 @@
       <template v-slot:noOptions>Пустой список</template>
       <template v-slot:noResult><div>По вашему запросу ничего не найдено. <span v-if="searchAdd" style="color: red;" @click="addItem">Добавить</span></div></template>
     </Multiselect>
-  </FveFieldTemplate>
+  </FveTemplateField>
 </template>
 
 <script>

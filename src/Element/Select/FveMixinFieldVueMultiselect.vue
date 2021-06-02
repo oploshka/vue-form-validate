@@ -60,12 +60,15 @@ export default {
 
     // для строк -> приходит строка и преобразуем в DateTime
     prepareInput(value){
-      return value;
+      return value ? {
+        id: this.optionGetKey(value),
+        name: this.optionGetName(value),
+        origin: value,
+      } : null;
     },
     // на выходе ожидается строка у нас DateTime
     prepareOutput(value){
-      if(value === null) { return null; }
-      return value;
+      return value ? value.origin : null;
     },
     inputPrepareFormElement(valueDateTime) {
       this.inputFormElement( this.prepareOutput(valueDateTime) );
@@ -89,16 +92,10 @@ export default {
     },
     _value: {
       get() {
-        if(!this.valuePrepare) {
-          return null;
-        }
-        return {
-          id: this.optionGetKey(this.valuePrepare),
-          name: this.optionGetName(this.valuePrepare),
-        };
+        return this.valuePrepare;
       },
       set(option){
-        this.inputPrepareFormElement(option.origin);
+        this.inputPrepareFormElement(option);
       }
     },
     _optionList() {
@@ -120,6 +117,7 @@ export default {
 .fve {
   @import "~vue-multiselect/dist/vue-multiselect.min";
 
+  /*
   .multiselect {
     margin: var(--fve-input--margin);
     .multiselect__select {
@@ -156,7 +154,7 @@ export default {
           &:hover {
             background-color: rgba(0,0,0,0);
             &:after {
-              color: var(--color-prime);
+              color: var(--fve-input--background);
             }
           }
         }
@@ -190,7 +188,7 @@ export default {
       }
     }
   }
-
+  */
 }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <FveFieldTemplate>
+  <FveTemplateField>
     <div class="select-line">
       <template v-for="option in optionList">
         <div
@@ -10,19 +10,19 @@
         >{{ optionGetName(option) }}</div>
       </template>
     </div>
-  </FveFieldTemplate>
+  </FveTemplateField>
 </template>
 
 <script>
 
-import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";
-import FveFieldSelectMixin from '@widgetFormValidate/src/Mixin/FveFieldSelectMixin';
+import FveMixinField        from "@widgetFormValidate/src/Mixin/FveMixinField";
+import FveMixinFieldSelect  from '@widgetFormValidate/src/Mixin/FveMixinFieldSelect';
 
 export default {
   name: 'FveSelectLine',
   mixins: [
-    FveFieldMixin,
-    FveFieldSelectMixin,
+    FveMixinField,
+    FveMixinFieldSelect,
   ],
   props: {
     value: [Number, String],

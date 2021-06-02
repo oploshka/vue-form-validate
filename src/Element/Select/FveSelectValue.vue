@@ -7,7 +7,7 @@ export default {
     FveMixinFieldVueMultiselect
   ],
   props: {
-    value    : { type: String, default: () => null },
+    value: [Number, String],
   },
   methods: {
     prepareInput(value){
@@ -15,12 +15,15 @@ export default {
         return null;
       }
       let v = this._optionList.find(option => option.id === this.value.toString());
-      v =  v ? v : null;
-      return v;
+      return v ? {
+        id: this.optionGetKey(v),
+        name: this.optionGetName(v),
+        origin: v,
+      } : null;
+
     },
     prepareOutput(value){
-      if(value === null) { return null; }
-      return this.optionGetKey(value);
+      return value ? this.optionGetKey(value.origin) : null;
     },
   },
 };

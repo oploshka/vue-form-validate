@@ -11,11 +11,14 @@ export default {
   },
   methods: {
     prepareInput(value){
-      return value;
+      return value ? {
+        id: this.optionGetKey(value),
+        name: this.optionGetName(value),
+        origin: value,
+      } : null;
     },
     prepareOutput(value){
-      if(value === null) { return null; }
-      return value;
+      return value ? value.origin : null;
     },
   },
 };

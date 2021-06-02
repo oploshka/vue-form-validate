@@ -1,27 +1,11 @@
 <script>
 
-import FveMixinFieldVueMultiselect from '@widgetFormValidate/src/Element/Select/FveMixinFieldVueMultiselect';
+import FveMixinFieldVueMultiselectMultiple
+  from '@widgetFormValidate/src/Element/Select/FveMixinFieldVueMultiselectMultiple';
 
 export default {
   mixins: [
-    FveMixinFieldVueMultiselect
+    FveMixinFieldVueMultiselectMultiple
   ],
-  props: {
-    value    : { type: Array, default: () => null },
-  },
-  data(){
-    return {
-      multiple: true,
-    };
-  },
-  methods: {
-    prepareInput(value){
-      return value;
-    },
-    prepareOutput(value){
-      if(value === null) { return null; }
-      return value;
-    },
-  },
 };
 </script>
