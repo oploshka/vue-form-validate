@@ -31,8 +31,8 @@
 
 <script>
 
-import FveMixinField from "@widgetFormValidate/src/Mixin/FveMixinField";
-import FveMixinFieldSelect from '@widgetFormValidate/src/Mixin/FveMixinFieldSelect';
+import FveMixinField from "@fve/Mixin/FveMixinField";
+import FveMixinFieldSelect from '@fve/Mixin/FveMixinFieldSelect';
 
 import Multiselect from 'vue-multiselect';
 

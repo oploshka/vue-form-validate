@@ -17,10 +17,10 @@
 
 <script>
 
-// import FveBoolean   from '@widgetFormValidate/src/Element/SelectBoolean/FveBoolean';
-// import FveSwitch    from '@widgetFormValidate/src/Switch/FveSwitch';
-// import FveRadio     from '@widgetFormValidate/src/Switch/FveRadio';
-// import FveCheckbox  from '@widgetFormValidate/src/Switch/FveCheckbox';
+// import FveBoolean   from '@fve/Element/SelectBoolean/FveBoolean';
+// import FveSwitch    from '@fve/Switch/FveSwitch';
+// import FveRadio     from '@fve/Switch/FveRadio';
+// import FveCheckbox  from '@fve/Switch/FveCheckbox';
 
 export default {
   components: {
@@ -41,7 +41,3 @@ export default {
 
 };
 </script>
-
-<style lang="scss" scoped>
-@import "~bootstrap";
-</style>

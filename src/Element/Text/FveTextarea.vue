@@ -19,7 +19,7 @@
 
 <script>
 
-import FveMixinField from "@widgetFormValidate/src/Mixin/FveMixinField";
+import FveMixinField from "@fve/Mixin/FveMixinField";
 
 export default {
   mixins: [
@@ -45,6 +45,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~@widgetFormValidate/style/textarea.scss";
+@import "~@fve/style/textarea.scss";
 
 </style>

@@ -1,11 +1,11 @@
 <script>
 
-import UiKitMixin from '@widgetFormValidate/test/page/UiKitMixin';
+import UiKitMixin from './UiKitMixin';
 
-import FveSelectValue   from '@widgetFormValidate/src/Element/Select/FveSelectValue';
-import FveSelectObject  from '@widgetFormValidate/src/Element/Select/FveSelectObject';
-import FveSelectLine    from '@widgetFormValidate/src/Element/Select/FveSelectLine';
-import FveMultiSelectObject from '@widgetFormValidate/src/Element/MultiSelect/FveMultiSelectObject'
+import FveSelectValue   from '@fve/Element/Select/FveSelectValue';
+import FveSelectObject  from '@fve/Element/Select/FveSelectObject';
+import FveSelectLine    from '@fve/Element/Select/FveSelectLine';
+import FveMultiSelectObject from '@fve/Element/MultiSelect/FveMultiSelectObject'
 
 export default {
   mixins: [

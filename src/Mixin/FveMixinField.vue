@@ -1,6 +1,6 @@
 <script>
 
-import FveTemplateField from "@widgetFormValidate/src/Mixin/FveTemplateField";
+import FveTemplateField from "@fve/Mixin/FveTemplateField";
 
 export default {
   components: {

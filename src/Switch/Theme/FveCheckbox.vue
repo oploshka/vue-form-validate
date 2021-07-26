@@ -7,7 +7,7 @@
 
 <script>
 
-import FveSwitchMixin from '@widgetFormValidate/src/Mixin/FveSwitchMixin';
+import FveSwitchMixin from '@fve/Mixin/FveSwitchMixin';
 
 export default {
   mixins: [

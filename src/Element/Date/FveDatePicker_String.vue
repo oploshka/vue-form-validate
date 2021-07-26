@@ -1,6 +1,6 @@
 <script>
 
-import FveMixinFieldDatePicker from '@widgetFormValidate/src/Element/Date/FveMixinFieldDatePicker';
+import FveMixinFieldDatePicker from '@fve/Element/Date/FveMixinFieldDatePicker';
 
 export default {
   mixins: [
@@ -44,7 +44,7 @@ export default {
 <script>
 
 import DatePicker from 'v-calendar/lib/components/date-picker.umd';
-import FveMixinField from "@widgetFormValidate/src/Mixin/FveMixinField";
+import FveMixinField from "@fve/Mixin/FveMixinField";
 
 export default {
   mixins: [

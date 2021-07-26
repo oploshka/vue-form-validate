@@ -1,15 +1,15 @@
 <script>
 
-import UiKitMixin from '@widgetFormValidate/test/page/UiKitMixin'
+import UiKitMixin from './UiKitMixin';
 
-import FveEmail       from '@widgetFormValidate/src/Element/Text/FveEmail';
-import FveLogin       from '@widgetFormValidate/src/Element/Text/FveLogin';
-import FveNumber      from '@widgetFormValidate/src/Element/Text/FveNumber';
-import FvePassword    from '@widgetFormValidate/src/Element/Text/FvePassword';
-import FveTime        from '@widgetFormValidate/src/Element/Text/FveTime';
-import FveUrl         from '@widgetFormValidate/src/Element/Text/FveUrl';
-import FvePhone       from "@widgetFormValidate/src/Element/Text/FvePhone";
-import FveTextarea    from "@widgetFormValidate/src/Element/Text/FveTextarea";
+import FveEmail       from '@fve/Element/Text/FveEmail';
+import FveLogin       from '@fve/Element/Text/FveLogin';
+import FveNumber      from '@fve/Element/Text/FveNumber';
+import FvePassword    from '@fve/Element/Text/FvePassword';
+import FveTime        from '@fve/Element/Text/FveTime';
+import FveUrl         from '@fve/Element/Text/FveUrl';
+import FvePhone       from "@fve/Element/Text/FvePhone";
+import FveTextarea    from "@fve/Element/Text/FveTextarea";
 
 export default {
   mixins: [
@@ -21,7 +21,7 @@ export default {
 
     return {
       componentInfoList: [
-        {name: 'text'         , component: () => import('@widgetFormValidate/src/Element/Text/FveText')  , data: {} },
+        {name: 'text'         , component: () => import('@fve/Element/Text/FveText')  , data: {} },
         {name: 'textarea'     , component: FveTextarea  , data: {} },
         //
         {name: 'text-phone'   , component: FvePhone     , data: {} },

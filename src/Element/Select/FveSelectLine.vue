@@ -15,8 +15,8 @@
 
 <script>
 
-import FveMixinField        from "@widgetFormValidate/src/Mixin/FveMixinField";
-import FveMixinFieldSelect  from '@widgetFormValidate/src/Mixin/FveMixinFieldSelect';
+import FveMixinField        from "@fve/Mixin/FveMixinField";
+import FveMixinFieldSelect  from '@fve/Mixin/FveMixinFieldSelect';
 
 export default {
   name: 'FveSelectLine',

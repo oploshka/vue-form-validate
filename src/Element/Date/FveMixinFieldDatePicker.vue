@@ -39,7 +39,7 @@
 <script>
 
 import DatePicker from 'v-calendar/lib/components/date-picker.umd';
-import FveMixinField from "@widgetFormValidate/src/Mixin/FveMixinField";
+import FveMixinField from "@fve/Mixin/FveMixinField";
 
 export default {
   mixins: [
@@ -153,7 +153,7 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~@widgetFormValidate/style/inputText.scss";
+@import "~@fve/style/inputText.scss";
 
 input[readonly],
 input[disabled] {

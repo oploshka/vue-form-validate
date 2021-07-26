@@ -9,7 +9,7 @@
 
 <script>
 
-import FveMixinField from "@widgetFormValidate/src/Mixin/FveMixinField";
+import FveMixinField from "@fve/Mixin/FveMixinField";
 
 export default {
   mixins: [
@@ -17,9 +17,9 @@ export default {
   ],
   data(){
     return {
-      theme: () => import('@widgetFormValidate/src/Switch/FveCheckbox'),
-      theme2: () => import('@widgetFormValidate/src/Switch/FveSwitch'),
-      theme3: () => import('@widgetFormValidate/src/Switch/FveRadio'),
+      theme: () => import('@fve/Switch/FveCheckbox'),
+      theme2: () => import('@fve/Switch/FveSwitch'),
+      theme3: () => import('@fve/Switch/FveRadio'),
     };
   },
   props: {
@@ -46,6 +46,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~@widgetFormValidate/style/inputText.scss";
+@import "~@fve/style/inputText.scss";
 
 </style>

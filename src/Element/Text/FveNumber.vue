@@ -1,6 +1,6 @@
 <script>
 
-import FveText from "@widgetFormValidate/src/Element/Text/FveText";
+import FveText from "@fve/Element/Text/FveText";
 
 export default {
   mixins: [
@@ -46,6 +46,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~@widgetFormValidate/style/inputText.scss";
+@import "~@fve/style/inputText.scss";
 
 </style>

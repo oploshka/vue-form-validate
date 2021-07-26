@@ -65,7 +65,7 @@
 
 <script>
 
-import FveMixinForm   from "@widgetFormValidate/src/Mixin/FveMixinForm";
+import FveMixinForm   from "@fve/Mixin/FveMixinForm";
 
 export default {
   mixins: [
@@ -89,9 +89,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~@widgetFormValidate/style/const.scss";
-</style>
-
-<style lang="scss" scoped>
-@import "~bootstrap";
+@import "~@fve/style/const.scss";
 </style>

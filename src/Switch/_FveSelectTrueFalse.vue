@@ -1,6 +1,6 @@
 <script>
 
-import FveSelect from "@widgetFormValidate/src/Element/Select/FveSelect";
+import FveSelect from "@fve/Element/Select/FveSelect";
 
 export default {
   mixins: [

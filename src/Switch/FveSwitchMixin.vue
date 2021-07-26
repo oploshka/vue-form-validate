@@ -1,6 +1,6 @@
 <script>
 
-import FveSwitchTemplate from '@widgetFormValidate/src/Mixin/FveSwitchTemplate';
+import FveSwitchTemplate from '@fve/Mixin/FveSwitchTemplate';
 
 export default {
   components: {

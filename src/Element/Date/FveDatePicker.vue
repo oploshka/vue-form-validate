@@ -1,6 +1,6 @@
 <script>
 
-import FveMixinFieldDatePicker from '@widgetFormValidate/src/Element/Date/FveMixinFieldDatePicker';
+import FveMixinFieldDatePicker from '@fve/Element/Date/FveMixinFieldDatePicker';
 
 export default {
   mixins: [
