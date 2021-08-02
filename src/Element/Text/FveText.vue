@@ -22,6 +22,7 @@
 import FveMixinField from "@fve/Mixin/FveMixinField";
 
 export default {
+  name: 'FveText',
   mixins: [
     FveMixinField
   ],

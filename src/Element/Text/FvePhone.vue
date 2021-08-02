@@ -20,6 +20,7 @@ import PhoneMaskInput from  "vue-phone-mask-input";
 import FveMixinField from "@fve/Mixin/FveMixinField";
 
 export default {
+  name: 'FvePhone',
   mixins: [
     FveMixinField
   ],

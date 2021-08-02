@@ -26,16 +26,15 @@
 
           <template v-for="required in ['', 'required']">
             <template v-for="readonly in ['', 'readonly']">
-              <template v-for="disabled in ['', 'disabled']">
-                <div class="col-3" :key="required + '-' + readonly + '-' + disabled">
+              <!--<template v-for="disabled in ['', 'disabled']">-->
+                <div class="col-3" :key="required + '-' + readonly">
                   <component
                     v-bind:is="componentInfo.component"
                     v-bind="Object.assign({
-                    label       :'Label ' + componentInfo.name + ' ( ' + required + ' ' + readonly + ' ' + disabled + ' )',
+                    label       :'Label ' + componentInfo.name + ' ( ' + required + ' ' + readonly + ' )',
                     placeholder : 'Placeholder ' + componentInfo.name,
                     required    : !!required,
                     readonly    : !!readonly,
-                    disabled    : !!disabled,
                   },
                   componentInfo.data
                 )"
@@ -43,7 +42,7 @@
                   />
                 </div>
 
-              </template>
+              <!--</template>-->
             </template>
           </template>
 
