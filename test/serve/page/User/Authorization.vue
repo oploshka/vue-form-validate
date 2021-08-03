@@ -8,7 +8,7 @@
         <div class="btn btn-primary mt-3" @click="auth">Войти</div>
       </div>
       <div class="co-12 col-md-6">
-        <h3>Результат</h3>
+        <h3 class="mb-4">Результат</h3>
         <pre>{{formData || 'null' }}</pre>
       </div>
     </div>

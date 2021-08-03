@@ -10,13 +10,19 @@
               <router-link class="nav-link" :to="{name: 'auth'}">Авторизация</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" :to="{name: 'uikit'}">UIkit</router-link>
+            </li>
+
+            <li class="nav-item dropdown">
+              <span class="nav-link dropdown-toggle">UIkit</span>
+              <ul class="dropdown-menu">
+                <li><router-link class="dropdown-item" :to="{name: 'uikit-text'}">UIkit Text</router-link></li>
+                <li><router-link class="dropdown-item" :to="{name: 'uikit-select'}">UIkit Select</router-link></li>
+                <li><router-link class="dropdown-item" :to="{name: 'uikit-switch'}">UIkit Switch</router-link></li>
+              </ul>
             </li>
             <!--
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
+              <span class="nav-link dropdown-toggle">Dropdown</span>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -61,8 +67,7 @@ html, body, #app {
 }
 pre {
   background: #f2f2f2;
-  padding: 25px;
-  margin-top: 50px;
+  padding: 15px;
   border-radius: 10px;
 }
 </style>
@@ -70,6 +75,21 @@ pre {
 .nav-item {
   padding-left: 10px;
 }
+.nav-link{
+  cursor: pointer;
+}
+.nav-item.dropdown{
+  position: relative;
+}
+.dropdown-menu {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+}
+nav.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
 .main-content {
   min-height: 100%;
   min-height: calc(100% - 80px);
