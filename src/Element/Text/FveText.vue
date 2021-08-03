@@ -1,0 +1,58 @@
+<template>
+  <FveTemplateField>
+    <input
+      :type="type"
+      :name="name"
+      :placeholder="placeholder"
+      :readonly="readonly"
+      :disabled="disabled"
+      :value="value"
+      :required="required"
+      autocomplete="off"
+      @input="inputFormElement"
+      @change="inputFormElement"
+      @keypress.enter="$emit('keypress-enter')"
+      v-bind="inputAttr"
+    />
+  </FveTemplateField>
+</template>
+
+<script>
+
+import FveMixinField from "@fve/Mixin/FveMixinField";
+
+export default {
+  name: 'FveText',
+  mixins: [
+    FveMixinField
+  ],
+  data(){
+    return {
+      type: 'text',
+      inputAttr: {},
+    };
+  },
+  props: {
+    // значение по умолчанию (можно переопределить тип)
+    value    : { type: [String, Number], default: '' },
+  },
+  methods: {
+    prepareValue($event) {
+      return $event.target.value;
+    },
+    isEmpty(value) {
+      return value === '';
+    },
+    // eslint-disable-next-line
+    validateFunction(str) {
+      return 'SUCCESS';
+    },
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+
+@import "~@fve/style/inputText.scss";
+
+</style>
