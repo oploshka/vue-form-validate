@@ -3,6 +3,7 @@
 import FveText from "@fve/Element/Text/FveText";
 
 export default {
+  name: 'FveUrl',
   mixins: [
     FveText
   ],

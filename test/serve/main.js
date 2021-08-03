@@ -16,6 +16,13 @@ import router from '@router';
 // import '@plugins/v-mask';
 // import '@plugin/vue-click-outside';
 
+// import 'prism-es6/components/prism-markup-templating';
+// import VueCodeHighlight from "vue-code-highlight";
+// Vue.use(VueCodeHighlight);
+
+
+import '@plugin/vue-form-validate-element';
+
 Vue.config.productionTip = false;
 
 global.Vue = Vue;

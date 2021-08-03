@@ -1,6 +1,6 @@
 <script>
 
-import FveTemplateField from "@fve/Mixin/FveTemplateField";
+import FveTemplateField from "@fve/Template/FveTemplateField";
 
 export default {
   components: {
@@ -50,6 +50,10 @@ export default {
   },
   methods: {
 
+    // eslint-disable-next-line
+    validateFunction(str) {
+      return 'SUCCESS';
+    },
     /*
     // НУЖНО РЕАЛИЗОВАТЬ У СЕБЯ В КОМПОНЕНТЕ!!!!!
     prepareValue($event) {

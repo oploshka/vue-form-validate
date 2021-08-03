@@ -5,7 +5,7 @@ import UiKitMixin from './UiKitMixin';
 import FveSelectValue   from '@fve/Element/Select/FveSelectValue';
 import FveSelectObject  from '@fve/Element/Select/FveSelectObject';
 import FveSelectLine    from '@fve/Element/Select/FveSelectLine';
-import FveMultiSelectObject from '@fve/Element/MultiSelect/FveMultiSelectObject'
+import FveMultiSelectObject from '@fve/Element/MultiSelect/FveMultiSelectObject';
 
 export default {
   mixins: [

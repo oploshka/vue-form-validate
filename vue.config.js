@@ -15,6 +15,18 @@ let testDomainName      = process.env.DOMAIN_NAME;
 let testDomainPort      = process.env.DOMAIN_PORT;
 let testDomainFull      = testDomainProtocol + '://' + testDomainName + ':' + testDomainPort;
 
+let publicPath = '/';
+let outputDir  = path.resolve(__dirname, "./web");
+
+console.log("=========================================")
+console.log("mode: " + process.env.NODE_ENV, process.env.BUILD_MODE )
+console.log("=========================================")
+
+if(process.env.BUILD_MODE === 'demo') {
+  publicPath  = '/vue-form-validate/';
+  outputDir   = path.resolve(__dirname, "./demo");
+}
+
 module.exports = {
   lintOnSave: process.env.NODE_ENV !== 'production',
 
@@ -46,8 +58,9 @@ module.exports = {
     },
   },
 
-  outputDir: path.resolve(__dirname, "./web"),
-  assetsDir: "./resource/",
+  publicPath: publicPath,
+  outputDir : outputDir,
+  assetsDir : "./resource/",
 
   filenameHashing: true,
 

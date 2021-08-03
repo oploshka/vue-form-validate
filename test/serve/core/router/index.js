@@ -27,6 +27,13 @@ const routes = [
   },
 
   {
+    path: '/auth',
+    name: 'auth',
+    component: () => import('@page/User/Authorization'),
+  },
+
+
+  {
     path: '*',
     name: 'front',
     component: () => import('@page/UiKit'),

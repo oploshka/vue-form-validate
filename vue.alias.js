@@ -10,6 +10,7 @@ const alias = {
   '@plugin'         : path.join(__dirname, './test/serve/core/plugin'      ),
   '@router'         : path.join(__dirname, './test/serve/core/router'      ),
   '@page'           : path.join(__dirname, './test/serve/page'             ),
+  '@component'      : path.join(__dirname, './test/serve/component'        ),
   '@'               : path.join(__dirname, './test/serve'                  ),
 
 };
