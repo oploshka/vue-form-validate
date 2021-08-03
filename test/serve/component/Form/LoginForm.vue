@@ -1,18 +1,16 @@
 <template>
-  <form class="form-auth form-base" @submit="formSubmit"  @submit.prevent="formSubmit">
+  <form @submit="formSubmit"  @submit.prevent="formSubmit">
     <FveLogin
       label="Логин"
       name="login"
       required
       v-model="form.login"
-      @keypress-enter="formSubmit"
     />
     <FvePassword
       label="Пароль"
       name="password"
       required
       v-model="form.password"
-      @keypress-enter="formSubmit"
     />
   </form>
 </template>

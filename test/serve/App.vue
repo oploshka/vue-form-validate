@@ -2,12 +2,17 @@
   <div id="app">
     <nav class="navbar  navbar-dark bg-dark fixed-top">
       <div class="container">
-        <router-link class="navbar-brand" to="/">VUE FORM</router-link>
+        <router-link class="navbar-brand" to="/">VUE FORM ELEMENT</router-link>
 
         <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="display: flex; flex-direction: row;">
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{name: 'auth'}">Авторизация</router-link>
+            <li class="nav-item dropdown">
+              <span class="nav-link dropdown-toggle">Примеры форм</span>
+              <ul class="dropdown-menu">
+                <li><router-link class="dropdown-item" :to="{name: 'user__auth'}">Авторизации</router-link></li>
+                <li><router-link class="dropdown-item" :to="{name: 'user__password-reset'}">Сброса пароля</router-link></li>
+                <li><router-link class="dropdown-item" :to="{name: 'user__profile'}">Профиль</router-link></li>
+              </ul>
             </li>
             <li class="nav-item">
             </li>

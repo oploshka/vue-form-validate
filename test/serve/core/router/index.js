@@ -8,35 +8,45 @@ const routes = [
   {
     path: '/uikit',
     name: 'uikit',
-    component: () => import('@page/UiKit'),
+    component: () => import('@page/UiKit/UiKit'),
   },
   {
     path: '/uikit-text',
     name: 'uikit-text',
-    component: () => import('@page/UiKitElementText'),
+    component: () => import('@page/UiKit/UiKitElementText'),
   },
   {
     path: '/uikit-select',
     name: 'uikit-select',
-    component: () => import('@page/UiKitElementSelect'),
+    component: () => import('@page/UiKit/UiKitElementSelect'),
   },
   {
     path: '/uikit-switch',
     name: 'uikit-switch',
-    component: () => import('@page/UiKitSwitch'),
+    component: () => import('@page/UiKit/UiKitSwitch'),
   },
 
   {
-    path: '/auth',
-    name: 'auth',
+    path: '/user/auth',
+    name: 'user__auth',
     component: () => import('@page/User/Authorization'),
+  },
+  {
+    path: '/user/password-reset',
+    name: 'user__password-reset',
+    component: () => import('@page/User/PasswordReset'),
+  },
+  {
+    path: '/user/profile',
+    name: 'user__profile',
+    component: () => import('@page/User/ProfileEdit'),
   },
 
 
   {
     path: '*',
     name: 'front',
-    component: () => import('@page/UiKit'),
+    component: () => import('@page/UiKit/UiKit'),
   },
 
 ];
