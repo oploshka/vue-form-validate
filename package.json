@@ -1,6 +1,6 @@
 {
   "name": "vue-form-element",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.1-beta.1",
   "description": "Vue form element and mixin",
   "author": "Andrey Tyurin <ectb08@mail.ru>",
   "scripts": {
@@ -18,9 +18,6 @@
   "homepage": "https://oploshka.github.io/vue-form-validate/",
   "license": "MIT",
   "repository": "git@github.com:oploshka/vue-form-validate.git",
-  "browserslist": [
-    "last 2 chrome versions"
-  ],
   "dependencies": {
   },
   "devDependencies": {

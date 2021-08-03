@@ -1,7 +1,7 @@
 # Переустановка пакета
 ```shell
-npm uninstall js-request-manager
-npm install js-request-manager@1.0.0-beta.4
+npm uninstall vue-form-element
+npm install vue-form-element@1.0.0-beta.4
 ```
 
 # Публикация пакета на npmjs
@@ -18,11 +18,11 @@ npm publish --tag beta
 
 # Отмена публикации пакета на npmjs
 ```shell
-npm unpublish js-request-manager@1.0.0-beta.0
+npm unpublish vue-form-element@1.0.0-beta.0
 ```
 
 # Установить пакеты устаревшими
 ```shell
-npm deprecate js-request-manager@"< 0.2.3" "critical bug fixed in v0.2.3"
-npm deprecate js-request-manager@0.x "0.x is no longer supported"
+npm deprecate vue-form-element@"< 0.2.3" "critical bug fixed in v0.2.3"
+npm deprecate vue-form-element@0.x "0.x is no longer supported"
 ```
