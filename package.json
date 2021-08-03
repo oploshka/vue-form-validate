@@ -1,14 +1,28 @@
 {
   "name": "vue-form-element",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
+  "description": "Vue form element and mixin",
+  "author": "Andrey Tyurin <ectb08@mail.ru>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "deploy": "gh-pages -d demo test/serve/main.js",
     "predeploy": "cross-env BUILD_MODE=demo vue-cli-service build test/serve/main.js"
   },
+  "main": "./build/index.js",
   "files": [
     "build"
   ],
+  "keywords": [
+    "vue form element"
+  ],
+  "homepage": "https://oploshka.github.io/vue-form-validate/",
+  "license": "MIT",
+  "repository": "git@github.com:oploshka/vue-form-validate.git",
+  "browserslist": [
+    "last 2 chrome versions"
+  ],
+  "dependencies": {
+  },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
