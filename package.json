@@ -19,6 +19,7 @@
   "license": "MIT",
   "repository": "git@github.com:oploshka/vue-form-validate.git",
   "dependencies": {
+    "vue-advanced-cropper": "^1.7.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

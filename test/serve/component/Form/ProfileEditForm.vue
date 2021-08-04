@@ -1,6 +1,17 @@
 <template>
   <form @submit="formSubmit"  @submit.prevent="formSubmit">
-    <fieldset>
+
+    <fieldset class="mb-5">
+      <legend>Аватар</legend>
+      <FveImagePreview
+        label="Аватар"
+        name="avatar"
+        required
+        v-model="form.avatar"
+      />
+    </fieldset>
+
+    <fieldset class="mb-5">
       <legend>Данные для входа</legend>
       <FvePhone
         label="Номер телефона"
@@ -20,7 +31,7 @@
       />
     </fieldset>
 
-    <fieldset>
+    <fieldset class="mb-5">
       <legend>Личные данные</legend>
       <!--<FveFileImageCropperPreview-->
       <!--  label=""-->
@@ -53,6 +64,8 @@
 //
 import FveMixinForm   from "@fve/Mixin/FveMixinForm";
 //
+import FveImagePreview from "@fve/Element/File/FveImagePreview";
+
 import FvePhone       from "@fve/Element/Text/FvePhone";
 import FveEmail       from "@fve/Element/Text/FveEmail";
 import FveLogin       from "@fve/Element/Text/FveLogin";
@@ -69,6 +82,8 @@ export default {
     FveMixinForm
   ],
   components: {
+    FveImagePreview,
+    //
     FvePhone,
     FveEmail,
     FveLogin,
@@ -85,6 +100,8 @@ export default {
     formSchema() {
       return {
         //
+        avatar          : { type: FileClass, default: () => { return null; } },
+        //
         phone           : { type: String,   default: () => { return ''; } },
         email           : { type: String,   default: () => { return ''; } },
         login           : { type: String,   default: () => { return ''; } },
@@ -92,8 +109,6 @@ export default {
         fio             : { type: String,   default: () => { return ''; } },
         birthday        : { type: DateTime, default: () => { return null; } },
         about           : { type: String,   default: () => { return ''; } },
-        //
-        // avatar          : { type: FileClass, default: () => { return null; } },
       };
     },
   },
