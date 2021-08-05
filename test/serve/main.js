@@ -3,9 +3,6 @@ import Vue from 'vue';
 // глобально инитим классы
 import '@entity';
 
-// Library
-import '@library/dayjs';
-
 // дефолтный импорт
 import App    from './App';
 import router from '@router';
@@ -21,7 +18,7 @@ import router from '@router';
 // Vue.use(VueCodeHighlight);
 
 
-import '@plugin/vue-form-validate-element';
+import '@plugin/vue-form-element';
 
 Vue.config.productionTip = false;
 

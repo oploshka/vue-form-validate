@@ -22,7 +22,7 @@
         <div class="row" style="margin-top: 30px;">
 
           <div class="col-12"><h4>{{componentInfo.name}}</h4></div>
-          <div class="col-12"><pre>{{form[componentInfo.name]}}</pre></div>
+          <div class="col-12"><pre>{{form[componentInfo.name] === null ? 'null' : typeof form[componentInfo.name] + ' : ' }}{{form[componentInfo.name]}}</pre></div>
 
           <template v-for="required in ['', 'required']">
             <template v-for="readonly in ['', 'readonly']">
@@ -87,6 +87,3 @@ export default {
 
 </script>
 
-<style lang="scss">
-@import "~@fve/style/const.scss";
-</style>

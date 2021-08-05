@@ -18,7 +18,7 @@ npm publish --tag beta
 
 # Отмена публикации пакета на npmjs
 ```shell
-npm unpublish vue-form-element@1.0.0-beta.0
+npm unpublish vue-form-element@0.1.1-beta.1
 ```
 
 # Установить пакеты устаревшими

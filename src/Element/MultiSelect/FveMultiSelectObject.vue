@@ -1,7 +1,7 @@
 <script>
 
 import FveMixinFieldVueMultiselectMultiple
-  from '@fve/Element/Select/FveMixinFieldVueMultiselectMultiple';
+  from '@fve/Element/MultiSelect/FveMixinFieldVueMultiselectMultiple';
 
 export default {
   mixins: [

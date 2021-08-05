@@ -1,4 +1,3 @@
-// import ParentClass from "@service/class/ParentClass";
 
 export default class FileClass {
   #field

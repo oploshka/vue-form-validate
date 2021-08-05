@@ -1,25 +1,23 @@
 <script>
 
-import FveMixinFieldVueMultiselect from '@fve/Element/Select/FveMixinFieldVueMultiselect';
+import FveSelectValue from "@fve/Element/Select/FveSelectValue";
 
 export default {
   mixins: [
-    FveMixinFieldVueMultiselect
+    FveSelectValue
   ],
   props: {
-    value    : { type: Object, default: () => null },
+    value: [Object],
   },
-  methods: {
-    prepareInput(value){
-      return value ? {
-        id: this.optionGetKey(value),
-        name: this.optionGetName(value),
-        origin: value,
-      } : null;
+  computed: {
+    _value: {
+      get() {
+        return (this.value === null) ? null : this.prepareOption(this.value);
+      },
+      set(option){
+        this.inputFormElement( option ? option.origin : null );
+      }
     },
-    prepareOutput(value){
-      return value ? value.origin : null;
-    },
-  },
+  }
 };
 </script>
