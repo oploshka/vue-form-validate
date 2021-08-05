@@ -3,8 +3,8 @@
     <DatePicker
       :popover="{ placement: 'bottom-end', visibility: 'click' }"
       v-model="valueDatePickerComputed"
-      color="red"
-      is-dark
+      color="blue"
+      :is-dark="false"
       :mode="DATE_PICKER_MODE"
       is24hr
     >
@@ -186,5 +186,9 @@ input[disabled] {
     }
     */
   }
+
+  svg, svg:focus {
+    outline: none;
+  }}
 }
 </style>
