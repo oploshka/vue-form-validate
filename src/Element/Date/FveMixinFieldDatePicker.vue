@@ -189,6 +189,6 @@ input[disabled] {
 
   svg, svg:focus {
     outline: none;
-  }}
+  }
 }
 </style>
