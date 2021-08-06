@@ -1,6 +1,6 @@
 <script>
 
-import FveMixinFieldDatePicker from '@fve/Element/Date/FveMixinFieldDatePicker';
+import FveMixinFieldDatePicker from '@fve/Element/Date/_old/FveMixinFieldDatePicker';
 
 export default {
   mixins: [
