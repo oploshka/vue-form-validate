@@ -21,6 +21,11 @@ const routes = [
     component: () => import('@page/UiKit/UiKitElementSelect'),
   },
   {
+    path: '/uikit-date',
+    name: 'uikit-date',
+    component: () => import('@page/UiKit/UiKitElementDate'),
+  },
+  {
     path: '/uikit-switch',
     name: 'uikit-switch',
     component: () => import('@page/UiKit/UiKitSwitch'),

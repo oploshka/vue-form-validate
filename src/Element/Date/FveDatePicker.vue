@@ -1,10 +1,13 @@
 <template>
-  <FveFieldTemplate>
+  <FveTemplateField>
     <DatePicker
        :popover="{ placement: 'bottom-end', visibility: 'click' }"
         v-model="valueDatePickerComputed"
-        color="red"
-        is-dark
+
+       :color="settings.DATE_PICKER_COLOR"
+       :is-dark="settings.DATE_PICKER_IS_DARK"
+       :is24hr="settings.DATE_PICKER_IS_24HR"
+       :mode="settings.DATE_PICKER_MODE"
       >
       <template v-slot="{ inputEvents }">
         <!--
@@ -19,7 +22,7 @@
               v-model="valueInputComputed"
               :placeholder="placeholderCache"
               :required="required"
-              v-mask="'##.##.####'"
+              v-mask="settings.DATE_INPUT_MASK"
             />
             <svg v-on="inputEvents" xmlns="http://www.w3.org/2000/svg" class="fve-datepicker-icon"  width="19" height="21" viewBox="0 0 19 21">
               <g id="Слой_2" data-name="Слой 2">
@@ -31,35 +34,89 @@
           </div>
       </template>
     </DatePicker>
-  </FveFieldTemplate>
+  </FveTemplateField>
 </template>
 
 <script>
-import DatePicker from 'v-calendar/lib/components/date-picker.umd';
-import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";
 
-const DATE_FORMAT_API  = 'YYYY-MM-DD';
-const DATE_FORMAT_VIEW = 'DD.MM.YYYY';
+import DatePicker from 'v-calendar/lib/components/date-picker.umd';
+import FveMixinField from "@fve/Mixin/FveMixinField";
+
+import getFieldSetting from "@fve/settings";
 
 export default {
+  name: 'FveDatePicker',
   mixins: [
-    FveFieldMixin
+    FveMixinField
   ],
+  components: {
+    DatePicker
+  },
   props: {
     value       : { type: String },
     min         : { type: String },
     max         : { type: String },
   },
   data() {
+    const settings = Object.assign({
+      DATE_INPUT_MASK   : '##.##.####',
+      DATE_FORMAT_VIEW  : 'DD.MM.YYYY',
+      //
+      DATE_FORMAT_API   : 'YYYY-MM-DD',
+
+      // settings
+      DATE_PICKER_MODE    : 'date',
+      DATE_PICKER_COLOR   : 'blue',
+      DATE_PICKER_IS_DARK : false,
+      DATE_PICKER_IS_24HR : true,
+    }, getFieldSetting(this.$options.name));
+
     return {
-      DATE_FORMAT_API   : DATE_FORMAT_API,
-      DATE_FORMAT_VIEW  : DATE_FORMAT_VIEW,
+      cacheStr: '',
+      cacheStrFix: false,
+      settings: settings,
     };
   },
-  components: {
-    DatePicker
-  },
   methods: {
+    reset(){
+      this.cacheStr = '';
+      this.cacheStrFix = false;
+    },
+    // // для строк -> приходит строка и преобразуем в DateTime
+    // prepareInput(value){
+    //   return value;
+    // },
+    // // на выходе ожидается строка у нас DateTime
+    // prepareOutput(valueDateTime){
+    //   if(valueDateTime === null) { return null; }
+    //   return valueDateTime;
+    // },
+
+    // для строк -> приходит строка и преобразуем в DateTime
+    prepareInput(value){
+      if(this.cacheStrFix) {
+        this.cacheStrFix = false;
+        return null;
+      }
+
+      this.cacheStr = '';
+      let date = DateTime(value, this.settings.DATE_FORMAT_API, true);
+      if( !date.isValid() ){
+        // TODO: fix placeholder prepareInput
+        return null;
+      }
+      return date;
+    },
+
+    prepareOutput(valueDateTime){
+      if(valueDateTime === null) { return ''; }
+      return valueDateTime.format(this.settings.DATE_FORMAT_API);
+    },
+
+
+
+
+
     strToDate(str, format1) {
       let date = DateTime(str, format1, true);
       if( !date.isValid() ){
@@ -78,10 +135,14 @@ export default {
       return $event;
     },
     isEmpty(value) {
-      return !value;
+      return !value && !this.cacheStr;
     },
     validateFunction(value) {
-      const date = this.strToDate(value, DATE_FORMAT_API);
+      if(this.cacheStr){
+        return 'Некорректная дата';
+      }
+
+      const date = this.strToDate(value, this.settings.DATE_FORMAT_API);
       return date ?  'SUCCESS' : 'Некорректная дата';
       // const d = this.valueToDate ? DateTime(this.valueToDate, DATE_FORMAT_VIEW, true) : null;
       // return d.isValid() || null ?
@@ -91,24 +152,47 @@ export default {
     placeholderCache() {
       return this.placeholder ? this.placeholder : '';
     },
+    valueDateTime() {
+      return this.prepareInput(this.value);
+    },
     valueDatePickerComputed: {
       get() {
-        return this.strToDate(this.value, DATE_FORMAT_API);
+        return this.valueDateTime ? this.valueDateTime.toDate() : null;
       },
       set(value) {
-        const _value = DateTime(value).format(DATE_FORMAT_API);
-        this.inputFormElement(_value);
+        this.cacheStr = '';
+        const valueDateTime = DateTime(value);
+        this.inputFormElement( this.prepareOutput(valueDateTime) );
       }
     },
     valueInputComputed: {
       get() {
-        return this.prepareDateFormat(this.value, DATE_FORMAT_API, DATE_FORMAT_VIEW);
+        if( this.cacheStr ) {
+          return this.cacheStr;
+        }
+        return this.valueDateTime ? this.valueDateTime.format(this.settings.DATE_FORMAT_VIEW) : '';
       },
       set(value) {
-        const _value = this.prepareDateFormat(value, DATE_FORMAT_VIEW, DATE_FORMAT_API);
-        this.inputFormElement(_value);
+        if( value === '') {
+          this.inputFormElement( this.prepareOutput(null) );
+        }
+
+        let date = DateTime(value, this.settings.DATE_FORMAT_VIEW, true);
+        if( !date.isValid() ){
+          this.cacheStr = value;
+          this.cacheStrFix = true;
+
+          this.inputFormElement( this.prepareOutput(null) );
+          return;
+        }
+
+        this.cacheStr = '';
+        this.formMessage = '';
+        this.formStatus  = '';
+
+        this.inputFormElement( this.prepareOutput(date) );
       }
-    }
+    },
   },
 };
 </script>
@@ -116,7 +200,7 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~@widgetFormValidate/style/inputText.scss";
+@import "~@fve/style/inputText.scss";
 
 input[readonly],
 input[disabled] {
@@ -148,6 +232,10 @@ input[disabled] {
       }
     }
     */
+  }
+
+  svg, svg:focus {
+    outline: none;
   }
 }
 </style>

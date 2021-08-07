@@ -7,23 +7,19 @@ const defaultFieldSettings = {
   settings: () => { return {}; },
 }
 
-import settingsField from "./settingsObject";
-
-
 let settingsInit = false;
-let settingsUser = {};
-const setUserSettings = (settings) => {
+let settings = {};
+export function setUserSettings(s) {
   if(settingsInit) {
     console.error("[plugin:fve] Duplicate form validate element settings set");
     return;
   }
-
-  settingsUser = Object.assign({}, settings);
+  settings = Object.assign({}, s);
 }
 
 const getFieldSetting = (fieldName) => {
   settingsInit = true; // fix get settings and set new settings
-  return {};
+  return settings[fieldName] || {};
 };
 
 export default getFieldSetting;

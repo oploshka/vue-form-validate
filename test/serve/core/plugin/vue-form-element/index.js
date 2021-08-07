@@ -13,3 +13,6 @@ import './dependency/plugin/v-mask';
 
 // style
 import "@fve/style/const.scss";
+
+// settings
+import "./settings";

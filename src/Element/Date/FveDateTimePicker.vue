@@ -1,5 +1,5 @@
 <template>
-  <FveFieldTemplate>
+  <FveTemplateField>
     <DatePicker
        :popover="{ placement: 'bottom-end', visibility: 'click' }"
         v-model="valueDatePickerComputed"
@@ -33,19 +33,20 @@
           </div>
       </template>
     </DatePicker>
-  </FveFieldTemplate>
+  </FveTemplateField>
 </template>
 
 <script>
+
 import DatePicker from 'v-calendar/lib/components/date-picker.umd';
-import FveFieldMixin from "@widgetFormValidate/src/Mixin/FveFieldMixin";
+import FveMixinField from "@fve/Mixin/FveMixinField";
 
 const DATE_FORMAT_API  = 'YYYY-MM-DDTHH:mm:ss';
 const DATE_FORMAT_VIEW = 'DD.MM.YYYY HH:mm';
 
 export default {
   mixins: [
-    FveFieldMixin
+    FveMixinField
   ],
   props: {
     value       : { type: String },
@@ -118,7 +119,7 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~@widgetFormValidate/style/inputText.scss";
+@import "~@fve/style/inputText.scss";
 
 input[readonly],
 input[disabled] {

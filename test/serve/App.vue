@@ -20,9 +20,10 @@
             <li class="nav-item dropdown">
               <span class="nav-link dropdown-toggle">UIkit</span>
               <ul class="dropdown-menu">
-                <li><router-link class="dropdown-item" :to="{name: 'uikit-text'}">UIkit Text</router-link></li>
-                <li><router-link class="dropdown-item" :to="{name: 'uikit-select'}">UIkit Select</router-link></li>
-                <li><router-link class="dropdown-item" :to="{name: 'uikit-switch'}">UIkit Switch</router-link></li>
+                <li><router-link class="dropdown-item" :to="{name: 'uikit-text'}">Text</router-link></li>
+                <li><router-link class="dropdown-item" :to="{name: 'uikit-select'}">Select</router-link></li>
+                <li><router-link class="dropdown-item" :to="{name: 'uikit-date'}">Date & Time</router-link></li>
+                <!--<li><router-link class="dropdown-item" :to="{name: 'uikit-switch'}">Switch</router-link></li>-->
               </ul>
             </li>
             <!--
