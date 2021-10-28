@@ -8,7 +8,6 @@
       inputClass="fve-field-phone--input"
       flagClass="fve-field-phone--flag-icon"
       :value="value"
-      @input="inputFormElement"
     />
   </FveTemplateField>
 </template>
@@ -48,7 +47,31 @@ export default {
       }
       return 'SUCCESS';
     },
+  },
+
+
+  /*
+  data(){
+    return {
+      cacheStrFix: false,
+      cacheStr: '',
+    }
+  },
+  computed: {
+    valueComputed: {
+      get() {
+        debugger;
+        return this.value;
+      },
+      set(value) {
+        this.cacheStrFix  = true;
+        this.cacheStr     = value;
+        this.inputFormElement( value );
+      }
+    }
   }
+   */
+
 };
 </script>
 

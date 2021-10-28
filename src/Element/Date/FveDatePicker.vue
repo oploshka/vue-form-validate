@@ -152,12 +152,26 @@ export default {
     placeholderCache() {
       return this.placeholder ? this.placeholder : '';
     },
-    valueDateTime() {
+    valuePrepare() {
+
+      if(this.cacheStrFix) {
+        this.cacheStrFix = false;
+        return null;
+      }
+
+      this.cacheStr = '';
+      let date = DateTime(value, this.settings.DATE_FORMAT_API, true);
+      if( !date.isValid() ){
+        // TODO: fix placeholder prepareInput
+        return null;
+      }
+      return date;
+
       return this.prepareInput(this.value);
     },
     valueDatePickerComputed: {
       get() {
-        return this.valueDateTime ? this.valueDateTime.toDate() : null;
+        return this.valuePrepare ? this.valuePrepare.toDate() : null;
       },
       set(value) {
         this.cacheStr = '';
@@ -170,19 +184,27 @@ export default {
         if( this.cacheStr ) {
           return this.cacheStr;
         }
-        return this.valueDateTime ? this.valueDateTime.format(this.settings.DATE_FORMAT_VIEW) : '';
+        return this.valuePrepare ? this.valuePrepare.format(this.settings.DATE_FORMAT_VIEW) : '';
       },
       set(value) {
         if( value === '') {
+          this.cacheStr = '';
+          this.formMessage = '';
+          this.formStatus  = '';
+
           this.inputFormElement( this.prepareOutput(null) );
+          return;
         }
 
         let date = DateTime(value, this.settings.DATE_FORMAT_VIEW, true);
         if( !date.isValid() ){
+          debugger;
           this.cacheStr = value;
           this.cacheStrFix = true;
 
-          this.inputFormElement( this.prepareOutput(null) );
+          this.formMessage = 'Некорректная дата';
+          this.formStatus = 'ERROR';
+          // this.inputFormElement( this.prepareOutput(null) );
           return;
         }
 
