@@ -1,367 +1,68 @@
+# Vue Form Validate
 
-# Vue Dialog - показ диалоговых окон для Vue 3
-Это обобщенный каркас для показа диалоговых окон, alert'ов, confirm'ов.
-Есть ряд подготовленных шаблонов, но что использовать в конечном итоге решаете Вы.
+```text
+Модуль находиться в процессе разработки, а документация в процессе уточнения.
+```
 
-Мы постарались не перегружать компоненты готовыми стилями и упростить кастомизацию,
-по этой причине установка, будет чуть сложнее (чем обычно).
+![Пример формы](./doc/img/example.gif)
 
-Отличия от других:
-- Решение использует "тонкий клиент", 
-  по этому вы можете работать с модальными окнами,
-  до загрузки Vue App 
-  (Отображение произойдет после иницализации приложения).
-- Возможность задать свои алисы для модальных окон 
-  (пример: alertSuccess, alertWarning, alertError)
-- Мы не наслаиваем 10 модальных окон друг на друга, 
-  а предлагаем отображать друг за другом, 
-  в том количестве которое приемлемо вам.
-- Не предлагаем вам использовать template для отображения модального окна
-- Не предлагаем использовать кучу параметров,
-  для задания ширины и высоты модального окна
-  их адаптивности и тп. Для этого есть стили.
-  
+## Что это и зачем
+Данный модуль (точнее набор mixin-ов и компонентов) для Vue 3 - это набор правил для создания форм, их валидации и кастомизации.
+Это не панацея, но хоть какое-то решение на фоне всего остального мрака.
 
-## Setup
+## Как это работает
+Много магии.
+Основано все на миксинах (используется вместо наследования) и доверии (интерфейс).
+В js без доверия ни как.
 
-<details>
-<summary><b style="font-size: 1.3em;">Установка (слабонервным не читать)</b></summary>
+Все это основано на 3 базовых элементах:
+- Формы (FveMixinForm.vue)
+- Элементы формы (FveFieldMixin.vue и FveTemplateField.vue)
+- (в процессе разработки) Группа элементов (FveMultiMixin.vue и FveMultiTemplate.vue)
 
-### Шаг 1
+## Как установить
+### Шаг 1 - Npm
 ```bash
-yarn add vue-dlg
-# Or using npm
-npm install vue-dlg --save
+npm i vue-fve
 ```
 
-### Шаг 2
-Создайте папку в удобном месте для файлов настроек плагина.
-Предположим "./plugin/vue-dlg". 
-В этой папке создайте следующие файлы:
+### Шаг 2 - copy
+Скопировать папку example/plugin-install к себе в проект в удобное место.
 
-<details>
-<summary><b style="font-size: 1.3em;">group-settings.js</b></summary>
-
+### Шаг 3 - alias (optional)
 ```js
-//
-import {addGroupSetting} from "vue-dlg/src/DialogGroupSettings";
+// в корне проекта создать vue.config.js (если его нет) и добавить в него алисы
+// для работы алисов необходимо перезапустить сборку
+const path = require("path");
 
-// задаем настройки для разных групп
-addGroupSetting('modal', {
-  // максимальное количество модальных окон на экране в этой группе
-  maxDisplayItem: 1,
-  // показывать overlay?
-  overlay      : true,
-});
-
-addGroupSetting('notify', {
-  maxDisplayItem: 3,
-  overlay      : false,
-});
-```
-
-</details>
-
-<details>
-<summary><b style="font-size: 1.3em;">action.js</b></summary>
-
-```js
-// Тонкий клиент
-import DialogThinClient from 'vue-dlg/src/DialogThinClient';
-// Темплейты модальных окон
-import DialogBox        from "vue-dlg/src/Template/DialogBox";
-import DialogNotify     from "vue-dlg/src/Template/DialogNotify";
-
-// настраиваем список модальных окон
-export default {
-  open: DialogThinClient, // function (VueComponent, VueComponentProps, setting)
-
-  alert: {
-    success: (message) => {
-      return DialogThinClient(
-              DialogBox,
-              { title: "Успешно", message: message, okLabel: 'Ok', theme: "success", },
-              { group: 'modal' }
-      );
-    },
-    warning: (message) => {
-      return DialogThinClient(
-              DialogBox,
-              { title: "Предупреждение", message: message, okLabel: 'Ok', theme: "warning" },
-              { group: 'modal' }
-      );
-    },
-    error: (message) => {
-      return DialogThinClient(
-              DialogBox,
-              { title: "Ошибка", message: message, okLabel: 'Ok', theme: "error" },
-              { group: 'modal' }
-      );
-    },
-  },
-
-  confirm(message, options = {}){
-    return DialogThinClient(
-            DialogBox,
-            {
-              title: "Подтвердите действие",
-              message: message,
-              okLabel: (options && options.okLabel) ? options.okLabel : 'Ok',
-              cancelLabel: (options && options.cancelLabel) ? options.cancelLabel : 'Отмена',
-            },
-            { group: 'modal' }
-    );
-  },
-
-  notify: (title, message) => {
-    return DialogThinClient(
-            DialogNotify,
-            { title: title, message: message },
-            { group: 'notify' }
-    );
-  }
-};
-```
-
-</details>
-
-<details>
-<summary><b style="font-size: 1.3em;">style.scss</b></summary>
-
-```scss
-
-.dlg .dlg-overlay {
-  background: var(--dlg-overlay, rgba(0,0,0,0.5));
-  cursor: default;
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.dlg .dlg-container{
-  pointer-events: none;
-  & > div {
-    pointer-events: all;
-  }
-}
-
-.dlg .dlg-container.dlg-container-notify{
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  width: 320px;
-  z-index: 420;
-
-  & > div {
-    margin-bottom: 5px;
-  }
-  & > div:last-child {
-    margin-bottom: 0px;
-  }
-
-}
-
-
-.dlg .dlg-container.dlg-container-modal {
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 400;
-
-  overflow: hidden;
-  opacity: 1;
-
-  display: flex;
-  display: -ms-flexbox;
-  align-items: center;
-  -ms-flex-align: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-
-
-  & > div {
-    width: 100%;
-    max-width: 740px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 20px;
-  }
-  & > div:last-child {
-    margin-bottom: 0px;
+module.exports = {
+  chainWebpack: (config) => {
+    // WARNING - укажи путь к своей папке!!! (замени /src/components/FormValidate src на свой путь)
+    config.resolve.alias.set('@widgetFormValidate'       , path.join(__dirname, './src/components/FormValidate')   );
+    config.resolve.alias.set('@widgetFormValidateCustom' , path.join(__dirname, './src/components/FormValidateCustom')   );
   }
 }
 ```
 
-</details>
+### Шаг 4 - dependency (optional)
+```bash
+# (легкая библиотека для работы с датой, нужна для datepicker)
+npm i dayjs
+npm i v-calendar
 
-<details>
-<summary><b style="font-size: 1.3em;">index.js</b></summary>
-
-```js
-// Подключаем плагин
-import vueDlgPlugin from "vue-dlg/src/plugin";
-
-// настройки модальных групп
-import "./group-settings";
-// задаем стили
-import './style.scss';
-// список настроенных действий
-import dialogAction from "./action";
-
-// опционально можно сделать глобальным
-// global.DIALOG = dialogAction;
-
-// фасад для установки плагина (чтоб не перегружать основной main.js) 
-export default {
-  install: (app) => {
-    vueDlgPlugin.install(app, {action: dialogAction});
-  },
-};
+#- "dayjs": "^1.8.36", 
+#- "v-calendar": "^2.3.0", (необходимо для поля даты)
+#- "vue-phone-mask-input": "^1.1.11", (необходимо для поля телефон)
+#- "v-mask": "^2.2.4",
 ```
 
-</details>
 
-
-### Шаг 3
-Add dependencies to your `main.js`:
-<details>
-<summary><b style="font-size: 1.3em;">main.js</b></summary>
-
-```js
-import { createApp } from 'vue';
-// [ADD]
-import vueDlgPluginProxy from './plugin/vue-dlg'
-// ...
-
-let app = createApp(App)
-// [ADD]
-app.use(vueDlgPluginProxy);
-// ...
-app.use(router);
-app.mount('#app');
-
-```
-
-</details>
-
-
-### Шаг 4
-Add the global component to your `App.vue`:
-
-<details>
-<summary><b style="font-size: 1.3em;">App.vue</b></summary>
-
-```vue
-<template>
-  <DialogCore />
-  <!-- -->
-  <router-view />
-</template>
-
-<script>
-import DialogCore from "vue-dlg/src/DialogCore";
-
-export default {
-  component: {
-    DialogCore,
-    // ...
-  }
-  // ...
-}
-</script>
-```
-
-</details>
-
-
-
-</details>
-
-
-
-## Пример использования
-
-### Простые Alert
-```js
-export default {
-  // vue component
-  // ...
-  methods: {
-    showAlertSuccess() {
-      this.$dialog.alert.success('Запись добавлена').then(res => {
-        console.log(res) // {}
-      })
-    },
-    showAlertWarning() {
-      this.$dialog.alert.warning('Данный сервис не доступен, попробуйте через 5 минут').then(res => {
-        console.log(res) // {}
-      })
-    },
-    showAlertError() {
-      this.$dialog.alert.error('Ошибка сервера').then(res => {
-        console.log(res) // {}
-      })
-    }
-  }
-}
-```
-
-### Произвольный компонент в модальном окне
-```js
-// props: {
-//   fullName: String,
-//   year: Number
-// },
-// emit: ['save']
-import ArbitraryComponent from "./ArbitraryComponent";
-
-export default {
-  mounted() {
-
-    let modal = null;
-    const closeModal = () => { modal && modal.close(); };
-    const props = {
-      // data
-      fullName: 'Tester',
-      year: 2014,
-      // events (добавляем приставку on к emit: ['save'])
-      onSave: (saveObj) => {
-        console.log(saveObj);
-        closeModal();
-      },
-    };
-    //
-    modal = this.$dialog.open(ArbitraryComponent, props, { group: "modal", theme: "community", close: true });
-    modal.then(() => { modal = null; });
-    
-  },
-};
-```
-
-### Использование дополнительной обертки
-В редких случаях может понадобиться использовать дополнительную обертку для отображения компонента 
-и добавления специфичной логики связанное с модальным окном.
-В таком варианте вы можете дополнительно передавать функции и делать поведение более гибким.
-Но не стоит этим увлекаться.
-
-Вызов модального окна, не отличается от предыдущего примера,
-а обертки могут быть на любой вкус 
-(от универсальных, до заточенных под конкретный компонент).
-По этой примчине мы не будем приводить пример.
-
-## Options DialogThinClient.add
-
-| Name              | Type               | Required | Default value   | Info                                  |
-| ----------------- | ------------------ | -------- | --------------- | ------------------------------------- |
-| VueComponent      | VueComponent       | Yes      |                 | Vue component that opens in a modal   |
-| VueComponentProps | Object             | Yes      | {}              | Vue component props data              |
-| settings          | Object             | No       | {group: "modal"}| Настройки для диалоговых окон         |
-
-
-
+## Почему так сложно?
+Многие компоненты приходиться затачивать под конкретный проект.
+Можно сделать тысячу копий datepicker-ов, текстовых полей и других полей со всевозможными настройками,
+но это оверинженеринг, которым будет сложно пользоваться и он не нужен вам в полном объеме.
+И вместо того, чтоб писать адаптеры/костыли, я предлагаю просто отредактировать существующие элементы.
+Ответственность ложиться на вас, но вы начнете понимать за что вы отвечаете.
+Отвечать вы будете не за костыли, а за реализацию конкретного интерфейса.
+Ситуация схожа с тем, что можно вечно просить рыбу или же научиться ее ловить.
+В любом случае решать вам
