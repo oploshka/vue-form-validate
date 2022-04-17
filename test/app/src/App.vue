@@ -9,9 +9,9 @@
             <li class="nav-item dropdown">
               <span class="nav-link dropdown-toggle">Примеры форм</span>
               <ul class="dropdown-menu">
-                <!--<li><router-link class="dropdown-item" :to="{name: 'user__auth'}">Авторизации</router-link></li>-->
-                <!--<li><router-link class="dropdown-item" :to="{name: 'user__password-reset'}">Сброса пароля</router-link></li>-->
-                <!--<li><router-link class="dropdown-item" :to="{name: 'user__profile'}">Профиль</router-link></li>-->
+                <li><router-link class="dropdown-item" :to="{name: 'UserLogin'}">Авторизации</router-link></li>
+                <li><router-link class="dropdown-item" :to="{name: 'UserRegistration'}">Регистрация</router-link></li>
+                <li><router-link class="dropdown-item" :to="{name: 'UserProfileEdit'}">Профиль</router-link></li>
               </ul>
             </li>
             <li class="nav-item">

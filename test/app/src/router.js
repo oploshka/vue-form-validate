@@ -10,8 +10,23 @@ const routes = [
   },
   {
     path: '/user',
+    name: 'User',
+    component: () => import('./page/User/UserLoginLogic'),
+  },
+  {
+    path: '/user/login',
     name: 'UserLogin',
     component: () => import('./page/User/UserLoginLogic'),
+  },
+  {
+    path: '/user/registration',
+    name: 'UserRegistration',
+    component: () => import('./page/User/UserRegistrationLogic'),
+  },
+  {
+    path: '/user/profile',
+    name: 'UserProfileEdit',
+    component: () => import('./page/User/UserProfileEditLogic'),
   },
   // {
   //   path: '/uikit-text',

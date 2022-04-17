@@ -98,6 +98,6 @@ export default {
 
 <style lang="css" scoped>
 
-/*@import "~@field/../style/inputText";*/
+@import "~@field/../style/inputText.scss";
 
 </style>
