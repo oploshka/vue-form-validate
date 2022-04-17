@@ -96,8 +96,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 
-@import "~$field/../style/inputText.scss";
+/*@import "~@field/../style/inputText";*/
 
 </style>

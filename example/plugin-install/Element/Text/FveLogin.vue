@@ -1,6 +1,6 @@
 <script>
 
-import FveText from "@fve/Element/Text/FveText";
+import FveText from "@field/Text/FveText";
 
 export default {
   name: 'FveLogin',
@@ -22,8 +22,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 
-@import "~$field/../style/inputText.scss";
+/*@import "~@field/../style/inputText.scss";*/
 
 </style>

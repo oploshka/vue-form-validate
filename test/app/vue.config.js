@@ -6,7 +6,7 @@ const DIR_ROOT = path.join(__dirname, './../../');
 const aliasObj = {
   'vue-form-element': DIR_ROOT,
   // вспомогательные алиасы
-  '$field': path.join(DIR_ROOT, './example/plugin-install/Element'),
+  '@field': path.join(DIR_ROOT, './example/plugin-install/Element'),
 };
 
 

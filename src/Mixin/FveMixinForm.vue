@@ -1,8 +1,8 @@
 <script>
 
-import FveForm from "@plugin/vue-form-element/src/Template/FveForm";
+import FveForm from "../Template/FveForm";
 
-import {isPromise, assertType} from "@fve/Helper/Helper";
+import {isPromise, assertType} from "../Helper/Helper";
 
 
 const getUniqueKey = (() => {

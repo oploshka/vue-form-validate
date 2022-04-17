@@ -1,7 +1,7 @@
 
 // style
-import '@fve/style/const.scss';
-import './custom-style.scss';
+import './style/const.scss';
+import './style/custom-style.scss';
 
 // plugins
 // import './dependency/plugin/v-mask';

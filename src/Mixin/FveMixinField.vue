@@ -1,5 +1,5 @@
 <script>
-import FveTemplateField from "@fve/Template/FveTemplateField";
+import FveTemplateField from "../Template/FveTemplateField";
 
 export default {
   name: "FveMixinField",

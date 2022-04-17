@@ -180,7 +180,7 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~$field/../style/inputText.scss";
+@import "~@field/../style/inputText.scss";
 
 input[readonly],
 input[disabled] {

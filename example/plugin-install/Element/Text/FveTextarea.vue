@@ -24,7 +24,7 @@
 
 //         @keypress.enter.prevent.stop="newLine"
 
-import FveText from "@fve/Element/Text/FveText";
+import FveText from "@field/Text/FveText";
 
 export default {
   name: 'FveTextarea',
@@ -41,6 +41,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~$field/../style/textarea.scss";
+@import "~@field/../style/textarea.scss";
 
 </style>

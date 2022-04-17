@@ -25,7 +25,7 @@
 
 <script>
 
-import FveText from "@fve/Element/Text/FveText";
+import FveText from "./FveText";
 
 export default {
   name: "FvePasswordShowPass",
@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~$field/../style/inputText.scss";
+@import "~@field/../style/inputText.scss";
 
 .btn-show-pass {
   position: absolute;
