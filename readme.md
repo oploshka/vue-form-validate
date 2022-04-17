@@ -1,319 +1,367 @@
-# Vue Form Validate
 
-```text
-Модуль находиться в процессе разработки, а документация не является актуальной.
-Это не мешает скопировать набор миксинов к себе в проект и использовать их.
+# Vue Dialog - показ диалоговых окон для Vue 3
+Это обобщенный каркас для показа диалоговых окон, alert'ов, confirm'ов.
+Есть ряд подготовленных шаблонов, но что использовать в конечном итоге решаете Вы.
 
-Для предварительного ознакомления (выкачиваем проект из гита и играемся) через npm run serve.
-Тестовая среда находиться в папке test/serve
+Мы постарались не перегружать компоненты готовыми стилями и упростить кастомизацию,
+по этой причине установка, будет чуть сложнее (чем обычно).
+
+Отличия от других:
+- Решение использует "тонкий клиент", 
+  по этому вы можете работать с модальными окнами,
+  до загрузки Vue App 
+  (Отображение произойдет после иницализации приложения).
+- Возможность задать свои алисы для модальных окон 
+  (пример: alertSuccess, alertWarning, alertError)
+- Мы не наслаиваем 10 модальных окон друг на друга, 
+  а предлагаем отображать друг за другом, 
+  в том количестве которое приемлемо вам.
+- Не предлагаем вам использовать template для отображения модального окна
+- Не предлагаем использовать кучу параметров,
+  для задания ширины и высоты модального окна
+  их адаптивности и тп. Для этого есть стили.
+  
+
+## Setup
+
+<details>
+<summary><b style="font-size: 1.3em;">Установка (слабонервным не читать)</b></summary>
+
+### Шаг 1
+```bash
+yarn add vue-dlg
+# Or using npm
+npm install vue-dlg --save
 ```
 
-![Пример формы](./docs/img/example.gif)
+### Шаг 2
+Создайте папку в удобном месте для файлов настроек плагина.
+Предположим "./plugin/vue-dlg". 
+В этой папке создайте следующие файлы:
 
-## Что это и зачем
-Данный модуль (точнее набор mixin-ов и компонентов) для Vue 2 - это набор правил для создания форм, их валидации и кастомизации. Это не панацея, но хоть какое то решение на фоне всего остального мрака.
+<details>
+<summary><b style="font-size: 1.3em;">group-settings.js</b></summary>
 
-## Как это работает
-Много магии). Основано все на миксинах (используется вместо наследования) и доверии (интерфейс). В js без доверия ни как).
-
-Все это основано на 3 базовых элементах:
-- Формы (FveMixinForm.vue)
-- Элементы формы (FveFieldMixin.vue и FveTemplateField.vue)
-- TODO Группа элементов (FveMultiMixin.vue и FveMultiTemplate.vue)
-
-## Как установить
-1) В своем проекте, в папке где лежат все компоненты создаем папку FormValidate (по умолчанию будет src/components/FormValidate )
-2) Рядом создать папку для FormValidateCustom для своих элементов формы (заточенных под проект)
-3) В корне проекта создать vue.config.js (если его нет) и добавить 
 ```js
-const path = require("path");
+//
+import {addGroupSetting} from "vue-dlg/src/DialogGroupSettings";
 
-module.exports = {
-  chainWebpack: (config) => {
-    // WARNING - укажи путь к своей папке!!! (замени /src/components/FormValidate src на свой путь)
-    config.resolve.alias.set('@widgetFormValidate'       , path.join(__dirname, './src/components/FormValidate')   );
-    config.resolve.alias.set('@widgetFormValidateCustom' , path.join(__dirname, './src/components/FormValidateCustom')   );
+// задаем настройки для разных групп
+addGroupSetting('modal', {
+  // максимальное количество модальных окон на экране в этой группе
+  maxDisplayItem: 1,
+  // показывать overlay?
+  overlay      : true,
+});
+
+addGroupSetting('notify', {
+  maxDisplayItem: 3,
+  overlay      : false,
+});
+```
+
+</details>
+
+<details>
+<summary><b style="font-size: 1.3em;">action.js</b></summary>
+
+```js
+// Тонкий клиент
+import DialogThinClient from 'vue-dlg/src/DialogThinClient';
+// Темплейты модальных окон
+import DialogBox        from "vue-dlg/src/Template/DialogBox";
+import DialogNotify     from "vue-dlg/src/Template/DialogNotify";
+
+// настраиваем список модальных окон
+export default {
+  open: DialogThinClient, // function (VueComponent, VueComponentProps, setting)
+
+  alert: {
+    success: (message) => {
+      return DialogThinClient(
+              DialogBox,
+              { title: "Успешно", message: message, okLabel: 'Ok', theme: "success", },
+              { group: 'modal' }
+      );
+    },
+    warning: (message) => {
+      return DialogThinClient(
+              DialogBox,
+              { title: "Предупреждение", message: message, okLabel: 'Ok', theme: "warning" },
+              { group: 'modal' }
+      );
+    },
+    error: (message) => {
+      return DialogThinClient(
+              DialogBox,
+              { title: "Ошибка", message: message, okLabel: 'Ok', theme: "error" },
+              { group: 'modal' }
+      );
+    },
+  },
+
+  confirm(message, options = {}){
+    return DialogThinClient(
+            DialogBox,
+            {
+              title: "Подтвердите действие",
+              message: message,
+              okLabel: (options && options.okLabel) ? options.okLabel : 'Ok',
+              cancelLabel: (options && options.cancelLabel) ? options.cancelLabel : 'Отмена',
+            },
+            { group: 'modal' }
+    );
+  },
+
+  notify: (title, message) => {
+    return DialogThinClient(
+            DialogNotify,
+            { title: title, message: message },
+            { group: 'notify' }
+    );
+  }
+};
+```
+
+</details>
+
+<details>
+<summary><b style="font-size: 1.3em;">style.scss</b></summary>
+
+```scss
+
+.dlg .dlg-overlay {
+  background: var(--dlg-overlay, rgba(0,0,0,0.5));
+  cursor: default;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.dlg .dlg-container{
+  pointer-events: none;
+  & > div {
+    pointer-events: all;
+  }
+}
+
+.dlg .dlg-container.dlg-container-notify{
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  width: 320px;
+  z-index: 420;
+
+  & > div {
+    margin-bottom: 5px;
+  }
+  & > div:last-child {
+    margin-bottom: 0px;
+  }
+
+}
+
+
+.dlg .dlg-container.dlg-container-modal {
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 400;
+
+  overflow: hidden;
+  opacity: 1;
+
+  display: flex;
+  display: -ms-flexbox;
+  align-items: center;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+
+
+  & > div {
+    width: 100%;
+    max-width: 740px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+  }
+  & > div:last-child {
+    margin-bottom: 0px;
   }
 }
 ```
-4) установить пакеты (необязательно)
-- "dayjs": "^1.8.36", (легкая библиотека для работы с датой, нужна для datepicker)
-- "v-calendar": "^2.3.0", (необходимо для поля даты)
-- "vue-phone-mask-input": "^1.1.11", (необходимо для поля телефон)
-- "v-mask": "^2.2.4",
 
-5) перезапустить сборку
+</details>
 
-## Почему не npm install?
-Приходиться затачивать некоторые вещи именно под проект и сейчас нет времени сделать большую инициализацию всего этого...
-Возможно когда-то это случиться и будет магия с npm i. Сейчас же это позволяет проще развивать данное решение.
+<details>
+<summary><b style="font-size: 1.3em;">index.js</b></summary>
 
-# Как создать свою форму
-Форма создается как обычный компонент, за исключением того, что мы добавляем необходимые миксины, а в родителе формы слушаем @submit
+```js
+// Подключаем плагин
+import vueDlgPlugin from "vue-dlg/src/plugin";
+
+// настройки модальных групп
+import "./group-settings";
+// задаем стили
+import './style.scss';
+// список настроенных действий
+import dialogAction from "./action";
+
+// опционально можно сделать глобальным
+// global.DIALOG = dialogAction;
+
+// фасад для установки плагина (чтоб не перегружать основной main.js) 
+export default {
+  install: (app) => {
+    vueDlgPlugin.install(app, {action: dialogAction});
+  },
+};
+```
+
+</details>
+
+
+### Шаг 3
+Add dependencies to your `main.js`:
+<details>
+<summary><b style="font-size: 1.3em;">main.js</b></summary>
+
+```js
+import { createApp } from 'vue';
+// [ADD]
+import vueDlgPluginProxy from './plugin/vue-dlg'
+// ...
+
+let app = createApp(App)
+// [ADD]
+app.use(vueDlgPluginProxy);
+// ...
+app.use(router);
+app.mount('#app');
+
+```
+
+</details>
+
+
+### Шаг 4
+Add the global component to your `App.vue`:
+
+<details>
+<summary><b style="font-size: 1.3em;">App.vue</b></summary>
+
 ```vue
 <template>
-  <!--
-     @submit.prevent="formSubmit" - вызывает событие обработки в миксине FveMixinForm
-     novalidate="novalidate"      - отключаем браузерную валидацию полей
-  -->
-  <form @submit.prevent="formSubmit" novalidate="novalidate">
-    <!-- 
-      formSubmit - будет обрабатывать только поля с миксином FveFieldMixin
-      обычные поля типа input, select и тд будут просто игнориться
-    -->
-
-    <!-- form element start -->
-    
-    <!-- это пример как использовать простое текстовое поле -->
-    <FveText
-      v-model="form.name"
-    />
-
-    <!-- form element end -->
-
-    <!-- 
-      Маленький совет, не забываем указывать type="button" 
-    -->
-    <button type="button" @click="formSubmit">submit</button>
-  </form>
+  <DialogCore />
+  <!-- -->
+  <router-view />
 </template>
 
 <script>
-// подключаем необходимые поля для формы
-import FveText from "@fve/Element/Text/FveText";
-// подключаем миксин формы
-import FveMixinForm   from "@fve/Mixin/FveMixinForm";
+import DialogCore from "vue-dlg/src/DialogCore";
 
 export default {
-  mixins: [
-    FveMixinForm
-  ],
-  components: {
-    FveText,
-  },
-  methods: {
-    // необходимо описать, какие данные мы хотим получить в виде полной схемы без сокращений (как props)
-    // хотелось взять валидацию props из самого vue js - но она написана на столько криво...,
-    // что ее не возможно переиспользовать
-    formSchema() {
-      return {
-        name: {
-          type: String,
-          default: () => { return ''; }
-        },
-      };
-    },
+  component: {
+    DialogCore,
+    // ...
   }
-};
-
+  // ...
+}
 </script>
 ```
 
-# Как создать свой элемент формы
-Все просто, необходимо только использовать миксин FveFieldMixin
-Рассмотрим все на примере обычного текстового поля
-```vue
-<template>
-  <FveTemplateField>
-    <!-- FveTemplateField - это однообразная обертка для всех наших полей -->
-    <input
-        :type="type"
-        :name="name"
-        :placeholder="placeholder"
-        :readonly="readonly"
-        :disabled="disabled"
-        :value="value"
-        :required="required"
-        @input="inputFormElement"
-        @change="inputFormElement"
-    />
-    <!-- 
-      @input="inputFormElement"                  - тут мы следим за нашим value
-      @change="inputFormElement"                 - inputFormElement - функция миксина, она отвечает за логику обработки.
+</details>
 
-      @keypress.enter="$emit('keypress-enter')"  - добавляет в форму отправку по нажатию enter
-    -->
-  </FveTemplateField>
-</template>
 
-<script>
 
-import FveFieldMixin from "@fve/Mixin/FveFieldMixin";
+</details>
+
+
+
+## Пример использования
+
+### Простые Alert
+```js
+export default {
+  // vue component
+  // ...
+  methods: {
+    showAlertSuccess() {
+      this.$dialog.alert.success('Запись добавлена').then(res => {
+        console.log(res) // {}
+      })
+    },
+    showAlertWarning() {
+      this.$dialog.alert.warning('Данный сервис не доступен, попробуйте через 5 минут').then(res => {
+        console.log(res) // {}
+      })
+    },
+    showAlertError() {
+      this.$dialog.alert.error('Ошибка сервера').then(res => {
+        console.log(res) // {}
+      })
+    }
+  }
+}
+```
+
+### Произвольный компонент в модальном окне
+```js
+// props: {
+//   fullName: String,
+//   year: Number
+// },
+// emit: ['save']
+import ArbitraryComponent from "./ArbitraryComponent";
 
 export default {
-  mixins: [
-    FveFieldMixin
-  ],
-  props: {
-    // value, min, max - это то чему необходимо задать тип и значение по умолчанию
-    // остальное берется из FveFieldMixin обеспечивая единообразие
-    value    : { type: String, default: '' },
-    /* 
-     * на всякий случай) все это указано в FveFieldMixin -> props и переопределять все это нет смысла!
-     * // стилистика
-     * label       : { type: String, default: '' },
-     * name        : { type: String, default: '' },
-     * placeholder : { type: String, default: '' },
-     * readonly    : { type: Boolean, default: false },
-     * disabled    : { type: Boolean, default: false },
-     * // валидация
-     * required         : { type: Boolean, default: true },
-     * validateRealtime : { type: Boolean, default: true },
-     */
-  },
-  // data применяется для наследования, в вашем компоненте ее может и не быть
-  data(){
-    return {
-      // type - вынесен в data для того что бы его можно было переопределить в наследниках на password, number и тд..
-      type: 'text',
+  mounted() {
+
+    let modal = null;
+    const closeModal = () => { modal && modal.close(); };
+    const props = {
+      // data
+      fullName: 'Tester',
+      year: 2014,
+      // events (добавляем приставку on к emit: ['save'])
+      onSave: (saveObj) => {
+        console.log(saveObj);
+        closeModal();
+      },
     };
-  },
-  // это то что нам необходимо реализовать...
-  methods: {
-    // сюда приходят события или неочищенные или не преобразованные данные. Нам необходим достать чистые данные.
-    // смотрим на props value => String
-    prepareValue($event) {
-      return $event.target.value;
-    },
-    // проверка на то что поле не заполнено (используется для обязательных полей)
-    isEmpty(value) {
-      return value === '';
-    },
-    // функция валидации. Если все хорошо то отдаем 'SUCCESS', если есть ошибки, то отдаем текст с текстом ошибки
-    // на данный момент, нет разных статусов ошибок (warning, error)
-    // все что не 'SUCCESS' то error message.
-    validateFunction(str) {
-      return 'SUCCESS';
-    },
-  }
-};
-</script>
-
-<style lang="scss" scoped>
-// используются стили которые не влияют на весь проект и на чужие компоненты (которые используют select, input и тд...)
-@import '~@widgetFormValidate/style/const.scss';
-@import "~@widgetFormValidate/style/inputText.scss";
-
-</style>
-```
-
-Или использовать в качестве основы созданный компонент. Например FveText.
-```vue
-<script>
-
-import FveText from "@fve/Element/Text/FveText";
-
-export default {
-  mixins: [
-    FveText
-  ],
-  methods: {
-    // переопределяем только валидацию текстового поля и на этом все)
-    validateFunction(str) {
-      if(str.length < 5 ){ return 'Длинна логина не менее 5 символов'; }
-      // mут можно проверить еще что нибудь....
-      return 'SUCCESS';
-    },
-  }
-};
-</script>
-```
-
-
-## Хочу изменить вид полей...
-Нет проблем, в папке style есть настройки переменных css variable (const.scss) и общие стили для input полей (inputText.scss).
-Так же есть общий template для всех полей - FveTemplateField.vue (в корне).
-
-
-## Как это будет выглядеть
-В "~/FormValidate/test/page/UiKit.vue" добавлены элементы формы, можно посмотреть, как все это будет выглядеть.
-
-
-## Еще больше документации
-Да я тоже хочу еще больше документации, но времени на написание документации тратиться много.
-А при развитии всего этого, она устаревает еще быстрее чем пишется).
-В данном случае, не надо боятся заглянуть в миксины (они не на столько сложные и большая часть будет понятна всем).
-По созданию своих элементов формы, примеры можно посмотреть в папке Element
-
-## Пример как это использовать на форме авторизации
-Фаил формы авторизации (AuthForm): 
-```vue
-<template>
-  <form class="form-auth form-base" @submit="formSubmit"  @submit.prevent="formSubmit">
-    <LoginFormElement
-        name="login"
-        label="Логин"
-        v-model="form.login"
-        @keypress-enter="formSubmit"
-    />
-    <PasswordFormElement
-        name="password"
-        label="Пароль"
-        v-model="form.password"
-        @keypress-enter="formSubmit"
-    />
-    <button type="button" @click="formSubmit" class="btn btn-prime">Войти</button>
-  </form>
-</template>
-
-<script>
-
-import LoginFormElement    from "@fve/Element/Text/FveLogin";
-import PasswordFormElement from "@fve/Element/Text/FvePassword";
-//
-import FveMixinForm   from "@fve/Mixin/FveMixinForm";
-
-export default {
-  mixins: [
-    FveMixinForm
-  ],
-  components: {
-    LoginFormElement,
-    PasswordFormElement,
-  },
-  methods: {
-    formSchema() {
-      return {
-        login: {
-          type: String,
-          default: () => { return ''; }
-        },
-        password: {
-          type: String,
-          default: () => { return ''; }
-        },
-      };
-    },
-  },
-
-};
-</script>
-```
-
-И файл обработки данной формы
-```vue
-<template>
-  <div>
-    <FormAuth @submit="authSubmit" />
-  </div>
-</template>
-
-<script>
-
-import FormAuth from '@component/Form/Auth';
-
-export default {
-  components: {
-    FormAuth
-  },
-  methods: {
-    // вызовется если вся форма валидна
-    authSubmit (data) {
-      console.log('Auth form submit data', data);
-    },
-  
+    //
+    modal = this.$dialog.open(ArbitraryComponent, props, { group: "modal", theme: "community", close: true });
+    modal.then(() => { modal = null; });
+    
   },
 };
-
-</script>
 ```
+
+### Использование дополнительной обертки
+В редких случаях может понадобиться использовать дополнительную обертку для отображения компонента 
+и добавления специфичной логики связанное с модальным окном.
+В таком варианте вы можете дополнительно передавать функции и делать поведение более гибким.
+Но не стоит этим увлекаться.
+
+Вызов модального окна, не отличается от предыдущего примера,
+а обертки могут быть на любой вкус 
+(от универсальных, до заточенных под конкретный компонент).
+По этой примчине мы не будем приводить пример.
+
+## Options DialogThinClient.add
+
+| Name              | Type               | Required | Default value   | Info                                  |
+| ----------------- | ------------------ | -------- | --------------- | ------------------------------------- |
+| VueComponent      | VueComponent       | Yes      |                 | Vue component that opens in a modal   |
+| VueComponentProps | Object             | Yes      | {}              | Vue component props data              |
+| settings          | Object             | No       | {group: "modal"}| Настройки для диалоговых окон         |
+
+
+
