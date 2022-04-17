@@ -11,7 +11,7 @@
 
 <script>
 import ViewSquare from "@fve/Switch/Theme/ViewSquare";
-import FveMixinField from "@fve/Mixin/FveMixinField";
+import FveMixinField from "vue-form-element/src/Mixin/FveMixinField";
 
 export default {
   name: 'FveText',

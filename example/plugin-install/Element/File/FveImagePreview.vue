@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import FveMixinField from "@fve/Mixin/FveMixinField";
+import FveMixinField from "vue-form-element/src/Mixin/FveMixinField";
 
 export default {
   mixins: [FveMixinField],

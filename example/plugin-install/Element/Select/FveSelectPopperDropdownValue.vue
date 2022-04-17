@@ -24,8 +24,8 @@
 
 <script>
 
-import FveMixinField from "@fve/Mixin/FveMixinField";
-import FveMixinFieldSelect from '@fve/Mixin/FveMixinFieldSelect';
+import FveMixinField from "vue-form-element/src/Mixin/FveMixinField";
+import FveMixinFieldSelect from 'vue-form-element/src/Mixin/FveMixinFieldSelect';
 //
 import PopperDropdown from "@component/Popper/PopperDropdown";
 

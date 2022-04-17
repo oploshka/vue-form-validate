@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import FveMixinField from "@fve/Mixin/FveMixinField";
+import FveMixinField from "vue-form-element/src/Mixin/FveMixinField";
 //
 import getWeekday from "@helper/getWeekday";
 import { DatePicker } from "v-calendar";

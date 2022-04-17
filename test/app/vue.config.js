@@ -4,7 +4,9 @@ const path = require('path');
 const DIR_ROOT = path.join(__dirname, './../../');
 
 const aliasObj = {
-  'js-request-manager': DIR_ROOT,
+  'vue-form-element': DIR_ROOT,
+  // вспомогательные алиасы
+  '$field': path.join(DIR_ROOT, './example/plugin-install/Element'),
 };
 
 
@@ -25,7 +27,7 @@ const config = {
 
 // fix github page deploy
 if(process.env.BUILD_SETTINGS === 'gh-page') {
-  config.publicPath = '/js-request-manager/';
+  config.publicPath = '/vue-form-element/';
 }
 
 module.exports = config;

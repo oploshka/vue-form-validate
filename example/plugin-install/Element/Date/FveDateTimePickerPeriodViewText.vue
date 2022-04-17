@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import FveMixinField from "@fve/Mixin/FveMixinField";
+import FveMixinField from "vue-form-element/src/Mixin/FveMixinField";
 //
 import PopperDropdown from "@component/Popper/PopperDropdown";
 import getWeekday from "@helper/getWeekday";

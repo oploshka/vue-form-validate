@@ -47,7 +47,7 @@
 //
 //
 import { DatePicker } from 'v-calendar';
-import FveMixinField from "@fve/Mixin/FveMixinField";
+import FveMixinField from "vue-form-element/src/Mixin/FveMixinField";
 
 // import getFieldSetting from "@fve/settings";
 
