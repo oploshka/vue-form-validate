@@ -1,7 +1,7 @@
 {
   "name": "vue-form-element",
-  "version": "1.0.0-alpha.1",
-  "description": "Vue form element validate mixin",
+  "version": "1.0.0-alpha.2",
+  "description": "Vue form validate element mixin",
   "author": "Andrey Tyurin <ectb08@mail.ru>",
   "homepage": "https://oploshka.github.io/vue-form-validate/",
   "repository": "git@github.com:oploshka/vue-form-validate.git",
@@ -10,6 +10,7 @@
   },
   "main": "./index.js",
   "files": [
+    "doc",
     "src"
   ],
   "devDependencies": {

@@ -2,11 +2,10 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
 
 const routes = [
-  
   {
-    path: '/',
+    path: '/uikit-text',
     name: 'front',
-    component: () => import('./component/work-example'),
+    component: () => import('./page/UiKit/UiKitElementText'),
   },
   {
     path: '/user',
@@ -28,42 +27,26 @@ const routes = [
     name: 'UserProfileEdit',
     component: () => import('./page/User/UserProfileEditLogic'),
   },
-  // {
-  //   path: '/uikit-text',
-  //   name: 'uikit-text',
-  //   component: () => import('@page/UiKit/UiKitElementText'),
-  // },
-  // {
-  //   path: '/uikit-select',
-  //   name: 'uikit-select',
-  //   component: () => import('@page/UiKit/UiKitElementSelect'),
-  // },
-  // {
-  //   path: '/uikit-date',
-  //   name: 'uikit-date',
-  //   component: () => import('@page/UiKit/UiKitElementDate'),
-  // },
-  // {
-  //   path: '/uikit-switch',
-  //   name: 'uikit-switch',
-  //   component: () => import('@page/UiKit/UiKitSwitch'),
-  // },
-  //
-  // {
-  //   path: '/user/auth',
-  //   name: 'user__auth',
-  //   component: () => import('@page/User/Authorization'),
-  // },
-  // {
-  //   path: '/user/password-reset',
-  //   name: 'user__password-reset',
-  //   component: () => import('@page/User/PasswordReset'),
-  // },
-  // {
-  //   path: '/user/profile',
-  //   name: 'user__profile',
-  //   component: () => import('@page/User/ProfileEdit'),
-  // },
+  {
+    path: '/uikit-text',
+    name: 'uikit-text',
+    component: () => import('./page/UiKit/UiKitElementText'),
+  },
+  {
+    path: '/uikit-select',
+    name: 'uikit-select',
+    component: () => import('./page/UiKit/UiKitElementSelect'),
+  },
+  {
+    path: '/uikit-date',
+    name: 'uikit-date',
+    component: () => import('./page/UiKit/UiKitElementDate'),
+  },
+  {
+    path: '/uikit-switch',
+    name: 'uikit-switch',
+    component: () => import('./page/UiKit/UiKitSwitch'),
+  },
 
 
 ];
