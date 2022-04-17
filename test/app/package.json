@@ -1,6 +1,6 @@
 {
-  "homepage": "https://oploshka.github.io/js-request-manager/",
-  "name": "test-vue-app-js-request-manager",
+  "homepage": "https://oploshka.github.io/vue-form-element/",
+  "name": "test-vue-app-vue-form-element",
   "version": "0.1.0",
   "scripts": {
     "serve": "vue-cli-service serve --port 3000 src/main.js",

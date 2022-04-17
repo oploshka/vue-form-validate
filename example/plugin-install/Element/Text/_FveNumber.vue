@@ -47,6 +47,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~@fve/style/inputText.scss";
+@import "~$field/../style/inputText.scss";
 
 </style>

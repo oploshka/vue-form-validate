@@ -1,8 +1,17 @@
 
-import RequestManagerCreate     from './src/Core/RequestManagerCreate';
-import _MethodInfo              from './src/Class/MethodInfo';
-import _RequestManagerException from './src/Exception/RequestManagerException';
+import _FveMixinField       from './src/Mixin/FveMixinField';
+import _FveMixinFieldSelect from './src/Mixin/FveMixinFieldSelect';
+import _FveMixinForm        from './src/Mixin/FveMixinForm';
+import _FveMixinProxy       from './src/Mixin/FveMixinProxy';
 
-export const RequestManager           = RequestManagerCreate;
-export const MethodInfo               = _MethodInfo;
-export const RequestManagerException  = _RequestManagerException;
+//
+import _FveForm             from './src/Template/FveForm';
+import _FveTemplateField    from './src/Template/FveTemplateField';
+
+export const FveMixinField        = _FveMixinField;
+export const FveMixinFieldSelect  = _FveMixinFieldSelect;
+export const FveMixinForm         = _FveMixinForm;
+export const FveMixinProxy        = _FveMixinProxy;
+//
+export const FveForm              = _FveForm;
+export const FveTemplateField     = _FveTemplateField; // TODO: delete???

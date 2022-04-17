@@ -41,6 +41,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~@fve/style/textarea.scss";
+@import "~$field/../style/textarea.scss";
 
 </style>

@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//@import "~@fve/style/inputText.scss";
+//@import "~$field/../style/inputText.scss";
 
 .select-button {
   display: flex;
