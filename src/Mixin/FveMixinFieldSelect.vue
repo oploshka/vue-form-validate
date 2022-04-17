@@ -4,7 +4,7 @@ export default {
     optionList: Array,
     optionGetKey: {
       type: Function,
-      default: (obj)=>{ return obj.id.toString(); }
+      default: (obj)=>{ return obj.id; }
     },
     optionGetName: {
       type: Function,

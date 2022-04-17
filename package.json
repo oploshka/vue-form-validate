@@ -1,54 +1,35 @@
 {
   "name": "vue-form-element",
-  "version": "0.1.0-beta.2",
-  "description": "Vue form element and mixin",
+  "version": "1.0.0-alpha.2",
+  "description": "Vue form validate element mixin",
   "author": "Andrey Tyurin <ectb08@mail.ru>",
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "deploy": "gh-pages -d demo test/serve/main.js",
-    "predeploy": "cross-env BUILD_MODE=demo vue-cli-service build test/serve/main.js"
-  },
-  "main": "./build/index.js",
-  "files": [
-    "build"
-  ],
-  "keywords": [
-    "vue form element"
-  ],
   "homepage": "https://oploshka.github.io/vue-form-validate/",
-  "license": "MIT",
   "repository": "git@github.com:oploshka/vue-form-validate.git",
+  "scripts": {
+    "serve": "cd ./test/app && npm run serve --port 3000"
+  },
+  "main": "./index.js",
+  "files": [
+    "doc",
+    "src"
+  ],
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-plugin-oploshka": "^1.0.7",
+    "eslint-plugin-vue": "^8.4.1"
+  },
   "browserslist": [
     "last 2 chrome versions"
   ],
+  "keywords": [
+    "vue",
+    "vue form",
+    "vue form element",
+    "vue 3",
+    "vue 3 form",
+    "vue 3 form element"
+  ],
   "dependencies": {
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/test-utils": "^1.0.3",
-    "babel-eslint": "^10.1.0",
-    "core-js": "^3.6.5",
-    "cross-env": "^7.0.3",
-    "dayjs": "^1.10.4",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "gh-pages": "^3.1.0",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "style-resources-loader": "^1.4.1",
-    "v-calendar": "^2.3.0",
-    "v-mask": "^2.2.4",
-    "vue": "^2.6.11",
-    "vue-cli-plugin-style-resources-loader": "^0.1.4",
-    "vue-multiselect": "^2.1.6",
-    "vue-phone-mask-input": "^1.1.11",
-    "vue-router": "^3.2.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue": "^3.2.33"
   }
 }

@@ -1,7 +1,27 @@
 <script>
 
-export default {
+import FveForm from "../Template/FveForm";
 
+import {isPromise, assertType} from "../Helper/Helper";
+
+
+const getUniqueKey = (() => {
+  let prefix = 'FVE_'+ Math.random().toString(36).substring(7)  + '_';
+  let id = 1;
+
+  return () => {
+    let uniqueId = prefix + id;
+    id++;
+    return uniqueId;
+  };
+})()
+
+
+export default {
+  name: 'FveMixinForm',
+  components: {
+    FveForm
+  },
   props: {
     formData: {
       type: Object,
@@ -10,52 +30,86 @@ export default {
   },
   data() {
     let form = this.formGetDefaultData();
+    let field = this.formGetFieldObject();
+
     return {
+      field: field,
       form: form,
+
+
+      formElement: {},
+      //
+      interface: 'FormInterface',
+      formSubmitValidateProcess: false // TODO: add support
     };
   },
   methods: {
-
+    // НЕОБХОДИМО ПЕРЕОПРЕДЕЛИТЬ ПОЛЬЗОВАТЕЛЕМ
     formSchema() {
       return {};
     },
-
-    // TODO: тут пользовательская валидация.
+    // тут пользовательская валидация ???
     validate() {
 
     },
-
-    // TODO: это поведение по умолчанию???
-    getFormData() {
-      return { ...this.form };
+    submitSuccessDataPrepare(submitData){
+      return submitData;
+    },
+    submitErrorDataPrepare(formFieldError){
+      return formFieldError;
     },
 
-
-    ////////////////////////////////
-    // eslint-disable-next-line
-    formReset($event) {
-      // todo после сброса остаются сообщения об ошибке
-      this.form = this.formGetDefaultData();
-      this.$emit('reset');
+    // это не нужно переопределять в 99% случаев
+    submit() {
+      const formSubmitPromise = this.formSubmit();
+      formSubmitPromise.then(
+          (formData) => {
+            this.$emit('submit', this.submitSuccessDataPrepare(formData));
+          },
+          (formFieldError) => {
+            console.warn('[Submit-] ', formFieldError);
+            this.$emit('error', this.submitErrorDataPrepare(formFieldError) );
+          }
+      );
     },
-    // eslint-disable-next-line
-    formCancel($event) {
-      this.$emit('cancel');
-    },
-    // eslint-disable-next-line
-    formSubmit($event) {
 
-      // TODO: fix default prevent
-      // if($event && 'currentTarget' in $event) {
-      //   // $event.defaultPrevented = true;
-      //   $event.currentTarget.addEventListener("submit", (event) => {
-      //     event.preventDefault();
-      //   });
-      // }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //
 
-      const data = this.formSubmitGetData();
-      data && this.$emit('submit', data);
+    formGetFieldObject() {
+      let fieldObject = {};
+      const formSchema = this.formSchema();
+      for(let fieldName in formSchema) {
+        let fieldSettings = {};
+        if('field' in formSchema[fieldName]){
+          fieldSettings = formSchema[fieldName].field;
+        }
+
+        let initValue = null;
+        if(fieldName in this.formData) {
+          // TODO: test
+          // if(typeof this.formData[key] !== formSchema[key].type){
+          if( !assertType (this.formData[fieldName], formSchema[fieldName].type) ){
+            console.warn('formSchema - is not correct type', fieldName, formSchema, this.formData, this  );
+          }
+          initValue = this.formData[fieldName];
+        } else {
+          initValue = formSchema[fieldName].default ? formSchema[fieldName].default() : null;
+        }
+
+        fieldObject[fieldName] = Object.assign(fieldSettings, {
+          name: fieldName,
+          initValue: initValue, // vs defaultValue() { return ''; }, // маловероятны проблемы с объектами
+          // update: update,
+          // // default
+          // required: false,
+          // sync: true,
+        })
+      }
+      return fieldObject;
     },
+
     //
     formGetDefaultData() {
       let form = {};
@@ -73,80 +127,95 @@ export default {
       }
       return form;
     },
-    //
-    formSubmitGetData() {
-      if( !this.formElementValidate() ) {
-        return false;
-      }
-      return this.getFormData();
-    },
-    formElementGet(){
-      return this.formElementGetByChildren(this.$children);
-    },
-    formElementGetByChildren($children){
-      let formElementArr = [];
-      for(let i = 0; i < $children.length; i++){
 
-        switch ($children[i].interface) {
-          case "FormElementInterface":
-            formElementArr.push($children[i]);
-            break;
-          case "FormProxyInterface":
-            var res =  this.formElementGetByChildren($children[i].$children);
-            formElementArr = formElementArr.concat(res);
-            break;
-          default:
-            continue;
-        }
+    formFieldSync(fieldName, value) {
+      this.form[fieldName] = value;
+    },
+
+    // Это регистрация компонента
+    formElementAdd($children){
+      let key = getUniqueKey();
+      // TODO: add field name group
+      this.formElement[key] = $children;
+      return key;
+    },
+    formElementDelete(key){
+      delete this.formElement[key];
+    },
+    formElementGetList(){
+      let formElementArr = [];
+      for(let key in this.formElement){
+        formElementArr.push(this.formElement[key])
       }
       return formElementArr;
     },
-    formElementValidate(){
+
+
+    // TODO: добавить блокировку формы
+    formSubmit(){
+
       let formIsValid = true;
+      let formValue   = {};
+      let formErrorField = [];
+
+      let validatePromiseList = [];
       //
-      const formElementArr = this.formElementGet();
+      const formElementArr = this.formElementGetList();
       for(let i = 0; i < formElementArr.length; i++){
+
         let formElement = formElementArr[i];
-        let res = formElement.validate(formElement.value);
-        formIsValid = formIsValid && res;
+        // TODO: получить значение из компонента
+        let res = formElement.fieldSubmit();
+
+        if(isPromise(res)) {
+          validatePromiseList.push(res);
+        } else {
+          if(res && res.success === true){
+            formValue[formElement.field.name] = res.data;
+          } else if(res && res.success === false){
+            formIsValid = false;
+            formErrorField.push({
+              component: formElement,
+              error: res.error,
+            });
+          } else {
+            console.error(res);
+          }
+        }
+      }
+
+      if (validatePromiseList.length > 0) {
+        console.error('FveForm::formSubmit - not add promise logic')
       }
       //
-      return formIsValid;
-    }
+      if(formIsValid) {
+        return Promise.resolve(formValue);
+      } else  {
+        for(let i = 0; i < formErrorField.length; i++){
+          let error = formErrorField[i].error;
+          formErrorField[i].component.fieldSetError(error.status, error.message, error.code);
+        }
+        formErrorField[0].component.setFocus();
+        return Promise.reject(formErrorField);
+      }
+    },
+
+    //
+
+    // // action
+    // formCancel()        {}, // сбросить к предыдущим валидным значениям???  this.$emit('cancel');
+    // formReset()         {}, // установить дефолтные значения формы. vs formClear ???
+    // formValidate()      {}, // Запустить валидацию
+    // formValidateReset() {}, // Очистить все ошибки
+    // formSubmitEmit() { this.$emit('submit', {} ); },
 
   },
-  computed: {},
-  watch:{
-    formData(newFormData) {
-      this.form = this.formGetDefaultData();
-    }
-  }
+  // computed: {},
+  // watch:{
+  //   formData(newFormData) {
+  //     this.form = this.formGetDefaultData();
+  //   }
+  // }
 };
 
 </script>
-
-<style lang="scss" scoped>
-.form-auth {
-  &__recovery {
-    display: inline-block;
-    margin: 14px 0;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 2;
-    float: right;
-  }
-  .btn {
-    display: block;
-    width: 100%;
-  }
-}
-
-.grid-sm {
-  .form-auth {
-    &__recovery {
-      margin: 6px 0;
-    }
-  }
-}
-
-</style>

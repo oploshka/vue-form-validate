@@ -1,13 +1,17 @@
 <template>
   <div :class="$parent.formElementBlockClass">
-    <label :for="$parent.name" v-if="$parent.label" class="fve-label">{{ $parent.label }}<span v-if="$parent.required" class="fve-label-require">*</span></label>
+    <label :for="$parent.field.name" v-if="$parent.label" class="fve-label">
+      {{ $parent.label }}
+      <span v-if="$parent.fieldRequired" class="fve-label-require">*</span>
+    </label>
     <div class="fve-field">
       <div class="fve-control">
         <!-- custom block start -->
         <slot />
         <!-- custom block end -->
       </div>
-      <div v-if="$parent.formMessage" class="fve-message">{{$parent.formMessage}}</div>
+      <div v-if="$parent.caption && !($parent.error && $parent.error.message)" class="fve-caption">{{$parent.caption}}</div>
+      <div v-if="$parent.error && $parent.error.message" class="fve-message">{{$parent.error.message}}</div>
     </div>
   </div>
 </template>
@@ -32,12 +36,21 @@ export default {};
 
   // label
   .fve-label {
-    display     : inline-block;
-    margin      : 0 0 0 3px;
-    padding     : 0 0 0 0;
-    color       : #757A8A;
-    font-size   : 12px;
-    line-height : inherit;
+    display           : var(--fve-label--display          );
+    margin            : var(--fve-label--margin           );
+    padding           : var(--fve-label--padding          );
+    width             : var(--fve-label--width            );
+    height            : var(--fve-label--height           );
+    font-family       : var(--fve-label--font-family      );
+    font-size         : var(--fve-label--font-size        );
+    font-weight       : var(--fve-label--font-weight      );
+    color             : var(--fve-label--font-color       );
+    line-height       : var(--fve-label--line-height      );
+    border            : var(--fve-label--border           );
+    border-color      : var(--fve-label--border-color     );
+    border-radius     : var(--fve-label--border-radius    );
+    background        : var(--fve-label--background       );
+    background-color  : var(--fve-label--background-color );
     transition: color 0.15s ease-in-out;
   }
   .fve-label-require {
@@ -45,9 +58,9 @@ export default {};
   }
   &.fve-require .fve-label-require {
     display     : inline-block;
-    margin      : 0 0 0 4px;
-    padding     : 0 0 0 0;
-    color       : #094E91;
+    margin      : 0;
+    padding     : 0;
+    color       : var(--color-red-03);
     font-size   : 14px;
     line-height : inherit;
   }
@@ -57,47 +70,58 @@ export default {};
     position: relative;
   }
 
+  .fve-caption {
+    position:         absolute;
+    display           : var(--fve-caption--display          );
+    margin            : var(--fve-caption--margin           );
+    padding           : var(--fve-caption--padding          );
+    width             : var(--fve-caption--width            );
+    height            : var(--fve-caption--height           );
+    font-family       : var(--fve-caption--font-family      );
+    font-size         : var(--fve-caption--font-size        );
+    font-weight       : var(--fve-caption--font-weight      );
+    color             : var(--fve-caption--font-color       );
+    line-height       : var(--fve-caption--line-height      );
+    border            : var(--fve-caption--border           );
+    border-color      : var(--fve-caption--border-color     );
+    border-radius     : var(--fve-caption--border-radius    );
+    background        : var(--fve-caption--background       );
+    background-color  : var(--fve-caption--background-color );
+  }
+
   // TODO: допилить блок message (warning, error, success)
   // message
   .fve-message {
     position: absolute;
-    right: 0;
-    bottom: 100%;
-    padding: 6px 8px;
-    //color: #757A8A;
-    font-size: 0.75em;
-    //background-color: #ffffff;
+    font-size: 0.75rem;
     border-radius: 4px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 4px;
     transform: translateY(10px);
     transition: all 0.25s ease-in-out;
     opacity: 0;
     visibility: hidden;
-
-    background-color: #ffb3b3;
-    color: #1c1c1c;
+    color: var(--color-red-06);
     &:after {
       content: "";
       position: absolute;
       right: 10px;
       top: 100%;
-      border: 6px solid transparent;
-      //border-top: 6px solid #ffffff;
-
-      border-top: 6px solid #ffb3b3;
+      display: none;
+      //border: 6px solid transparent;
+      //border-top: 6px solid #ffb3b3;
     }
   }
 }
 .fve.fve-require {
   // label
-  .fve-label {
-    color: #f5ac1c;
-  }
+  //.fve-label {
+  //  color: #f5ac1c;
+  //}
 }
 
 .fve.fve-status__error {
   .fve-label {
-    color: var(--fve-color-error);
+    //color: var(--fve-color-error);
   }
   .fve-message {
     opacity: 1;
