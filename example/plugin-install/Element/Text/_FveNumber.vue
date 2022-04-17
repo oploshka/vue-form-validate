@@ -1,6 +1,6 @@
 <script>
 
-import FveText from "@field/Text/FveText";
+import FveText from '@field/Text/FveText';
 
 export default {
   name: 'FveNumber',

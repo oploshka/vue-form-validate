@@ -1,6 +1,6 @@
 <script>
 
-import FveText from "@field/Text/FveText";
+import FveText from '@field/Text/FveText';
 
 export default {
   name: 'FveEmail',
@@ -20,7 +20,7 @@ export default {
           status: 'ERROR',
           code : 'VALIDATE',
           message: 'Проверьте корректность E-mail адреса',
-        }
+        };
       }
       return null;
     },

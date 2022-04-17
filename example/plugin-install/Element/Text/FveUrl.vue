@@ -1,6 +1,6 @@
 <script>
 
-import FveText from "@field/Text/FveText";
+import FveText from '@field/Text/FveText';
 
 export default {
   name: 'FveUrl',
@@ -24,7 +24,7 @@ export default {
           status: 'ERROR',
           code : 'VALIDATE',
           message: 'Не верный формат ссылки',
-        }
+        };
       }
       
       return null;

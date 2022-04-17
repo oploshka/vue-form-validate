@@ -8,10 +8,6 @@ module.exports = {
     'plugin:oploshka/overrides-test-jest',
   ],
   globals: {
-    "CONST": true,
-    "ENUM": true,
-    "VueApp": true,
-    "RequestManager": true,
     "DateTime": true,
     "FileClass": true
   },

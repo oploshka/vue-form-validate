@@ -25,10 +25,10 @@
 
 <script>
 
-import FveText from "./FveText";
+import FveText from './FveText';
 
 export default {
-  name: "FvePasswordShowPass",
+  name: 'FvePasswordShowPass',
   mixins: [FveText],
   data() {
     return {
@@ -40,10 +40,10 @@ export default {
   },
   methods: {
     showPass() {
-      if (this.view.type === "password") {
-        this.view.type = "text";
+      if (this.view.type === 'password') {
+        this.view.type = 'text';
       } else {
-        this.view.type = "password";
+        this.view.type = 'password';
       }
     },
 
@@ -54,7 +54,7 @@ export default {
           status: 'ERROR',
           code : 'VALIDATE',
           message: 'Длинна строки не менее ' + min + ' символов',
-        }
+        };
       }
     },
   },

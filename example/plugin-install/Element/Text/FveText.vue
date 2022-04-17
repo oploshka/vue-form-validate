@@ -20,7 +20,7 @@
 
 <script>
 
-import FveMixinField from "vue-form-element/src/Mixin/FveMixinField";
+import FveMixinField from 'vue-form-element/src/Mixin/FveMixinField';
 
 export default {
   name: 'FveText',
@@ -49,14 +49,14 @@ export default {
 
     // пользовательские действия
     inputValueUpdate($event) {
-      this.fieldValueUpdate({input: $event.target.value})
+      this.fieldValueUpdate({input: $event.target.value});
     },
 
     // описываем структуру value
     valueSchema() {
       return {
         input: {type: String, default: () => { return ''; } }
-      }
+      };
     },
     convertObjectToValue(valueObj) {
       return valueObj.input;
@@ -64,7 +64,7 @@ export default {
     convertValueToObject(value) {
       return {
         input: value,
-      }
+      };
     },
     isEmpty(valueObj) {
       return valueObj.input === '';
@@ -75,16 +75,16 @@ export default {
           status: 'ERROR',
           code : 'VALIDATE',
           message: 'Длинна строки не менее '+this.field.min+' символов',
-        }
+        };
       }
       if( this.field.max && valueObj.input.length > this.field.max ) {
         return {
           status: 'ERROR',
           code : 'VALIDATE',
           message: 'Длинна строки не более '+this.field.max+' символов',
-        }
+        };
       }
-      return null
+      return null;
     },
     // Установить фокус на текущий элемент
     setFocus(){

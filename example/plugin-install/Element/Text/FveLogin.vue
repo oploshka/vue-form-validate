@@ -1,6 +1,6 @@
 <script>
 
-import FveText from "@field/Text/FveText";
+import FveText from '@field/Text/FveText';
 
 export default {
   name: 'FveLogin',
@@ -15,7 +15,7 @@ export default {
           status: 'ERROR',
           code : 'VALIDATE',
           message: 'Длинна строки не менее ' + min + ' символов',
-        }
+        };
       }
     },
   }

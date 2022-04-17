@@ -3,7 +3,6 @@
     <textarea
         type="text"
         class="fei-control"
-        :type="view.type"
         :name="field.name"
         :placeholder="placeholder"
         :readonly="readonly"
@@ -22,20 +21,14 @@
 
 <script>
 
-//         @keypress.enter.prevent.stop="newLine"
-
-import FveText from "@field/Text/FveText";
+import FveText from '@field/Text/FveText';
 
 export default {
   name: 'FveTextarea',
+  // @keypress.enter.prevent.stop="newLine"
   mixins: [
     FveText
-  ],
-  methods: {
-    newLine($event) {
-
-    },
-  }
+  ]
 };
 </script>
 
