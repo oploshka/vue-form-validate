@@ -24,6 +24,22 @@
 ### Шаг 1 - Npm
 ```bash
 npm i vue-fve
+
+# Дальнейшая установка опциональна
+# для работы готовых элементов формы - необходима поддержка scss
+npm i -D sass-loader sass
+
+#### field dependency #####
+
+# (легкая библиотека для работы с датой, нужна для datepicker)
+npm i dayjs
+# календарь - необходим для datepicker
+npm i v-calendar
+
+#- "dayjs": "^1.8.36", 
+#- "v-calendar": "^2.3.0", (необходимо для поля даты)
+#- "vue-phone-mask-input": "^1.1.11", (необходимо для поля телефон)
+#- "v-mask": "^2.2.4",
 ```
 
 ### Шаг 2 - copy
@@ -42,18 +58,6 @@ module.exports = {
     config.resolve.alias.set('@widgetFormValidateCustom' , path.join(__dirname, './src/components/FormValidateCustom')   );
   }
 }
-```
-
-### Шаг 4 - dependency (optional)
-```bash
-# (легкая библиотека для работы с датой, нужна для datepicker)
-npm i dayjs
-npm i v-calendar
-
-#- "dayjs": "^1.8.36", 
-#- "v-calendar": "^2.3.0", (необходимо для поля даты)
-#- "vue-phone-mask-input": "^1.1.11", (необходимо для поля телефон)
-#- "v-mask": "^2.2.4",
 ```
 
 

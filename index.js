@@ -15,3 +15,13 @@ export const FveMixinProxy        = _FveMixinProxy;
 //
 export const FveForm              = _FveForm;
 export const FveTemplateField     = _FveTemplateField; // TODO: delete???
+
+
+// TODO: Возможно стоит сделать эти компоненты глобальными и добавить ряд настроект
+const install = (app, options) => {
+  // TODO: add setting support
+};
+
+export default {
+  install: install
+};

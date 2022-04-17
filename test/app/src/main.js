@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import router from './router';
 import App from './App.vue';
 
 
@@ -8,5 +9,6 @@ import 'vue-form-element/example/plugin-install/index.js'
 //
 const VueApp = createApp(App);
 
+VueApp.use(router);
 //
 VueApp.mount('#app');

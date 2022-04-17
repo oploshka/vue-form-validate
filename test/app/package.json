@@ -11,7 +11,9 @@
     "predeploy": "cross-env BUILD_SETTINGS=gh-page vue-cli-service build"
   },
   "dependencies": {
-    "vue": "^3.2.13"
+    "dayjs": "^1.11.1",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@vue/cli-service": "~5.0.0",

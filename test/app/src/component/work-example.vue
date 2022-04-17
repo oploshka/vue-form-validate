@@ -8,10 +8,5 @@
 
 export default {
   name: 'work-example',
-  methods: {
-  },
 };
 </script>
-
-<style scoped>
-</style>

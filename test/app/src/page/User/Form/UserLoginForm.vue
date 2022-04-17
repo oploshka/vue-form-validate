@@ -38,17 +38,6 @@ export default {
     FvePassword,
   },
   methods: {
-    submit() {
-      const formSubmitPromise = this.formSubmit();
-      formSubmitPromise.then(
-          (formData) => {
-            this.$emit('submit', formData);
-          },
-          (formFieldError) => {
-            this.$emit('error', formFieldError);
-          }
-      );
-    },
     formSchema() {
       return {
         login: {
@@ -65,14 +54,6 @@ export default {
             required: true,
           }
         },
-        // cert: {
-        //   type: File,
-        //   default: () => { return null; }
-        // },
-        // remember: {
-        //   type: Boolean,
-        //   default: () => { return true; }
-        // },
       };
     },
   }
@@ -106,37 +87,5 @@ export default {
   &:hover {
     background-color: #F98D5F;
   }
-}
-
-// checkbox
-.checkbox {
-  display: none;
-}
-
-.checkbox__text {
-  display: inline-block;
-  margin-left: 35px;
-  font-size: 14px;
-  line-height: 18px;
-  color: #15131f;
-}
-
-.checkbox + .checkbox__label::before {
-  content: "";
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 22px;
-  height: 22px;
-
-  background: var(--color-main);
-  box-shadow: 0px 4px 30px 2px rgba(0, 0, 0, 0.01);
-  border-radius: 5px;
-}
-
-.checkbox:checked + .checkbox__label::before {
-  content: "✓";
-  color: #ffffff;
 }
 </style>
