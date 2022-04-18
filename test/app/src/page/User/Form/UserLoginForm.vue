@@ -29,7 +29,7 @@ import FveEmail        from '@field/Text/FveEmail';
 import FvePassword     from '@field/Text/FvePasswordShowPass';
 
 export default {
-  name: "UserLoginForm",
+  name: 'UserLoginForm',
   mixins: [
     FveMixinForm
   ],

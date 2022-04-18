@@ -22,8 +22,8 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 
-/*@import "~@field/../style/inputText.scss";*/
+@import "~@field/../style/inputText.scss";
 
 </style>
