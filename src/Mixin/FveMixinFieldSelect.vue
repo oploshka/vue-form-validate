@@ -1,5 +1,12 @@
 <script>
+
+import FveMixinField from './FveMixinField';
+
 export default {
+  name: 'FveMixinFieldSelect',
+  mixins: [
+    FveMixinField
+  ],
   props: {
     optionList: Array,
     optionGetKey: {

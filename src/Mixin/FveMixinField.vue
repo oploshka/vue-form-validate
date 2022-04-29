@@ -1,19 +1,19 @@
 <script>
-import FveTemplateField from "../Template/FveTemplateField";
+import FveTemplateField from '../Template/FveTemplateField';
 
 export default {
-  name: "FveMixinField",
+  name: 'FveMixinField',
   components: {
     FveTemplateField,
   },
   props: {
     // стилистика
-    label: { type: String, default: "" },
-    placeholder: { type: String, default: "" },
-    caption: { type: String, default: "" },
+    label: { type: String, default: '' },
+    placeholder: { type: String, default: '' },
+    caption: { type: String, default: '' },
     readonly: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
-    theme: { type: String, default: "" },
+    theme: { type: String, default: '' },
 
     // Переходим в сторону объекта, так как обновление происходит позже чем валидация
     field: {
@@ -50,12 +50,12 @@ export default {
       value: this.fieldGetInitValue(), // TODO: переопределить у себя в компоненте, а лучше использовать функцию
       view: {},
       //
-      interface: "FormElementInterface",
+      interface: 'FormElementInterface',
       // TODO: use class
       error: {
-        code: "ERROR_NO",
-        status: "SUCCESS", // SUCCESS WARNING ERROR // TODO: use const
-        message: "",
+        code: 'ERROR_NO',
+        status: 'SUCCESS', // SUCCESS WARNING ERROR // TODO: use const
+        message: '',
       },
       fve: {
         id: null,
@@ -117,7 +117,7 @@ export default {
       }
 
       // form
-      if (this.field.hasOwnProperty("initValue")) {
+      if (this.field.hasOwnProperty('initValue')) {
         return this.convertValueToObject(this.field.initValue);
       }
 
@@ -154,7 +154,7 @@ export default {
       let sync = false;
       if (this.fve.parentComponent) {
         sync = true; // default value = TRUE
-        if (this.field.hasOwnProperty("sync")) {
+        if (this.field.hasOwnProperty('sync')) {
           sync = !!this.field.sync;
         }
       }
@@ -180,13 +180,13 @@ export default {
 
       // fix for modelValue
       if (isValueUpdated && this.isModelValue()) {
-        this.$emit("update:modelValue", valueSync);
+        this.$emit('update:modelValue', valueSync);
       }
 
       this.fieldSync(valueSync, this.value);
       this.field.update && this.field.update(valueSync, this.value);
     },
-    fieldSetError(status = "SUCCESS", message = "", code = "ERROR_NO") {
+    fieldSetError(status = 'SUCCESS', message = '', code = 'ERROR_NO') {
       this.error.status = status;
       this.error.message = message;
       this.error.code = code;
@@ -197,9 +197,9 @@ export default {
 
       if (this.fieldRequired && fieldIsEmpty) {
         return {
-          code: "REQUIRE",
-          status: "ERROR",
-          message: "Поле обязательно для заполнения",
+          code: 'REQUIRE',
+          status: 'ERROR',
+          message: 'Поле обязательно для заполнения',
         };
       }
 
@@ -237,10 +237,10 @@ export default {
 
     fieldValidateChangeValue() {
       let validateType = this.fieldValidateType;
-      if (validateType === "REALTIME") {
+      if (validateType === 'REALTIME') {
         let error = this.fieldValidate(this.value);
         // TODO: fix
-        if (error && error.code !== "REQUIRE") {
+        if (error && error.code !== 'REQUIRE') {
           this.fieldSetError(error.status, error.message, error.code);
         } else {
           this.fieldSetError(); // reset error
@@ -263,18 +263,18 @@ export default {
       // TODO: add settings support
       const defaultValue = false;
       // console.log(this.field);
-      return this.field.hasOwnProperty("required")
+      return this.field.hasOwnProperty('required')
         ? this.field.required
         : defaultValue;
     },
     // TODO: use validate type: REALTIME_NOT_EMPTY, REALTIME_EMPTY_ERROR, NONE
     fieldValidateType() {
       // TODO: add settings support
-      const defaultValue = "REALTIME";
+      const defaultValue = 'REALTIME';
       let v = defaultValue;
-      if (this.field.hasOwnProperty("validateRealtime")) {
+      if (this.field.hasOwnProperty('validateRealtime')) {
         if (!this.field.validateRealtime) {
-          v = "DISABLE";
+          v = 'DISABLE';
         }
       }
       return v;
@@ -282,22 +282,22 @@ export default {
 
     formElementBlockClass() {
       return {
-        "form-validate-element": true,
+        'form-validate-element': true,
         fve: true,
-        ["fve-field__" + this.field.name]: true,
-        ["fve-theme__" + this.theme]: !!this.theme,
-        ["fve-status__" + this.error.status.toLowerCase()]: true,
-        "fve-readonly": this.readonly,
-        "fve-disabled": this.disabled,
-        "fve-require": this.fieldRequired,
+        ['fve-field__' + this.field.name]: true,
+        ['fve-theme__' + this.theme]: !!this.theme,
+        ['fve-status__' + this.error.status.toLowerCase()]: true,
+        'fve-readonly': this.readonly,
+        'fve-disabled': this.disabled,
+        'fve-require': this.fieldRequired,
       };
     },
   },
   mounted() {
     if (this.isModelValue()) {
-      this.$watch("modelValue", (val) => {
+      this.$watch('modelValue', (val) => {
         // TODO: uncommitted
-        if (typeof val === "undefined") {
+        if (typeof val === 'undefined') {
           return;
         }
         this.value = this.convertValueToObject(val);
@@ -313,10 +313,10 @@ export default {
         // TODO: add error ???
         return;
       }
-      if (VueComponent.interface === "FormProxyInterface") {
+      if (VueComponent.interface === 'FormProxyInterface') {
         continue;
       }
-      if (VueComponent.interface === "FormInterface") {
+      if (VueComponent.interface === 'FormInterface') {
         this.fve.parentComponent = VueComponent;
         this.fve.id = this.fve.parentComponent.formElementAdd(this);
         break;
