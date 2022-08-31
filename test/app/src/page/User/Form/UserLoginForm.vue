@@ -1,32 +1,22 @@
 <template>
-  <FveForm class="form-auth form-base row">
-    <div class="form-group">
-      <FveEmail
-        :field="field.login"
-        label="E-mail"
-        placeholder="name@mail.com"
-      />
-    </div>
-    <div class="form-group">
-      <FvePassword
-        :field="field.password"
-        label="Password"
-        placeholder="6+ Characters"
-      />
-    </div>
-    <div class="form-group">
-      <!-- <router-link :to="{name: $routerName.USER_AUTH}" class="auth__remember-password">Забыли пароль?</router-link> -->
-      <button type="button" @click="submit" class="pl-btn auth__btn">Log in</button>
-    </div>
-  </FveForm>
+  <div>
+    [[[
+      <div>asdasd</div>
+    ]]]
+    <FveEmail :field="field.login"/>
+  </div>
 </template>
 
 <script>
 
 import FveMixinForm    from 'vue-form-element/src/Mixin/FveMixinForm';
+console.log(FveMixinForm);
 
 import FveEmail        from '@field/Text/FveEmail';
-import FvePassword     from '@field/Text/FvePasswordShowPass';
+// import FvePassword     from '@field/Text/FvePasswordShowPass';
+
+console.log(FveEmail);
+debugger;
 
 export default {
   name: 'UserLoginForm',
@@ -35,7 +25,7 @@ export default {
   ],
   components: {
     FveEmail,
-    FvePassword,
+    // FvePassword,
   },
   methods: {
     formSchema() {

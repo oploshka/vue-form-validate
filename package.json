@@ -1,6 +1,6 @@
 {
   "name": "vue-form-element",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.4",
   "description": "Vue form validate element mixin",
   "author": "Andrey Tyurin <ectb08@mail.ru>",
   "homepage": "https://oploshka.github.io/vue-form-validate/",

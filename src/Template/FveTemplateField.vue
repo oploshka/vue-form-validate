@@ -1,9 +1,12 @@
 <template>
   <div :class="$parent.formElementBlockClass">
-    <label :for="$parent.field.name" v-if="$parent.label" class="fve-label">
-      {{ $parent.label }}
-      <span v-if="$parent.fieldRequired" class="fve-label-require">*</span>
-    </label>
+    
+      <label :for="$parent.field.name" v-if="$parent.label" class="fve-label">
+        {{ $parent.label }} <span v-if="$parent.fieldRequired" class="fve-label-require">*</span>
+      </label>
+    <!--<slot name="label" :field="$parent.field" :label="$parent.label" >-->
+    <!--</slot>-->
+    
     <div class="fve-field">
       <div class="fve-control">
         <!-- custom block start -->
@@ -35,7 +38,7 @@ export default {};
   line-height : 1.3;
 
   // label
-  .fve-label {
+  :deep(.fve-label) {
     display           : var(--fve-label--display          );
     margin            : var(--fve-label--margin           );
     padding           : var(--fve-label--padding          );
@@ -53,10 +56,10 @@ export default {};
     background-color  : var(--fve-label--background-color );
     transition: color 0.15s ease-in-out;
   }
-  .fve-label-require {
+  :deep(.fve-label-require) {
     display: none;
   }
-  &.fve-require .fve-label-require {
+  &.fve-require :deep(.fve-label-require) {
     display     : inline-block;
     margin      : 0;
     padding     : 0;

@@ -11,10 +11,10 @@
 
 <script>
 
-import UserLoginForm from "./Form/UserLoginForm";
+import UserLoginForm from './Form/UserLoginForm';
 
 export default {
-  name: "UserLoginLogic",
+  name: 'UserLoginLogic',
   components: {
     UserLoginForm,
   },
@@ -24,8 +24,8 @@ export default {
       // Добавте вашу логику авторизации
     },
     loginFormSubmit(form) {
-      console.log('Login form success submit:', form)
-      this.login(form.login, form.password)
+      console.log('Login form success submit:', form);
+      this.login(form.login, form.password);
     },
   
   },

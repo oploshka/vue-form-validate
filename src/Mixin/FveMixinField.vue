@@ -307,7 +307,7 @@ export default {
     }
 
     let VueComponent = this;
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       VueComponent = VueComponent.$parent;
       if (VueComponent === null) {
         // TODO: add error ???
@@ -316,6 +316,9 @@ export default {
       if (VueComponent.interface === 'FormProxyInterface') {
         continue;
       }
+      if (VueComponent.interface === 'FormProxyStopInterface') {
+        return;
+      }
       if (VueComponent.interface === 'FormInterface') {
         this.fve.parentComponent = VueComponent;
         this.fve.id = this.fve.parentComponent.formElementAdd(this);
@@ -323,7 +326,7 @@ export default {
       }
 
       // TODO: add error ???
-      return;
+      // return;
     }
   },
   beforeUnmount() {
