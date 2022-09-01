@@ -9,12 +9,12 @@ export default {
   data() {
     return {
       interface: 'FormProxyInterface'
-    }
+    };
   },
   methods: {
     signInButtonPressed($event) {
       // предположительно есть button без указанного типа
-      console.warn("Sign In Button Pressed");
+      console.warn('Sign In Button Pressed');
     },
   },
 };

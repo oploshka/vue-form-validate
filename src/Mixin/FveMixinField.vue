@@ -7,49 +7,20 @@ export default {
     FveTemplateField,
   },
   props: {
-    // стилистика
-    label: { type: String, default: '' },
-    placeholder: { type: String, default: '' },
-    caption: { type: String, default: '' },
-    readonly: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false },
-    theme: { type: String, default: '' },
-
     // Переходим в сторону объекта, так как обновление происходит позже чем валидация
+  
     field: {
+      /** @type {import('vue').PropType<{FveFieldObject}>} */
       type: Object,
       required: true,
-      default() {
-        return {};
-      },
     },
-    // //
-    // // Установочные
-    // name: { type: String, required: true },
-    // // validateSettings - настройки валидации
-    // required            : { type: Boolean, default: false },
-    // validateAdditional  : { type: Function, default: null }, // не обязательное
-    // // default: () => { return { code: 'ERROR_NO', status: 'SUCCESS', message: ''}'; }
-    //
-    // // pluginSettings - настройки поведения плагина
-    // validateRealtime      : { type: Boolean , default: true }, // TODO: добавить типы валидации через объект
-    //
-    // // callback
-    // sync                  : { type: Function, default: null }, // Не нужно задавать эту функцию, вместо нее использовать update
-    // update                : { type: Function, default: null }, // Пользовательская функция на событие обновления поля
-    //
-    // // TODO: необходимо переопределить
-    // // Установочные
-    // // initValue: { type: String, required: false, default: null},
-    // // настройки валидации - рекомендованные к реализация
-    // // min: { type: String, required: false, default: null},
-    // // max: { type: String, required: false, default: null},
   },
   data() {
     return {
       value: this.fieldGetInitValue(), // TODO: переопределить у себя в компоненте, а лучше использовать функцию
       view: {},
       //
+      // TODO: переименовать interface
       interface: 'FormElementInterface',
       // TODO: use class
       error: {
@@ -58,7 +29,6 @@ export default {
         message: '',
       },
       fve: {
-        id: null,
         parentComponent: null,
       },
 
@@ -313,6 +283,8 @@ export default {
         // TODO: add error ???
         return;
       }
+      
+      // TODO: переименовать interface
       if (VueComponent.interface === 'FormProxyInterface') {
         continue;
       }
@@ -321,7 +293,7 @@ export default {
       }
       if (VueComponent.interface === 'FormInterface') {
         this.fve.parentComponent = VueComponent;
-        this.fve.id = this.fve.parentComponent.formElementAdd(this);
+        this.fve.parentComponent.fveElAdd(this);
         break;
       }
 
@@ -331,8 +303,7 @@ export default {
   },
   beforeUnmount() {
     if (this.fve.parentComponent) {
-      this.fve.parentComponent.formElementDelete(this.fve.id);
-      this.fve.id = null;
+      this.fve.parentComponent.fveElDelete(this.field.name);
       this.fve.parentComponent = null;
     }
   },

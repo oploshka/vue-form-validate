@@ -1,8 +1,8 @@
 <template>
   <div :class="$parent.formElementBlockClass">
     
-      <label :for="$parent.field.name" v-if="$parent.label" class="fve-label">
-        {{ $parent.label }} <span v-if="$parent.fieldRequired" class="fve-label-require">*</span>
+      <label :for="$parent.field.name" v-if="$parent.field.label" class="fve-label">
+        {{ $parent.field.label }} <span v-if="$parent.fieldRequired" class="fve-label-require">*</span>
       </label>
     <!--<slot name="label" :field="$parent.field" :label="$parent.label" >-->
     <!--</slot>-->
@@ -13,7 +13,7 @@
         <slot />
         <!-- custom block end -->
       </div>
-      <div v-if="$parent.caption && !($parent.error && $parent.error.message)" class="fve-caption">{{$parent.caption}}</div>
+      <div v-if="$parent.field.caption && !($parent.error && $parent.error.message)" class="fve-caption">{{$parent.caption}}</div>
       <div v-if="$parent.error && $parent.error.message" class="fve-message">{{$parent.error.message}}</div>
     </div>
   </div>

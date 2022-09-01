@@ -14,7 +14,7 @@ const getUniqueKey = (() => {
     id++;
     return uniqueId;
   };
-})()
+})();
 
 
 export default {
@@ -35,9 +35,18 @@ export default {
     return {
       field: field,
       form: form,
+      /*
+      formV2: {
+        login: {
+          valid: true,
+          value: 'TestLogin',
+          error: {},
+          isRequiredValid: true,
+        }
+      },
+       */
 
-
-      formElement: {},
+      fveElObj: {},
       //
       interface: 'FormInterface',
       formSubmitValidateProcess: false // TODO: add support
@@ -81,10 +90,8 @@ export default {
       let fieldObject = {};
       const formSchema = this.formSchema();
       for(let fieldName in formSchema) {
-        let fieldSettings = {};
-        if('field' in formSchema[fieldName]){
-          fieldSettings = formSchema[fieldName].field;
-        }
+        const fieldInfo = formSchema[fieldName];
+        
 
         let initValue = null;
         if(fieldName in this.formData) {
@@ -97,16 +104,24 @@ export default {
         } else {
           initValue = formSchema[fieldName].default ? formSchema[fieldName].default() : null;
         }
-
-        fieldObject[fieldName] = Object.assign(fieldSettings, {
+  
+  
+        let fieldSettings = {
+          ...fieldInfo,
+          // нельзя переопределить
           name: fieldName,
-          initValue: initValue, // vs defaultValue() { return ''; }, // маловероятны проблемы с объектами
+          initValue: initValue,
+          
           // update: update,
           // // default
           // required: false,
           // sync: true,
-        })
+        };
+        // TODO: нормализовать обьект (задать значения по умолчанию?)
+
+        fieldObject[fieldName] = fieldSettings;
       }
+  
       return fieldObject;
     },
 
@@ -131,25 +146,6 @@ export default {
     formFieldSync(fieldName, value) {
       this.form[fieldName] = value;
     },
-
-    // Это регистрация компонента
-    formElementAdd($children){
-      let key = getUniqueKey();
-      // TODO: add field name group
-      this.formElement[key] = $children;
-      return key;
-    },
-    formElementDelete(key){
-      delete this.formElement[key];
-    },
-    formElementGetList(){
-      let formElementArr = [];
-      for(let key in this.formElement){
-        formElementArr.push(this.formElement[key])
-      }
-      return formElementArr;
-    },
-
 
     // TODO: добавить блокировку формы
     formSubmit(){
@@ -208,7 +204,43 @@ export default {
     // formValidate()      {}, // Запустить валидацию
     // formValidateReset() {}, // Очистить все ошибки
     // formSubmitEmit() { this.$emit('submit', {} ); },
-
+  
+  
+  
+    // Это регистрация компонента
+    fveElAdd($children){
+      const fieldName = $children.field.name;
+      if(!this.field[fieldName]) {
+        console.error('[FVE-FORM] Not field in schema', fieldName, $children, this);
+        this.field[fieldName] = {};
+      }
+      if(this.field[fieldName].field) {
+        console.warn('[FVE-FORM] Duplicate form element', fieldName, $children, this);
+      }
+      
+      // TODO: оставить только нужный набор функций
+      this.field[fieldName].field = {
+        ...$children,
+        toJSON: function() {
+          return '$FveFieldObject';
+        }
+      };
+    },
+    fveElDelete(fieldName){
+      delete this.field[fieldName].field;
+    },
+    // TODO: add rename callback
+    //
+    formElementGetList(){
+      let formElementArr = [];
+      for(let key in this.field){
+        if(!this.field[key] || !this.field[key].field) {
+          continue;
+        }
+        formElementArr.push(this.field[key].field);
+      }
+      return formElementArr;
+    },
   },
   // computed: {},
   // watch:{

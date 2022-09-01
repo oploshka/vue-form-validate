@@ -17,6 +17,17 @@ const config = {
   css: {
     extract: false
   },
+  
+  // беэ этого тестовый проект сыпит ошибки и работает не корректно...
+  // (внешним папкам требуется зависимость от vue)
+  configureWebpack: {
+    resolve: {
+      symlinks: false,
+      alias: {
+        vue: path.resolve('./node_modules/vue')
+      }
+    }
+  },
   chainWebpack: (config) => {
     // добавляем свои алиасы
     for (const aliasName in aliasObj) {

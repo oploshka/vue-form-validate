@@ -1,22 +1,20 @@
 <template>
   <div>
-    [[[
-      <div>asdasd</div>
-    ]]]
-    <FveEmail :field="field.login"/>
+    <pre>{{field}}</pre>
+    
+    <FveLogin :field="field.login"/>
+    <FvePassword :field="field.password" />
+    
+    <pre>{{form}}</pre>
   </div>
 </template>
 
 <script>
 
 import FveMixinForm    from 'vue-form-element/src/Mixin/FveMixinForm';
-console.log(FveMixinForm);
 
-import FveEmail        from '@field/Text/FveEmail';
-// import FvePassword     from '@field/Text/FvePasswordShowPass';
-
-console.log(FveEmail);
-debugger;
+import FveLogin        from '@field/Text/FveLogin';
+import FvePassword     from '@field/Text/FvePasswordShowPass';
 
 export default {
   name: 'UserLoginForm',
@@ -24,25 +22,34 @@ export default {
     FveMixinForm
   ],
   components: {
-    FveEmail,
-    // FvePassword,
+    FveLogin,
+    FvePassword,
   },
   methods: {
     formSchema() {
       return {
         login: {
+          // TODO: подумать о том, чтоб задавать здесь component (для рендеринга)...
           type: String,
-          default() { return ''; },
-          field: {
-            required: true,
-          }
+          default() { return 'test'; },
+          required: true,
+          label: 'Login',
+          placeholder: 'User'
+          
+          // TODO: возможно стоит хранить дочерний компонент тут...
         },
         password: {
           type: String,
-          default: () => { return ''; },
-          field: {
-            required: true,
-          }
+          default: () => { return '1'; },
+          required: true,
+          label: 'Password',
+          placeholder: '******',
+          
+          // TODO: добавить флаг валидности (возможно стоит выносить логику полей отдельно)...
+          // update: (val) => {
+          //   // console.log(val, this);
+          //   this.field.login.label = 'Login ' + val;
+          // }
         },
       };
     },
