@@ -32,8 +32,8 @@ export default {
         valueSync: null, // null as string|null, // null необходим только для первой инициализации!!!
       },
       
-      value: this.fieldGetInitValue(), // TODO: переопределить у себя в компоненте, а лучше использовать функцию
       // value => fieldStore ???
+      fieldState: this.fieldGetInitValue(),
       
       fieldError: null, // null as FveFieldError|null,
       
@@ -217,14 +217,14 @@ export default {
     fieldValueUpdate(valueObj /*: Object */) {
       // TODO: update logic
       
-      Object.assign(this.value, valueObj);
+      Object.assign(this.fieldState, valueObj);
       
       if (this.fieldValidateType === 'REALTIME') {
         let error = this.fieldValidate();
       }
       
       
-      let valueSync = this.convertObjectToValueSync(this.value);
+      let valueSync = this.convertObjectToValueSync(this.fieldState);
       
       const isValueUpdated = this.fve.valueSync !== valueSync;
       this.fve.valueSync = valueSync;
@@ -234,8 +234,8 @@ export default {
         this.$emit('update:modelValue', valueSync);
       }
       
-      this.fieldSync(valueSync, this.value);
-      this.field.update && this.field.update(valueSync, this.value);
+      this.fieldSync(valueSync, this.fieldState);
+      this.field.update && this.field.update(valueSync, this.fieldState);
     },
     
     
@@ -301,7 +301,7 @@ export default {
      * Валидация текущего поля с выводомм ошибки на поле
      */
     async fieldValidate() /* : Promise<FveFieldError | null> */ {
-      const fieldError = await this.fieldValidateValueObj(this.value);
+      const fieldError = await this.fieldValidateValueObj(this.fieldState);
       if (fieldError) {
         this.fieldErrorSetObject(fieldError);
         return fieldError;
@@ -338,7 +338,7 @@ export default {
       
       let res = null;
       try {
-        res = await this.submitPrepare(this.value);
+        res = await this.submitPrepare(this.fieldState);
       } catch (fieldError) {
         this.fieldErrorSetObject(fieldError);
         
@@ -398,8 +398,8 @@ export default {
         if (typeof val === 'undefined') {
           return;
         }
-        this.value = this.convertValueToObject(val);
-        let valueSync = this.convertObjectToValue(this.value);
+        this.fieldState = this.convertValueToObject(val);
+        let valueSync = this.convertObjectToValue(this.fieldState);
         this.fve.valueSync = valueSync;
       });
     }
