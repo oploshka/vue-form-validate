@@ -2,6 +2,7 @@
 <script>
 
 import FveMixinField from './FveMixinField';
+import {FT_STRING} from '@field/FveFieldType';
 
 export default {
   name: 'FveMixinFieldSwitch',
@@ -10,20 +11,23 @@ export default {
   ],
   props: {
     modelValue    : { type: Boolean, required: false },
-  
-    // TODO: is need?
-    // theme       : { type: String, default: '' },
   },
   methods: {
-    
+
+    fieldPropertySchemaPrepare(fieldPropertySchema) {
+      // TODO: delete (фикс для работы шаблонов ЖЦ)
+      fieldPropertySchema.from = FT_STRING();
+      fieldPropertySchema.to = FT_STRING();
+    },
+
     // пользовательские действия
     setValue(val) {
-      this.fieldStateUpdate({input: !!val});
+      this.fieldValueUpdate({input: !!val});
     },
     change() {
-      this.fieldStateUpdate({input: !this.value.input});
+      this.fieldValueUpdate({input: !this.value.input});
     },
-    
+
     // описываем структуру value
     valueSchema() {
       return {
@@ -31,26 +35,26 @@ export default {
         input: {type: Boolean, default: () => { return false; } }
       };
     },
-    convertFieldStateToValue(fieldState) {
-      return fieldState.input;
+    convertFieldStorageToValue(valueObj) {
+      return valueObj.input;
     },
-    convertValueToFieldState(value) {
+    convertValueToFieldStorage(value) {
       return {
         input: !!value,
       };
     },
-    isEmpty(/* fieldState */) {
+    isEmpty(/* valueObj */) {
       return false;
     },
-    validate(fieldState) {
+    validate(valueObj) {
       return null;
     },
     // Установить фокус на текущий элемент
     // setFocus(){
     //   this.$refs.input.focus();
     // },
-    
-    
+
+
   },
 };
 </script>
