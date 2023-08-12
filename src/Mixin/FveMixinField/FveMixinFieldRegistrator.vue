@@ -24,7 +24,7 @@ export default {
      * @param fieldStore возможно стоит отказаться
      */
     fieldSyncParentForm(newValue, fieldStore) {
-      this.fveParentForm?.formFieldSync(this.field.name, newValue, fieldStore);
+      this.fveParentForm?.fveFormFieldSync(this.field.name, newValue, fieldStore);
     },
 
     /**
@@ -50,8 +50,7 @@ export default {
         case FVE_INTERFACE_STOP_PROXY: return;
         case FVE_INTERFACE_FORM:
           this.fveParentForm = VueComponent;
-          // TODO: delete
-          this.fveParentFormId = this.fveParentForm.formElementAdd(this);
+          this.fveParentForm.fveFormAddField(this);
           break;
         default: continue;
       }
@@ -61,7 +60,7 @@ export default {
   beforeUnmount() {
     if (this.fveParentForm) {
       // TODO: update
-      this.fveParentForm.formElementDelete(this.fveParentFormId);
+      this.fveParentForm.fveFormRemoveField(this);
       this.fveParentForm = null;
       // TODO: delete
       this.fveParentFormId = null;

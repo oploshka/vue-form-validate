@@ -45,9 +45,7 @@ export default {
 
     // Error
     fieldErrorSet(status = 'SUCCESS', message = '', code = 'ERROR_NO') {
-      this.error.status = status;
-      this.error.message = message;
-      this.error.code = code;
+      this.error = { status, message, code }
     },
 
     fieldErrorSetObject(fieldError /*: FveFieldError */) {
