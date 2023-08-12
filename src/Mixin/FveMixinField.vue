@@ -33,7 +33,7 @@ export default {
       },
       
       // value => fieldStore ???
-      fieldState: this.fieldGetInitValue(),
+      innerValue: this.fieldGetInitValue(),
       
       fieldError: null, // null as FveFieldError|null,
       
@@ -41,18 +41,18 @@ export default {
   },
   methods: {
     /**
-     * @param {FveFieldValue} valueObj
+     * @param {FveFieldState} fieldState
      * @return {boolean}
      */
-    isEmpty(valueObj /*: FveFieldValue */) /* : boolean */ {
+    isEmpty(fieldState /*: FveFieldState */) /* : boolean */ {
       return false;
     },
     
     /**
-     * @param {FveFieldValue} valueObj
+     * @param {FveFieldState} fieldState
      * return {any}
      */
-    validate(valueObj /*: FveFieldValue */) {
+    validate(fieldState /*: FveFieldState */) {
       return null;
     },
     
@@ -81,15 +81,15 @@ export default {
      * - Наша система работает с объектом Date
      * - Для ввода даты используется текстовое поле
      * В данной ситуации формат данных поля и нашей системы не должен быть связан.
-     * Для этого мы пишем адаптеры convertObjectToValue и convertValueToObject.
+     * Для этого мы пишем адаптеры convertFieldStateToValue и convertValueToFieldState.
      * 
      * Функция преобразовывает внешнее значение формы во внутренний формат
      *
-     * @param {FveFieldValue} valueObj
+     * @param {FveFieldState} fieldState
      * return {any}
      */
-    convertObjectToValue(valueObj /* : FveFieldValue */) /* : any */ {
-      return null; // valueObj?.input || '';
+    convertInnerValueToValue(fieldState /* : FveFieldState */) /* : any */ {
+      return null; // fieldState?.input || '';
     },
   
     /**
@@ -101,12 +101,12 @@ export default {
      * - Наша система работает с объектом Date
      * - Для ввода даты используется текстовое поле
      * В данной ситуации формат данных поля и нашей системы не должен быть связан.
-     * Для этого мы пишем адаптеры convertObjectToValue и convertValueToObject.
+     * Для этого мы пишем адаптеры convertFieldStateToValue и convertValueToFieldState.
      *
      * @param {any} value
-     * @return {FveFieldValue}
+     * @return {FveFieldState}
      */
-    convertValueToObject(value /*: any*/) /*: FveFieldValue */ {
+    convertValueToInnerValue(value /*: any*/) /*: FveFieldState */ {
       return {}; // { input: value, };
     },
   
@@ -115,11 +115,11 @@ export default {
     /**
      * TODO: дать описание!!!
      * 
-     * @param {FveFieldValue} valueObj
+     * @param {FveFieldState} fieldState
      * @return {string}
      */
-    convertObjectToValueSync(valueObj /*: FveFieldValue*/) /*: string*/ {
-      const res = this.convertObjectToValue(valueObj);
+    convertFieldStateToValueSync(fieldState /*: FveFieldState*/) /*: string*/ {
+      const res = this.convertFieldStateToValue(fieldState);
       return res ? res.toString() : '';
     },
   
@@ -127,7 +127,7 @@ export default {
     /**
      * Функция не требует переопределения в 99.9% случаях.
      * Но бывают моменты, когда финальное значение поля нужно преобразовать, до-вычислить и тп.
-     * В таких случаях неразумно пользоваться convertObjectToValue для каждого введенного значения,
+     * В таких случаях неразумно пользоваться convertFieldStateToValue для каждого введенного значения,
      * так как это тратит значительные ресурсы.
      *
      * Реальный пример - автокомплит и геокодинг от гугла.
@@ -136,26 +136,26 @@ export default {
      *
      * Пример очень специфичный, но имеет право на жизнь.
      *
-     * @param {FveFieldValue} valueObj
+     * @param {FveFieldState} fieldState
      * @return {any}
      */
-    async submitPrepare(valueObj /*: FveFieldValue*/) {
+    async submitPrepare(fieldState /*: FveFieldState*/) {
       // /**
       //  * тут возможна валидация с использованием Promise, но это скорее всего пока не надо переопределять
-      //  * @param valueObj
+      //  * @param fieldState
       //  *
       //  * подумать над структурой и тут может быть Promise!!!
       //  * @returns {{isPromise: boolean, data, success: boolean}}
       //  */
-      // submit(valueObj) {
+      // submit(fieldState) {
       //   return {
       //     success: true,
-      //     data: this.convertObjectToValue(valueObj),
+      //     data: this.convertFieldStateToValue(fieldState),
       //     isPromise: false,
       //   };
       // },
       
-      return this.convertObjectToValue(valueObj);
+      return this.convertFieldStateToValue(fieldState);
     },
     
     
@@ -168,17 +168,17 @@ export default {
      * 
      * Функция вызывается из data(), по этому имеет ряд ограничений
      */
-    fieldGetInitValue() /*: FveFieldValue */ {
+    fieldStateGetInitValue() /*: FveFieldState */ {
       if (this.isModelValue()) {
-        return this.convertValueToObject(this.modelValue); // TODO: undefined fix
+        return this.convertValueToFieldState(this.modelValue); // TODO: undefined fix
       }
       
       // form
       if (this.field.hasOwnProperty('initValue')) {
-        return this.convertValueToObject(this.field.initValue);
+        return this.convertValueToFieldState(this.field.initValue);
       }
       
-      let value = {}; // {} as FveFieldValue;
+      let value = {}; // {} as FveFieldState;
       let valueSchema = this.valueSchema();
       for (let key in valueSchema) {
         try {
@@ -212,19 +212,19 @@ export default {
     
     /**
      * Функция для обновления состояния текущего компонента
-     * @param {FveFieldValue} valueObj
+     * @param {FveFieldState} fieldState
      */
-    fieldValueUpdate(valueObj /*: Object */) {
+    fieldStateUpdate(fieldState /*: Object */) {
       // TODO: update logic
       
-      Object.assign(this.fieldState, valueObj);
+      Object.assign(this.fieldState, fieldState);
       
       if (this.fieldValidateType === 'REALTIME') {
         let error = this.fieldValidate();
       }
       
       
-      let valueSync = this.convertObjectToValueSync(this.fieldState);
+      let valueSync = this.convertFieldStateToValueSync(this.fieldState);
       
       const isValueUpdated = this.fve.valueSync !== valueSync;
       this.fve.valueSync = valueSync;
@@ -266,10 +266,10 @@ export default {
     
     /**
      * Чистая функция валидации чистого значения??? или все таки внутреннего значения поля???
-     * @param {FveFieldValue} valueObj
+     * @param {FveFieldState} fieldState
      */
-    async fieldValidateValueObj(valueObj /*: Object*/) /*: Promise<FveFieldError | null> */ {
-      let fieldIsEmpty = this.isEmpty(valueObj);
+    async fieldValidateValueObj(fieldState /*: Object*/) /*: Promise<FveFieldError | null> */ {
+      let fieldIsEmpty = this.isEmpty(fieldState);
       
       if (this.fieldRequired && fieldIsEmpty) {
         return this.fieldValidateRequiredErrorGet();
@@ -280,7 +280,7 @@ export default {
       }
       
       // Валидация которую можно переопределить в реализуемом поле
-      let error = await this.validate(valueObj);
+      let error = await this.validate(fieldState);
       
       if (error) {
         return error;
@@ -288,7 +288,7 @@ export default {
       
       // // TODO: fix или Удалить из за не актуальности???
       // if (this.field.validateCustomFunction) {
-      //   error = await this.field.validateCustomFunction(valueObj);
+      //   error = await this.field.validateCustomFunction(fieldState);
       //   if (error) {
       //     return error;
       //   }
@@ -398,8 +398,8 @@ export default {
         if (typeof val === 'undefined') {
           return;
         }
-        this.fieldState = this.convertValueToObject(val);
-        let valueSync = this.convertObjectToValue(this.fieldState);
+        this.fieldState = this.convertValueToFieldState(val);
+        let valueSync = this.convertFieldStateToValue(this.fieldState);
         this.fve.valueSync = valueSync;
       });
     }

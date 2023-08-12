@@ -25,29 +25,29 @@
  * @example ```ts
  * type FveFieldObject = {
  *   name: 'full-name',
- *   
+ *
  *   //
  *   initValue: '',
- *   
+ *
  *   //
  *   required: true,
  *   readonly: false,
  *   disabled: false,
- *   
+ *
  *   //
  *   label: 'Полное имя',
  *   placeholder: 'Иванов И. И.',
  *   caption: 'доп. подсказка',
  *   theme: 'default',
- *   
+ *
  *   //
  *   isNotSubmit: false, // Не сабмитить это поле
- *   
+ *
  *   // callback
  *   sync: () => {},
  *   update: () => {},
- *   
- *   
+ *
+ *
  * };
  * ```
  *
@@ -55,14 +55,15 @@
 
 
 /**
- * @typedef FveFieldState
+ * @typedef FveFieldStoreObj
  * @type {Object.<string, any>}
  *
- * Внутренний объект поля (хранящий в себе данные и состояния поля)
- * 
+ * Внутренний объект поля хранящий в себе данные поля (данные которые влияют на submit)
+ * Данный объект не должен хранить состояния поля (открыто модальное окно, поле находиться в фокусе и тп)
+ *
  *
  * @example ```ts
- * type FveFieldState = {
+ * type FveFieldStoreObj = {
  *   [name: string]: any,
  * };
  * ```
@@ -76,10 +77,10 @@
  * @type {Object.<string, FveFieldSchemaItem>}
  *
  * Схема данных определяет какая структура данных будет использоваться для хранения состояния.
- * В данной схеме мы описываем объект FveFieldState.
+ * В данной схеме мы описываем объект FveFieldStoreObj.
  * Функция по большей части несет вспомогательную роль.
  * Но так же может участвовать для установки дефолтного состояния, если не задано, что-то другое.
- * 
+ *
  * @example ```ts
  * type FveFieldSchema = {
  *   [name: string]: FveFieldSchemaItem
@@ -93,9 +94,9 @@
  *
  * Необходимо подправить типы данных type и уточнить какая функция и что возвращаяе
  *
- * Описывает один ключ валидационной схемы 
- * 
- * 
+ * Описывает один ключ валидационной схемы
+ *
+ *
  * @example ```ts
  * type FveFieldSchemaItem = {
  *   type: string,

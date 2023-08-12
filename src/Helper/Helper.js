@@ -41,7 +41,7 @@ function makeMap(str, expectsLowerCase) {
     : (val) => !!map[val];
 }
 const isSimpleType = /*#__PURE__*/ makeMap(
-  "String,Number,Boolean,Function,Symbol,BigInt"
+  'String,Number,Boolean,Function,Symbol,BigInt'
 );
 function getType(ctor) {
   const match = ctor && ctor.toString().match(/^\s*function (\w+)/);

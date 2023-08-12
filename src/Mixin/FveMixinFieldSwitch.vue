@@ -18,10 +18,10 @@ export default {
     
     // пользовательские действия
     setValue(val) {
-      this.fieldValueUpdate({input: !!val});
+      this.fieldStateUpdate({input: !!val});
     },
     change() {
-      this.fieldValueUpdate({input: !this.value.input});
+      this.fieldStateUpdate({input: !this.value.input});
     },
     
     // описываем структуру value
@@ -31,18 +31,18 @@ export default {
         input: {type: Boolean, default: () => { return false; } }
       };
     },
-    convertObjectToValue(valueObj) {
-      return valueObj.input;
+    convertFieldStateToValue(fieldState) {
+      return fieldState.input;
     },
-    convertValueToObject(value) {
+    convertValueToFieldState(value) {
       return {
         input: !!value,
       };
     },
-    isEmpty(/* valueObj */) {
+    isEmpty(/* fieldState */) {
       return false;
     },
-    validate(valueObj) {
+    validate(fieldState) {
       return null;
     },
     // Установить фокус на текущий элемент

@@ -72,12 +72,12 @@ type FveFieldError = {
 }
 
 /**
- * @typedef FveFieldValue
+ * @typedef FveFieldState
  * @type {object}
  * 
  * Внутренний объект поля (хранящий в себе данные)
  */
-type FveFieldValue = {
+type FveFieldState = {
   [name: string]: any,
 };
 
