@@ -41,6 +41,13 @@ export default {
     fieldSetValue(value) {
       this.fieldStoreUpdate(this.convertValueToFieldStorage(value));
     },
+    fieldSetInitValue() {
+      // TODO: test
+      this.fieldStoreUpdate(this.convertValueToFieldStorage(this.field.initValue));
+    },
+    fieldGetValue() {
+      return this.convertFieldStorageToValue(this.value);
+    },
 
 
     // Error
@@ -118,7 +125,7 @@ export default {
       }
 
       // Валидация которую можно переопределить в реализуемом поле
-      let error = await this.validate(fieldStore);
+      const error = await this.validate(fieldStore);
 
       if (error) {
         return error;
@@ -180,7 +187,7 @@ export default {
 
       // form update
       this.fieldSyncParentForm(newValue, this.value);
-      this.fieldIsChangeStatusUpdate(newValue); // TODO: понять что сюда передать
+      this.fieldIsChangeStatusUpdate(); // TODO: понять что сюда передать
       this.field.update && this.field.update(newValue, this.value);
       this.field.onUpdate && this.field.onUpdate(newValue, this.value);
     },
@@ -198,7 +205,11 @@ export default {
         return this.convertValueToFieldStorage(this.modelValue); // TODO: undefined fix
       }
       if (this.field.hasOwnProperty('initValue')) {
-        return this.convertValueToFieldStorage(this.field.initValue);
+        try {
+          return this.convertValueToFieldStorage(this.field.initValue);
+        } catch (e) {
+          console.error(e);
+        }
       }
       return this.fieldStoreSchemaConvertInValue(this.fieldStoreSchema());
     },

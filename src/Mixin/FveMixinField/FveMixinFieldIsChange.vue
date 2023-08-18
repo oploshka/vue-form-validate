@@ -7,31 +7,32 @@ export default {
 
   data() {
     return {
-      fieldIsChange: {
+      fveFieldIsChange: {
         lastStatus: false,
 
       },
     };
   },
 
+  computed: {
+    // TODO add change initValue and defaultValue
+    fveFieldInitHash() {
+      const storeObj = this.convertValueToFieldStorage(this.field.initValue)
+      return this.convertFieldStorageToHash(storeObj);
+    }
+  },
+
 
   methods: {
-    fieldIsChangeStatusUpdate(valueSync) {
-      if(this.isEqualValue(valueSync, this.field.initValue)) {
-        if(!this.fieldIsChange.lastStatus) { return; }
-        this.fieldIsChange.lastStatus = false;
+    fieldIsChangeStatusUpdate() {
+      //
+      const isChange = (this.fveFieldInitHash !== this.fveFieldSyncValueHash);
 
-        this.fveParentForm?.formFieldIsChangeStatusUpdate(this.field.name, this.fieldIsChange.lastStatus);
-
-      } else {
-        if(this.fieldIsChange.lastStatus) { return; }
-        this.fieldIsChange.lastStatus = true;
-
-        this.fveParentForm?.formFieldIsChangeStatusUpdate(this.field.name, this.fieldIsChange.lastStatus);
-      }
+      if(this.fveFieldIsChange.lastStatus === isChange) { return; }
+      this.fveFieldIsChange.lastStatus = isChange;
+      this.fveParentForm?.formFieldIsChangeStatusUpdate(this.field.name, isChange);
     }
   }
 
-  // TODO add change initValue and defaultValue
 };
 </script>

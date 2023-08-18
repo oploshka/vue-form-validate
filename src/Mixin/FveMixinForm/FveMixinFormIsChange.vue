@@ -23,8 +23,20 @@ export default {
         this.formIsChange = false;
       }
     },
-  }
 
-  // TODO add change initValue and defaultValue
+    // TODO add change initValue and defaultValue
+    formIsChangeSetCurrentValueAndReset(formValue) {
+      // fix form submit save value
+      for (const key in formValue) {
+        if(!this.field[key]) {
+          continue;
+        }
+        this.field[key].initValue = formValue[key];
+      }
+      this.formIsChangeObj = {};
+      this.formIsChange = false;
+    },
+  },
+
 };
 </script>

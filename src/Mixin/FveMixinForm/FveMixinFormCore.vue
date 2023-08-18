@@ -54,8 +54,17 @@ export default {
         return Promise.reject(fieldErrorObj);
       }
 
+      this.formIsChangeSetCurrentValueAndReset(fieldSubmitValue);
       return Promise.resolve(fieldSubmitValue);
     },
+
+    formResetToInitValue() {
+      const fieldComponentObj = this.fveFormGetFieldComponentObj();
+      for(const fieldName in fieldComponentObj){
+        const fieldComponent = fieldComponentObj[fieldName];
+        fieldComponent.fieldSetInitValue();
+      }
+    }
   },
 };
 

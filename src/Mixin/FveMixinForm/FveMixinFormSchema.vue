@@ -88,7 +88,7 @@ export default {
           // }
           form[key] = this.formData[key];
         } else {
-          form[key] = formSchema[key].default ? formSchema[key].default() : null;
+          form[key] = formSchema[key].type.default ? formSchema[key].type.default() : null;
         }
       }
       return form;

@@ -164,15 +164,15 @@ export default {
       /* this.$refs.input.focus(); */
     },
 
-    /**
-     * Проверяем совпадают ли значения valueSync
-     * @param value1
-     * @param value2
-     * @return {boolean}
-     */
-    isEqualValue(value1, value2) {
-      return value1 === value2;
-    },
+    // /**
+    //  * Проверяем совпадают ли значения valueSync
+    //  * @param value1
+    //  * @param value2
+    //  * @return {boolean}
+    //  */
+    // isEqualValue(value1, value2) {
+    //   return value1 === value2;
+    // },
   },
 
   computed: {
