@@ -1,12 +1,7 @@
 <script>
 
-import FveForm from '../../Template/FveForm';
-
-import {isPromise} from '../../Helper/Helper';
-import { FVE_INTERFACE_FORM} from '../../FveConst';
-
 export default {
-  name: 'FveMixinFormDefault',
+  name: 'FvePartFormDefault',
   methods: {
     // НЕОБХОДИМО ПЕРЕОПРЕДЕЛИТЬ ПОЛЬЗОВАТЕЛЕМ
     // тут пользовательская валидация ???

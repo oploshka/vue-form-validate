@@ -16,7 +16,7 @@
  * Данный компонент отвечает за регистрацию поля в форме
  */
 export default {
-  name: 'FveMixinFormRegistrator',
+  name: 'FvePartFormRegistrator',
   data() {
     return {
       fveFormFieldElementObj: {},

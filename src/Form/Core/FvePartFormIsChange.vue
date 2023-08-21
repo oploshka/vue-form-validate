@@ -2,7 +2,7 @@
 
 
 export default {
-  name: 'FveMixinFormIsChange',
+  name: 'FvePartFormIsChange',
 
 
   data() {

@@ -1,14 +1,14 @@
 <script>
 
-import FveForm from '../../Template/FveForm';
+// import FveForm from '../../Template/FveForm';
 
 import { FVE_INTERFACE_FORM } from '../../FveConst';
 
 export default {
-  name: 'FveMixinFormCore',
-  components: {
-    FveForm
-  },
+  name: 'FvePartFormCore',
+  // components: {
+  //   FveForm
+  // },
   props: {
     // Форма создания vs редактирования
     modeEdit: {type: Boolean, default: false},

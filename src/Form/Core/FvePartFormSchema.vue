@@ -1,15 +1,10 @@
 <script>
 
-import FveForm from '../../Template/FveForm';
-
-import { assertType} from '../../Helper/Helper';
+import { assertType} from './FvePartFormSchemaValidate';
 
 
 export default {
-  name: 'FveMixinFormSchema',
-  components: {
-    FveForm
-  },
+  name: 'FvePartFormSchema',
   props: {
     // Форма создания vs редактирования
     formData: {
