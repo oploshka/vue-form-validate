@@ -32,14 +32,14 @@
     </svg>
   </template>
 </template>
+
 <script>
+
+import FveMixinFieldSwitchTheme from 'vue-form-element/src/Mixin/FveMixinFieldSwitchTheme';
+
 export default {
-  name: "ViewSquare",
-  props: {
-    selected: {
-      type: Boolean,
-      default: false,
-    },
-  },
+  mixins: [
+    FveMixinFieldSwitchTheme
+  ]
 };
 </script>

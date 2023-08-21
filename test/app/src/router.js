@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router
 
 const routes = [
   {
-    path: '/uikit-text',
+    path: '/',
     name: 'front',
     component: () => import('./page/UiKit/UiKitElementText'),
   },

@@ -1,14 +1,15 @@
 <template>
   <div :class="$parent.formElementBlockClass">
-    <label :for="$parent.field.name" v-if="$parent.label" class="fve-label">
-      {{ $parent.label }}
-      <span v-if="$parent.field.required" class="fve-label-require">*</span>
-    </label>
     <div class="fve-field">
       <div class="fve-control">
         <!-- custom block start -->
         <slot />
         <!-- custom block end -->
+
+        <label v-if="$parent.label" class="fve-label">
+          {{ $parent.label }}
+          <span v-if="$parent.field.required" class="fve-label-require">*</span>
+        </label>
       </div>
       <div v-if="$parent.caption && !($parent.error && $parent.error.message)" class="fve-caption">{{$parent.caption}}</div>
       <div v-if="$parent.error && $parent.error.message" class="fve-message">{{$parent.error.message}}</div>
@@ -112,37 +113,5 @@ export default {};
     }
   }
 }
-.fve.fve-require {
-  // label
-  //.fve-label {
-  //  color: #f5ac1c;
-  //}
-}
-
-.fve.fve-status__error {
-  .fve-label {
-    //color: var(--fve-color-error);
-  }
-  .fve-message {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .fve-input,
-  .fve-textarea,
-  .fve-select {
-    .fve-control {
-      border-color: var(--fve-color-error);
-    }
-  }
-
-  .fve-checkbox {
-    .fve-checkbox-vue {
-      border-color: var(--fve-color-error);
-    }
-  }
-}
-
 
 </style>
