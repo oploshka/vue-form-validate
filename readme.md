@@ -313,6 +313,9 @@ export default {
 
 И давайте вернемся к нашему решению и как данный пример может выглядеть.
 
+<details open>
+<summary><b style="font-size: 1.3em;">Пример создания формы</b></summary>
+
 ```vue
 <template>
   <FveForm>
@@ -369,7 +372,123 @@ export default {
 </script>
 ```
 
+</details>
+
+
 Данный пример занимает 50 строк кода, примерно 20 из них это базовая конструкция компонента.
 Говорить, что все будет идеально и на добавление одного поля будет уходить 3-4 строчки,
 это не верно, в реальной жизни это ~10 строчек кода (вместе с логикой).
 Отдельно стоит упомянуть о возможности дробить компонент на части, чего трудно приставить при использовании других решений.
+
+Как можем понять из данного примера - валидация ушла в поля. И дальше мы рассмотрим пример создания своего поля
+
+
+<details open>
+<summary><b style="font-size: 1.3em;">Пример создания простого текстового поля</b></summary>
+
+```vue
+<template>
+  <div>
+    <label>{{field.label}}</label>
+    <input
+      :type="inputType"
+      :name="field.name"
+      :placeholder="field.placeholder || ''"
+      :readonly="!!field.readonly"
+      :disabled="!!field.disabled"
+      :value="value.input"
+      :required="field.required"
+      autocomplete="off"
+      @input="inputValueUpdate"
+      @keypress.enter.prevent="fieldFormSubmit"
+      v-bind="inputAttr"
+
+      ref="input"
+    />
+  </div>
+</template>
+
+<script>
+
+import FveMixinField from 'vue-form-element/src/Field/FveMixinField';
+
+export default {
+  name: 'FieldText',
+  mixins: [ FveMixinField ],
+  data(){
+    return {
+      inputType: 'text',
+      inputAttr: {},
+    };
+  },
+  props: {
+    modelValue    : { type: String, required: false },
+  },
+  methods: {
+    // пользовательские действия
+    inputValueUpdate($event) {
+      this.fieldStoreUpdate({input: $event.target.value});
+    },
+    // описываем структуру value
+    valueSchema() {
+      return {
+        input: {type: String, default: () => { return ''; } }
+      };
+    },
+    isEmpty(valueObj) {
+      return valueObj.input === '' || valueObj.input === null || valueObj.input === undefined;
+    },
+    validate(valueObj) {
+      return null;
+    },
+    // Установить фокус на текущий элемент
+    setFocus(){
+      this.$refs.input.focus();
+    },
+  },
+};
+</script>
+
+```
+
+</details>
+
+
+
+
+<details open>
+<summary><b style="font-size: 1.3em;">Пример создания поля email</b></summary>
+
+```vue
+<script>
+// Наследуемся от классического поля
+import FieldText from '@field/FieldText';
+
+export default {
+  name: 'FieldEmail',
+  mixins: [FieldText],
+  data() {
+    return {
+      inputType: 'email',
+    };
+  },
+  methods: {
+    validate(valueObj) {
+      const re =
+        /^(([^а-яА-Я<>()[\]\\.,;:\s@\"]+(\.[^а-яА-Я<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(valueObj.input)) {
+        return {
+          status: 'ERROR',
+          code: 'VALIDATE',
+          message: 'Проверьте корректность E-mail адреса',
+        };
+      }
+      return null;
+    },
+  },
+};
+</script>
+```
+
+</details>
+
