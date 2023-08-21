@@ -1,6 +1,6 @@
 <script>
 
-import FveMixinFieldSelectSchemaMultiObject from './Core/FveMixinFieldSelectSchemaMultiObject';
+import FveMixinFieldSelectSchemaMultiObject from './Core/FvePartFieldSelectSchemaMultiObject';
 
 export default {
   name: 'FveMixinFieldSelectMultiObject',

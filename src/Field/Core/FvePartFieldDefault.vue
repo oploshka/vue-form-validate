@@ -4,7 +4,7 @@
 import {FT_STRING} from '@field/FveFieldType';
 
 export default {
-  name: 'FveMixinFieldDefault',
+  name: 'FvePartFieldDefault',
 
 
   props: {

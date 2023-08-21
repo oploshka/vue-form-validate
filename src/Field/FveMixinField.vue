@@ -1,21 +1,21 @@
 <script>
 
-import FveMixinFieldRegistrator from 'vue-form-element/src/Mixin/FveMixinField/FveMixinFieldRegistrator';
-import FveMixinFieldDefault from 'vue-form-element/src/Mixin/FveMixinField/FveMixinFieldDefault';
-import FveMixinFieldProperty from 'vue-form-element/src/Mixin/FveMixinField/FveMixinFieldProperty';
-import FveMixinFieldIsChange from 'vue-form-element/src/Mixin/FveMixinField/FveMixinFieldIsChange';
-import FveMixinFieldCore from 'vue-form-element/src/Mixin/FveMixinField/FveMixinFieldCore';
-import FveMixinFieldCssClass from 'vue-form-element/src/Mixin/FveMixinField/FveMixinFieldCssClass';
+import FvePartFieldRegistrator from './Core/FvePartFieldRegistrator';
+import FvePartFieldDefault     from './Core/FvePartFieldDefault';
+import FvePartFieldProperty    from './Core/FvePartFieldProperty';
+import FvePartFieldIsChange    from './Core/FvePartFieldIsChange';
+import FvePartFieldCore        from './Core/FvePartFieldCore';
+import FvePartFieldCssClass    from './Core/FvePartFieldCssClass';
 
 export default {
   name: 'FveMixinField',
   mixins: [
-    FveMixinFieldRegistrator,
-    FveMixinFieldDefault,
-    FveMixinFieldProperty,
-    FveMixinFieldIsChange,
-    FveMixinFieldCore,
-    FveMixinFieldCssClass,
+    FvePartFieldRegistrator,
+    FvePartFieldDefault,
+    FvePartFieldProperty,
+    FvePartFieldIsChange,
+    FvePartFieldCore,
+    FvePartFieldCssClass,
   ],
 };
 

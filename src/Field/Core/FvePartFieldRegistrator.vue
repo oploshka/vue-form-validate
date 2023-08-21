@@ -1,12 +1,12 @@
 <script>
 
-import { FVE_INTERFACE_STOP_PROXY, FVE_INTERFACE_FORM } from '../../FveConst';
+import { FVE_INTERFACE_STOP_PROXY, FVE_INTERFACE_FORM } from '../../Contract/FveConstInterface';
 
 /**
  * Данный компонент отвечает за регистрацию поля в форме (если она доступна)
  */
 export default {
-  name: 'FveMixinFieldRegistrator',
+  name: 'FvePartFieldRegistrator',
   data() {
     return {
       fveParentForm: null,

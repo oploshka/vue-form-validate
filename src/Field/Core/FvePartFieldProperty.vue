@@ -8,11 +8,11 @@ import {FT_BOOLEAN, FT_FUNCTION, FT_STRING} from '@field/FveFieldType';
  * Данный миксин описывает работу с пропсами
  */
 export default {
-  name: 'FveMixinFieldProperty',
+  name: 'FvePartFieldProperty',
 
   /*
   props: {
-    Все это превращается в магию из FveMixinFieldProperty
+    Все это превращается в магию из FvePartFieldProperty
     //
     // стилистика
     // label: { type: String, default: '' },

@@ -1,10 +1,10 @@
 <script>
 
-import FveMixinFieldSelectCore from './FveMixinFieldSelectCore';
+import FvePartFieldSelectCore from './FvePartFieldSelectCore';
 
 export default {
-  name: 'FveMixinFieldSelectSchemaMultiObject',
-  mixins: [ FveMixinFieldSelectCore ],
+  name: 'FvePartFieldSelectSchemaMultiObject',
+  mixins: [ FvePartFieldSelectCore ],
   methods: {
     isEmpty(fieldStore) {
       return fieldStore.input === [];

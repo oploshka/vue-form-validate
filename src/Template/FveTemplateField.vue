@@ -1,19 +1,16 @@
 <template>
   <div :class="$parent.formElementBlockClass">
-    
-      <label :for="$parent.field.name" v-if="$parent.field.label" class="fve-label">
-        {{ $parent.field.label }} <span v-if="$parent.fieldRequired" class="fve-label-require">*</span>
-      </label>
-    <!--<slot name="label" :field="$parent.field" :label="$parent.label" >-->
-    <!--</slot>-->
-    
+    <label :for="$parent.field.name" v-if="$parent.label" class="fve-label">
+      {{ $parent.label }}
+      <span v-if="$parent.field.required" class="fve-label-require">*</span>
+    </label>
     <div class="fve-field">
       <div class="fve-control">
         <!-- custom block start -->
         <slot />
         <!-- custom block end -->
       </div>
-      <div v-if="$parent.field.caption && !($parent.error && $parent.error.message)" class="fve-caption">{{$parent.caption}}</div>
+      <div v-if="$parent.caption && !($parent.error && $parent.error.message)" class="fve-caption">{{$parent.caption}}</div>
       <div v-if="$parent.error && $parent.error.message" class="fve-message">{{$parent.error.message}}</div>
     </div>
   </div>
@@ -38,7 +35,7 @@ export default {};
   line-height : 1.3;
 
   // label
-  :deep(.fve-label) {
+  .fve-label {
     display           : var(--fve-label--display          );
     margin            : var(--fve-label--margin           );
     padding           : var(--fve-label--padding          );
@@ -56,10 +53,10 @@ export default {};
     background-color  : var(--fve-label--background-color );
     transition: color 0.15s ease-in-out;
   }
-  :deep(.fve-label-require) {
+  .fve-label-require {
     display: none;
   }
-  &.fve-require :deep(.fve-label-require) {
+  &.fve-require .fve-label-require {
     display     : inline-block;
     margin      : 0;
     padding     : 0;

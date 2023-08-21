@@ -1,26 +1,26 @@
 export const isPromise = (p) => {
-  return p && Object.prototype.toString.call(p) === "[object Promise]";
+  return p && Object.prototype.toString.call(p) === '[object Promise]';
   /*
   //
   // https://debugpointer.com/check-if-an-object-is-a-promise/
   //
   // V2
-  return Boolean(value && typeof value.then === "function");
-  
+  return Boolean(value && typeof value.then === 'function');
+
   // V3
   if (Promise && Promise.resolve) {
     return Promise.resolve(object) == object;
   } else {
-    throw "Promise not supported in your environment"; // Most modern browsers support Promises
+    throw 'Promise not supported in your environment'; // Most modern browsers support Promises
   }
-  
+
   // V4
   return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
  */
 };
 
 const isArray = Array.isArray;
-export const isObject = (val) => val !== null && typeof val === "object";
+export const isObject = (val) => val !== null && typeof val === 'object';
 
 // выдернуто из vue.global.js
 /**
@@ -32,7 +32,7 @@ export const isObject = (val) => val !== null && typeof val === "object";
  */
 function makeMap(str, expectsLowerCase) {
   const map = Object.create(null);
-  const list = str.split(",");
+  const list = str.split(',');
   for (let i = 0; i < list.length; i++) {
     map[list[i]] = true;
   }
@@ -45,7 +45,7 @@ const isSimpleType = /*#__PURE__*/ makeMap(
 );
 function getType(ctor) {
   const match = ctor && ctor.toString().match(/^\s*function (\w+)/);
-  return match ? match[1] : ctor === null ? "null" : "";
+  return match ? match[1] : ctor === null ? 'null' : '';
 }
 export const assertType = (value, type) => {
   let valid;
@@ -54,15 +54,15 @@ export const assertType = (value, type) => {
     const t = typeof value;
     valid = t === expectedType.toLowerCase();
     // for primitive wrapper objects
-    if (!valid && t === "object") {
+    if (!valid && t === 'object') {
       valid = value instanceof type;
     }
     return valid;
-  } else if (expectedType === "Object") {
+  } else if (expectedType === 'Object') {
     valid = isObject(value);
-  } else if (expectedType === "Array") {
+  } else if (expectedType === 'Array') {
     valid = isArray(value);
-  } else if (expectedType === "null") {
+  } else if (expectedType === 'null') {
     valid = value === null;
   } else {
     // fix null для FileClass DateTime и других объектов (возможно необходимо продублировать для Object)

@@ -1,10 +1,15 @@
 <script>
 
-import { assertType} from './FvePartFormSchemaValidate';
+import FveForm from '../../Template/FveForm';
+
+import { assertType } from './FvePartFormSchemaValidate.js';
 
 
 export default {
   name: 'FvePartFormSchema',
+  components: {
+    FveForm
+  },
   props: {
     // Форма создания vs редактирования
     formData: {

@@ -1,6 +1,6 @@
 <script>
 
-import {FVE_INTERFACE_STOP_PROXY} from 'vue-form-element/src/FveConst';
+import {FVE_INTERFACE_STOP_PROXY} from '../Contract/FveConstInterface';
 
 export default {
   data() {

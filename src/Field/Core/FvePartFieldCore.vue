@@ -1,9 +1,9 @@
 <script>
 
-import {FVE_INTERFACE_FIELD} from '../../FveConst';
+import {FVE_INTERFACE_FIELD} from '../../Contract/FveConstInterface';
 
 export default {
-  name: 'FveMixinFieldCore',
+  name: 'FvePartFieldCore',
   data() {
     return {
       /**

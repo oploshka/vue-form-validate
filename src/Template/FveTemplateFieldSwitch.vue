@@ -8,7 +8,7 @@
 
         <label v-if="$parent.label" class="fve-label">
           {{ $parent.label }}
-          <span v-if="$parent.fieldRequired" class="fve-label-require">*</span>
+          <span v-if="$parent.field.required" class="fve-label-require">*</span>
         </label>
       </div>
       <div v-if="$parent.caption && !($parent.error && $parent.error.message)" class="fve-caption">{{$parent.caption}}</div>
@@ -24,9 +24,9 @@ export default {};
 <style lang="scss" scoped>
 
 .fve {
-  
+
   box-sizing: border-box;
-  
+
   // base
   display     : block;
   margin      : 0 0 0 0;
@@ -34,7 +34,7 @@ export default {};
   color       : #2C3242;
   font-size   : 16px;
   line-height : 1.3;
-  
+
   // label
   .fve-label {
     display           : var(--fve-label--display          );
@@ -65,12 +65,12 @@ export default {};
     font-size   : 14px;
     line-height : inherit;
   }
-  
+
   // field
   .fve-field {
     position: relative;
   }
-  
+
   .fve-caption {
     position:         absolute;
     display           : var(--fve-caption--display          );
@@ -89,7 +89,7 @@ export default {};
     background        : var(--fve-caption--background       );
     background-color  : var(--fve-caption--background-color );
   }
-  
+
   // TODO: допилить блок message (warning, error, success)
   // message
   .fve-message {

@@ -1,10 +1,10 @@
 <script>
 
-import FvePartFormRegistrator from './FvePartFormRegistrator';
-import FvePartFormSchema      from './FvePartFormSchema';
-import FvePartFormIsChange    from './FvePartFormIsChange';
-import FvePartFormDefaultTodo from './FvePartFormDefaultTodo';
-import FvePartFormCore        from './FvePartFormCore';
+import FvePartFormRegistrator from './Core/FvePartFormRegistrator';
+import FvePartFormSchema      from './Core/FvePartFormSchema';
+import FvePartFormIsChange    from './Core/FvePartFormIsChange';
+import FvePartFormDefaultTodo from './Core/FvePartFormDefaultTodo';
+import FvePartFormCore        from './Core/FvePartFormCore';
 
 export default {
   name: 'FveMixinForm',

@@ -6,11 +6,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      interface: 'FormProxyInterface'
-    };
-  },
+  // data() {
+  //   return {
+  //     interface: 'FormProxyInterface'
+  //   }
+  // },
   methods: {
     signInButtonPressed($event) {
       // предположительно есть button без указанного типа

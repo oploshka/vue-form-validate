@@ -1,7 +1,7 @@
 <script>
 
 export default {
-  name: 'FveMixinFieldCssClass',
+  name: 'FvePartFieldCssClass',
   computed: {
     formElementBlockClass() {
       let status = 'fve-status__success';

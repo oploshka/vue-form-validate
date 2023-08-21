@@ -4,9 +4,14 @@
  */
 
 
-import FveMixinField from '../../FveMixinField';
 import {FT_ARRAY, FT_BOOLEAN, FT_FUNCTION, FT_STRING} from '@field/FveFieldType';
-import {find} from 'lodash';
+
+import FvePartFieldRegistrator from './FvePartFieldRegistrator';
+import FvePartFieldDefault     from './FvePartFieldDefault';
+import FvePartFieldProperty    from './FvePartFieldProperty';
+import FvePartFieldIsChange    from './FvePartFieldIsChange';
+import FvePartFieldCore        from './FvePartFieldCore';
+import FvePartFieldCssClass    from './FvePartFieldCssClass';
 
 const optionGetKeyDefault   = (obj) => { return obj.id;   };
 const optionGetNameDefault  = (obj) => { return obj.name; };
@@ -14,7 +19,12 @@ const optionGetNameDefault  = (obj) => { return obj.name; };
 export default {
   name: 'FveMixinFieldSelect',
   mixins: [
-    FveMixinField
+    FvePartFieldRegistrator,
+    FvePartFieldDefault,
+    FvePartFieldProperty,
+    FvePartFieldIsChange,
+    FvePartFieldCore,
+    FvePartFieldCssClass,
   ],
   props: {
     selectedItems: {type: Array}
