@@ -2,7 +2,7 @@
   <div :class="$parent.formElementBlockClass">
     <label :for="$parent.field.name" v-if="$parent.label" class="fve-label">
       {{ $parent.label }}
-      <span v-if="$parent.fieldRequired" class="fve-label-require">*</span>
+      <span v-if="$parent.field.required" class="fve-label-require">*</span>
     </label>
     <div class="fve-field">
       <div class="fve-control">

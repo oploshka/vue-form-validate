@@ -1,0 +1,11 @@
+
+# Rename
+convertValueToObject => convertValueToFieldState  ==> convertValueToFieldStorage  (rename)
+convertObjectToValue => convertFieldStateToValue  ==> convertFieldStorageToValue  (rename)
+
+valueSchema => fieldStateSchema
+
+valueObj => fieldState (в большинстве)
+
+fieldValueUpdate => fieldStateUpdate  (rename)
+fieldGetInitValue => fieldStateGetInitValue (rename)

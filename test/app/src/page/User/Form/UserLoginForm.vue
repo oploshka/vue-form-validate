@@ -1,58 +1,55 @@
 <template>
-  <FveForm class="form-auth form-base row">
-    <div class="form-group">
-      <FveEmail
-        :field="field.login"
-        label="E-mail"
-        placeholder="name@mail.com"
-      />
-    </div>
-    <div class="form-group">
-      <FvePassword
-        :field="field.password"
-        label="Password"
-        placeholder="6+ Characters"
-      />
-    </div>
-    <div class="form-group">
-      <!-- <router-link :to="{name: $routerName.USER_AUTH}" class="auth__remember-password">Забыли пароль?</router-link> -->
-      <button type="button" @click="submit" class="pl-btn auth__btn">Log in</button>
-    </div>
-  </FveForm>
+  <div>
+    <pre>{{field}}</pre>
+    
+    <FveLogin :field="field.login"/>
+    <FvePassword :field="field.password" />
+    
+    <pre>{{form}}</pre>
+  </div>
 </template>
 
 <script>
 
 import FveMixinForm    from 'vue-form-element/src/Mixin/FveMixinForm';
 
-import FveEmail        from '@field/Text/FveEmail';
+import FveLogin        from '@field/Text/FveLogin';
 import FvePassword     from '@field/Text/FvePasswordShowPass';
 
 export default {
-  name: "UserLoginForm",
+  name: 'UserLoginForm',
   mixins: [
     FveMixinForm
   ],
   components: {
-    FveEmail,
+    FveLogin,
     FvePassword,
   },
   methods: {
     formSchema() {
       return {
         login: {
+          // TODO: подумать о том, чтоб задавать здесь component (для рендеринга)...
           type: String,
-          default() { return ''; },
-          field: {
-            required: true,
-          }
+          default() { return 'test'; },
+          required: true,
+          label: 'Login',
+          placeholder: 'User'
+          
+          // TODO: возможно стоит хранить дочерний компонент тут...
         },
         password: {
           type: String,
-          default: () => { return ''; },
-          field: {
-            required: true,
-          }
+          default: () => { return '1'; },
+          required: true,
+          label: 'Password',
+          placeholder: '******',
+          
+          // TODO: добавить флаг валидности (возможно стоит выносить логику полей отдельно)...
+          // update: (val) => {
+          //   // console.log(val, this);
+          //   this.field.login.label = 'Login ' + val;
+          // }
         },
       };
     },

@@ -10,13 +10,14 @@
               <span class="nav-link dropdown-toggle">Примеры форм</span>
               <ul class="dropdown-menu">
                 <li><router-link class="dropdown-item" :to="{name: 'UserLogin'}">Авторизации</router-link></li>
-                <li><router-link class="dropdown-item" :to="{name: 'UserRegistration'}">Регистрация</router-link></li>
-                <li><router-link class="dropdown-item" :to="{name: 'UserProfileEdit'}">Профиль</router-link></li>
+                <!--<li><router-link class="dropdown-item" :to="{name: 'UserRegistration'}">Регистрация</router-link></li>-->
+                <!--<li><router-link class="dropdown-item" :to="{name: 'UserProfileEdit'}">Профиль</router-link></li>-->
               </ul>
             </li>
             <li class="nav-item">
             </li>
-            
+  
+            <!--
             <li class="nav-item dropdown">
               <span class="nav-link dropdown-toggle">UIkit</span>
               <ul class="dropdown-menu">
@@ -26,6 +27,8 @@
                 <li><router-link class="dropdown-item" :to="{name: 'uikit-switch'}">Switch</router-link></li>
               </ul>
             </li>
+            -->
+            
             <!--
             <li class="nav-item dropdown">
               <span class="nav-link dropdown-toggle">Dropdown</span>

@@ -4,9 +4,14 @@ const path = require('path');
 const DIR_ROOT = path.join(__dirname, './../../');
 
 const aliasObj = {
+  // Этот alias нужен для корректной работы тестового приложения
   'vue-form-element': DIR_ROOT,
-  // вспомогательные алиасы
-  '@field': path.join(DIR_ROOT, './example/plugin-install/Element'),
+  
+  // вспомогательные alias 
+  '@field':           path.join(DIR_ROOT, './example/plugin-install/Field'),
+  '@fieldHelper':     path.join(DIR_ROOT, './example/plugin-install/FieldHelper'),
+  // Этот алиас просто для удобства
+  '@dependency':      path.join(DIR_ROOT, './example/plugin-install/dependency'),
 };
 
 
@@ -17,8 +22,19 @@ const config = {
   css: {
     extract: false
   },
+  
+  // Без этого тестовый проект сыпет ошибки и работает не корректно...
+  // (внешним папкам требуется зависимость от vue)
+  configureWebpack: {
+    resolve: {
+      symlinks: false,
+      alias: {
+        vue: path.resolve('./node_modules/vue')
+      }
+    }
+  },
   chainWebpack: (config) => {
-    // добавляем свои алиасы
+    // добавляем свои alias
     for (const aliasName in aliasObj) {
       config.resolve.alias.set(aliasName, aliasObj[aliasName]);
     }
