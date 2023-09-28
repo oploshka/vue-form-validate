@@ -1,0 +1,144 @@
+
+// Общие стили для VueMultiselect. Используются в разных select - по этому править очень аккуратно!!!
+// Добавить описание что за что отвечает или добавить сюда html схему
+
+//.multiselect__spinner {
+//  background: var(--fve-input--background-color);
+//  height: 40px;
+//}
+.multiselect {
+  // border: var(--fve-input--border);
+  border-radius: var(--fve-input--border-radius);
+
+  &--disabled {
+    background: var(--fve-input--background-color);
+    pointer-events: none;
+    opacity: 1;
+  }
+}
+.multiselect__placeholder {
+  padding-top: 3px;
+}
+
+.multiselect.multiselect--active {
+  .multiselect__tags {
+    border: 1px solid #26ade4;
+  }
+}
+
+// .multiselect {
+  
+  //  margin: var(--fve-input--margin);
+  //  .multiselect__select {
+  //    width: 40px;
+  //    height: 44px;
+  //  }
+  .multiselect__single {
+    color: var(--color-black);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    margin-top: 3px; // TODO: test margin-top: 4px;
+  }
+  
+  .multiselect__tag {
+    color: #535859;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    margin-bottom: 2px;
+    background: rgba(47, 154, 255, 0.12);
+    border-radius: 16px;
+    
+    .multiselect__tag-icon {
+      width: 27px;
+      line-height: 27px;
+    }
+    .multiselect__tag-icon:after {
+      color: #535859;
+      font-weight: 400;
+    }
+    .multiselect__tag-icon:focus,
+    .multiselect__tag-icon:hover {
+      background: none;
+    }
+  }
+  .multiselect__tags {
+    //min-height: 44px;
+    padding: 6px 40px 0 12px;
+    //border: var(--fve-input--border);
+    border-color: var(--fve-input--border-color);
+    border-radius: var(--fve-input--border-radius);
+    background-color: var(--fve-input--background-color);
+    .multiselect__single {
+      //padding-top: 2px;
+      //padding-left: 0;
+      //margin-bottom: 0;
+      //font-family: var(--fve-input--font-family);
+      //font-size: var(--fve-input--font-size);
+      //font-weight: var(--fve-input--font-weight);
+      color: var(--fve-input--font-color);
+      background-color: var(--fve-input--background-color);
+    }
+    & > input {
+      padding-top: 3px;
+      font-size: 14px;
+    }
+  }
+  //  .multiselect__input {
+  //    min-height: 24px;
+  //    font-family: var(--fve-input--font-family);
+  //    font-size: var(--fve-input--font-size);
+  //    font-weight: var(--fve-input--font-weight);
+  //    color: var(--fve-input--font-color);
+  //    background-color: rgba(0,0,0,0);
+  //  }
+  .multiselect__content-wrapper {
+    //background: var(--br-block-prime);
+    //border: 1px solid var(--br-block-prime);
+    z-index: 500;
+   
+    background: var(--color-white); // background: #ffffff;
+    border: 1px solid var(--color-primary-accent-25); // border: 1px solid #c9eaf8;
+    box-shadow: 0px 4px 8px rgb(28 41 61 / 10%);
+    border-radius: 8px;
+    margin-top: 2px;
+    padding: 10px 0;
+  }
+  .multiselect__element {
+    padding: 6px 6px; // TODO: test padding: 6px 20px;
+    
+    .multiselect__option {
+      font-size: 14px;
+      line-height: 20px; // line-height: 140%;
+      color: var(--color-black)!important;
+      padding: 6px 16px;
+      border-radius: 8px;
+      height: auto;
+      min-height: auto;
+  
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      
+      &--highlight {
+        background: var(--color-primary-accent-10)!important; // background: #e9f7fc;
+      }
+      &--selected {
+        //color: #ACACAC;
+        background: #e9f7fc!important;
+        font-weight: 400;
+        &.multiselect__option--highlight {
+          //color: var(--fve-input--font-color);
+          //background: var(--color-sub);
+        }
+      }
+    }
+  }
+  
+  .multiselect__option--selected:after,
+  .multiselect__option--highlight:after {
+    content: '';
+    display: none;
+  }
+// }
